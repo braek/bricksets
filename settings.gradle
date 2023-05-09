@@ -1,4 +1,4 @@
-rootProject.name = 'onion'
+rootProject.name = 'bricksets'
 
 include(':acceptance-tests')
 include(':api')
