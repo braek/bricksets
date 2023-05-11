@@ -12,11 +12,12 @@ public final class Brickset extends EventSourcedAggregate {
 
     private BricksetId id;
     private BricksetNumber number;
+
     private BricksetTitle title;
+
     private Timestamp createdAt;
     private Timestamp modifiedAt;
     private Timestamp removedAt;
-
     private Brickset() {
         super();
     }
@@ -28,6 +29,10 @@ public final class Brickset extends EventSourcedAggregate {
     @Override
     public BricksetId getId() {
         return id;
+    }
+
+    public BricksetNumber getNumber() {
+        return number;
     }
 
     @Override

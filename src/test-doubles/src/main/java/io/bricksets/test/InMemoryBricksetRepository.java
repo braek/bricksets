@@ -1,27 +1,22 @@
 package io.bricksets.test;
 
-import io.bricksets.domain.event.EventStreamOptimisticLockException;
-import io.bricksets.domain.brickset.Brickset;
-import io.bricksets.domain.brickset.BricksetNumberService;
-import io.bricksets.domain.brickset.BricksetRemoved;
-import io.bricksets.domain.brickset.BricksetRepository;
+import io.bricksets.domain.brickset.*;
 import io.bricksets.domain.event.Event;
 import io.bricksets.domain.event.EventStream;
+import io.bricksets.domain.event.EventStreamOptimisticLockException;
 import io.bricksets.vocabulary.brickset.BricksetId;
 import io.bricksets.vocabulary.brickset.BricksetNumber;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public final class InMemoryBricksetRepository implements BricksetRepository, BricksetNumberService {
 
     private final List<Event> eventStore = new ArrayList<>();
+    private final Set<BricksetNumber> numbers = new HashSet<>();
 
     @Override
     public boolean exists(final BricksetNumber number) {
-        return false;
+        return numbers.contains(number);
     }
 
     @Override
@@ -42,6 +37,14 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
         if (!Objects.equals(eventStream.getLastEventId(), brickset.getLastEventId())) {
             throw new EventStreamOptimisticLockException();
         }
+        brickset.getMutatingEvents().forEach(event -> {
+            if (event instanceof BricksetCreated created) {
+                numbers.add(created.number());
+            }
+            if (event instanceof BricksetRemoved) {
+                numbers.remove(brickset.getNumber());
+            }
+        });
         eventStore.addAll(brickset.getMutatingEvents());
     }
 
