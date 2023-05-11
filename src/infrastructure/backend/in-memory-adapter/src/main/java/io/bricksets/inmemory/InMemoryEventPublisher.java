@@ -1,4 +1,4 @@
-package io.bricksets.test;
+package io.bricksets.inmemory;
 
 import io.bricksets.domain.event.Event;
 import io.bricksets.domain.event.EventPublisher;
