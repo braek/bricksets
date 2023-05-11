@@ -18,7 +18,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @DisplayName("Given a use case to remove Bricksets")
 public class RemoveBricksetUseCaseTest {
@@ -35,15 +37,12 @@ public class RemoveBricksetUseCaseTest {
         private final BricksetNumber number = BricksetNumber.fromString("10194");
         private final BricksetTitle title = BricksetTitle.fromString("Emerald Night");
         private final Brickset brickset = Brickset.create(number, title, timeService);
-        private final BricksetTitle newTitle = BricksetTitle.fromString("Crocodile Locomotive");
         private boolean removedCalled;
-        private Brickset updatedBrickset;
 
         @BeforeEach
         void setup() {
             bricksetRepository.save(brickset);
             useCase.removeBrickset(brickset.getId(), this);
-            updatedBrickset = bricksetRepository.get(brickset.getId()).orElse(null);
         }
 
         @Test
@@ -55,7 +54,7 @@ public class RemoveBricksetUseCaseTest {
         @Test
         @DisplayName("it should persist state")
         void statePersisted() {
-            assertNull(updatedBrickset);
+            assertThat(bricksetRepository.get(brickset.getId())).isEmpty();
         }
 
         @Test
