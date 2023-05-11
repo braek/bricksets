@@ -12,5 +12,5 @@ public interface Event {
 
     Timestamp timestamp();
 
-    Set<AggregateId> identifiers();
+    Set<AggregateId> tags();
 }

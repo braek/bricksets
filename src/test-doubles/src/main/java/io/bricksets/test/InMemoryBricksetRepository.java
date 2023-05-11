@@ -47,7 +47,7 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
 
     private EventStream getBricksetEventStream(final BricksetId bricksetId) {
         return new EventStream(eventStore.stream()
-                .filter(it -> it.identifiers().contains(bricksetId))
+                .filter(it -> it.tags().contains(bricksetId))
                 .toList());
     }
 }
