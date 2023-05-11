@@ -27,13 +27,12 @@ class CreateBricksetUseCaseTest {
     class TestHappyFlow implements CreateBricksetPresenter {
 
         private boolean createdCalled;
+        private final BricksetNumber number = BricksetNumber.fromString("40580");
+        private final BricksetTitle title = BricksetTitle.fromString("Blacktron Cruiser");
 
         @BeforeEach
         void setup() {
-            useCase.execute(new CreateBricksetCommand(
-                    BricksetNumber.fromString("40580"),
-                    BricksetTitle.fromString("Blacktron Cruiser")
-            ), this);
+            useCase.execute(new CreateBricksetCommand(number, title), this);
         }
 
         @Test
