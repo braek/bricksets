@@ -19,10 +19,10 @@ public record EventStream(List<Event> events) {
     }
 
     public EventId getLastEventId() {
-        if (!isEmpty()) {
-            return null;
-        }
-        return events.get(events.size() - 1).id();
+        return events.stream()
+                .reduce((first, last) -> last)
+                .map(Event::id)
+                .orElseThrow();
     }
 
     public boolean containsInstanceOf(final Class<? extends Event> clazz) {

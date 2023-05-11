@@ -21,7 +21,7 @@ public abstract class EventSourcedAggregate implements Aggregate {
             throw new EventStreamEmptyException(getClass());
         }
         eventStream.events().forEach(this::when);
-        lastEventId = eventStream.events().get(eventStream.events().size() - 1).id();
+        lastEventId = eventStream.getLastEventId();
     }
 
     public EventId getLastEventId() {
@@ -32,11 +32,11 @@ public abstract class EventSourcedAggregate implements Aggregate {
         return mutatingEvents;
     }
 
-    protected abstract void when(Event event);
-
     protected void apply(Event event) {
         mutatingEvents.add(event);
     }
+
+    protected abstract void when(Event event);
 
     public abstract AggregateId getId();
 }
