@@ -3,7 +3,6 @@ package io.bricksets.domain.aggregate;
 import io.bricksets.domain.event.Event;
 import io.bricksets.domain.event.EventStream;
 import io.bricksets.domain.event.EventStreamEmptyException;
-import io.bricksets.vocabulary.domain.AggregateId;
 import io.bricksets.vocabulary.domain.event.EventId;
 
 import java.util.ArrayList;
