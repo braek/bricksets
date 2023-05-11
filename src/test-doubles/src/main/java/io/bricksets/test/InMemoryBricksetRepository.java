@@ -23,11 +23,11 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
                 .filter(it -> it instanceof BricksetCreated)
                 .map(it -> ((BricksetCreated) it).number())
                 .collect(Collectors.toSet());
-        var removedNumbers = eventStore.stream()
+        var removed = eventStore.stream()
                 .filter(it -> it instanceof BricksetRemoved)
                 .map(it -> ((BricksetRemoved) it).number())
                 .collect(Collectors.toSet());
-        numbers.removeAll(removedNumbers);
+        numbers.removeAll(removed);
         return numbers.contains(number);
     }
 
