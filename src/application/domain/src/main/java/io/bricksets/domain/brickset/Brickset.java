@@ -26,6 +26,11 @@ public final class Brickset extends EventSourcedAggregate {
     }
 
     @Override
+    protected BricksetId getId() {
+        return id;
+    }
+
+    @Override
     protected void when(Event event) {
         if (event instanceof BricksetCreated created) {
             when(created);
