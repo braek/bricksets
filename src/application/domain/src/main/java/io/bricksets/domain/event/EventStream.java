@@ -16,7 +16,7 @@ public record EventStream(List<Event> events) {
         return events.isEmpty();
     }
 
-    public boolean contains(Class clazz) {
+    public boolean containsInstanceOf(final Class<? extends Event> clazz) {
         return events.stream()
                 .map(Event::getClass)
                 .anyMatch(it -> it.equals(clazz));

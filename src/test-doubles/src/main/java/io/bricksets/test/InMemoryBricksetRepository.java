@@ -25,7 +25,7 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
     @Override
     public Optional<Brickset> get(BricksetId bricksetId) {
         var eventStream = getBricksetEvents(bricksetId);
-        if (eventStream.isEmpty() || eventStream.contains(BricksetRemoved.class)) {
+        if (eventStream.isEmpty() || eventStream.containsInstanceOf(BricksetRemoved.class)) {
             return Optional.empty();
         }
         return Optional.of(new Brickset(eventStream));
