@@ -35,9 +35,11 @@ class CreateBricksetUseCaseTest {
     @DisplayName("when Brickset successfully created")
     class TestHappyFlow implements CreateBricksetPresenter {
 
-        private boolean createdCalled;
         private final BricksetNumber number = BricksetNumber.fromString("40580");
         private final BricksetTitle title = BricksetTitle.fromString("Blacktron Cruiser");
+        private final Timestamp createdAt = Timestamp.fromString("2023-04-04T16:30:00Z");
+
+        private boolean createdCalled;
         private BricksetId bricksetId;
         private Brickset brickset;
 
@@ -59,7 +61,7 @@ class CreateBricksetUseCaseTest {
             assertThat(brickset.getId()).isEqualTo(bricksetId);
             assertThat(brickset.getTitle()).isEqualTo(title);
             assertThat(brickset.getNumber()).isEqualTo(number);
-            assertThat(brickset.getCreatedAt()).isEqualTo(Timestamp.fromString("2023-04-04T16:30:00Z"));
+            assertThat(brickset.getCreatedAt()).isEqualTo(createdAt);
             assertThat(brickset.getModifiedAt()).isNull();
             assertThat(brickset.getRemovedAt()).isNull();
         }
@@ -69,7 +71,7 @@ class CreateBricksetUseCaseTest {
         void eventsPublished() {
             eventPublisher.verifyEvents(List.of(
                     new BricksetCreated(
-                            Timestamp.fromString("2023-04-04T16:30:00Z"),
+                            createdAt,
                             bricksetId,
                             number,
                             title
