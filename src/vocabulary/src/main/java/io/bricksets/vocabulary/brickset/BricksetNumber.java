@@ -16,10 +16,10 @@ public final class BricksetNumber implements ValueObject {
         final var sanitized = ofNullable(str)
                 .map(String::trim)
                 .orElse(null);
-        if (isNull(sanitized) || !Pattern.compile("").matcher(sanitized).matches()) {
+        if (isNull(sanitized) || !Pattern.compile("^\\d{4,6}$").matcher(sanitized).matches()) {
             throw new InvalidBricksetNumberException(str);
         }
-        this.value = str;
+        this.value = sanitized;
     }
 
     @Override
