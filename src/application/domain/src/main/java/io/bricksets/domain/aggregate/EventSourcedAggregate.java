@@ -23,6 +23,10 @@ public abstract class EventSourcedAggregate implements Aggregate {
         lastEventId = eventStream.events().get(eventStream.events().size() - 1).id();
     }
 
+    public EventId getLastEventId() {
+        return lastEventId;
+    }
+
     public List<Event> getMutatingEvents() {
         return mutatingEvents;
     }
