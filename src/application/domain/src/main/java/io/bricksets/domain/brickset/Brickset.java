@@ -43,9 +43,8 @@ public final class Brickset extends EventSourcedAggregate {
     }
 
     public static Brickset create(BricksetNumber number, BricksetTitle title) {
-        var event = new BricksetCreated(BricksetId.createNew(), number, title);
         var brickset = new Brickset();
-        brickset.apply(event);
+        brickset.apply(new BricksetCreated(BricksetId.createNew(), number, title));
         return brickset;
     }
 
