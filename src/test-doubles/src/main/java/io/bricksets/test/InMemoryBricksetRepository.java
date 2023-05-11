@@ -41,8 +41,8 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
             if (event instanceof BricksetCreated created) {
                 numbers.add(created.number());
             }
-            if (event instanceof BricksetRemoved) {
-                numbers.remove(brickset.getNumber());
+            if (event instanceof BricksetRemoved removed) {
+                numbers.remove(removed.number());
             }
         });
         eventStore.addAll(brickset.getMutatingEvents());

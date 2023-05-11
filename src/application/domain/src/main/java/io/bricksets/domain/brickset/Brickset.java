@@ -30,10 +30,6 @@ public final class Brickset extends EventSourcedAggregate {
         return id;
     }
 
-    public BricksetNumber getNumber() {
-        return number;
-    }
-
     @Override
     protected void when(Event event) {
         if (event instanceof BricksetCreated created) {
@@ -62,7 +58,7 @@ public final class Brickset extends EventSourcedAggregate {
     }
 
     public void remove() {
-        apply(new BricksetRemoved(id));
+        apply(new BricksetRemoved(id, number));
     }
 
     private void when(BricksetCreated created) {
