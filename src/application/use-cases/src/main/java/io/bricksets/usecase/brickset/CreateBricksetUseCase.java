@@ -29,6 +29,7 @@ public final class CreateBricksetUseCase implements CreateBrickset, UseCase<Crea
 
     @Override
     public void execute(CreateBricksetCommand command, CreateBricksetPresenter presenter) {
+        // TODO: put this logic in aggregate, somehow?
         if (bricksetNumberService.exists(command.number())) {
             presenter.bricksetNumberAlreadyExists();
             return;
