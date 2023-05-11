@@ -1,10 +1,10 @@
 CREATE TABLE event
 (
-    id          UUID        NOT NULL,
-    timestamp   TIMESTAMPTZ NOT NULL,
-    position    BIGSERIAL      NOT NULL,
-    event_class VARCHAR     NOT NULL,
-    event_value JSONB       NOT NULL,
+    id          UUID      NOT NULL,
+    timestamp   TIMESTAMP NOT NULL,
+    position    BIGSERIAL NOT NULL,
+    event_class VARCHAR   NOT NULL,
+    event_value JSONB     NOT NULL,
     CONSTRAINT pk_event PRIMARY KEY (id)
 );
 CREATE TABLE tag
