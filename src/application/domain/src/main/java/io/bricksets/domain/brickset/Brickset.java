@@ -27,16 +27,16 @@ public final class Brickset extends EventSourcedAggregate {
 
     @Override
     protected void when(Event event) {
-        if (event instanceof BricksetCreated bricksetCreated) {
-            when(bricksetCreated);
+        if (event instanceof BricksetCreated created) {
+            when(created);
             return;
         }
-        if (event instanceof BricksetModified bricksetModified) {
-            when(bricksetModified);
+        if (event instanceof BricksetModified modified) {
+            when(modified);
             return;
         }
-        if (event instanceof BricksetRemoved bricksetRemoved) {
-            when(bricksetRemoved);
+        if (event instanceof BricksetRemoved removed) {
+            when(removed);
             return;
         }
         throw new IllegalStateException(String.format("Cannot process event of type %s", event.getClass().getSimpleName()));
