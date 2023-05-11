@@ -10,6 +10,8 @@ import io.bricksets.usecase.UseCase;
 import io.bricksets.vocabulary.brickset.BricksetNumber;
 import io.bricksets.vocabulary.brickset.BricksetTitle;
 
+import static java.util.Objects.requireNonNull;
+
 public final class CreateBricksetUseCase implements CreateBrickset, UseCase<CreateBricksetCommand, CreateBricksetPresenter> {
 
     private final BricksetRepository bricksetRepository;
@@ -24,6 +26,9 @@ public final class CreateBricksetUseCase implements CreateBrickset, UseCase<Crea
 
     @Override
     public void createBrickset(BricksetNumber number, BricksetTitle title, CreateBricksetPresenter presenter) {
+        requireNonNull(number, "Number cannot be NULL");
+        requireNonNull(title, "Title cannot be NULL");
+        requireNonNull(presenter, "Presenter cannot be NULL");
         execute(new CreateBricksetCommand(number, title), presenter);
     }
 
