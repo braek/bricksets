@@ -31,7 +31,7 @@ public class ModifyBricksetUseCaseTest {
     private final ModifyBricksetUseCase useCase = new ModifyBricksetUseCase(bricksetRepository, timeService, eventPublisher);
 
     @Nested
-    @DisplayName("when Brickset successfully created")
+    @DisplayName("when Brickset successfully modified")
     class TestHappyFlow implements ModifyBricksetPresenter {
 
         private final BricksetNumber number = BricksetNumber.fromString("10194");
