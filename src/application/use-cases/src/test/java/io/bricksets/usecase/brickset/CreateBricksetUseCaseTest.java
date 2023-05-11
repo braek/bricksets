@@ -45,7 +45,7 @@ class CreateBricksetUseCaseTest {
 
         @BeforeEach
         void setup() {
-            useCase.execute(new CreateBricksetCommand(number, title), this);
+            useCase.createBrickset(number, title, this);
             brickset = bricksetRepository.get(bricksetId).orElseThrow();
         }
 
@@ -101,8 +101,8 @@ class CreateBricksetUseCaseTest {
 
         @BeforeEach
         void setup() {
-            useCase.execute(new CreateBricksetCommand(number, title), new MockCreateBricksetPresenter());
-            useCase.execute(new CreateBricksetCommand(number, title), this);
+            useCase.createBrickset(number, title, new MockCreateBricksetPresenter());
+            useCase.createBrickset(number, title, this);
         }
 
         @Test
