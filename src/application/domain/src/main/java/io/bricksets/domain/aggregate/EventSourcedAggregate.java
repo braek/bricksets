@@ -8,6 +8,8 @@ import io.bricksets.vocabulary.domain.event.EventId;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.isNull;
+
 public abstract class EventSourcedAggregate implements Aggregate {
 
     private final List<Event> mutatingEvents = new ArrayList<>();
@@ -24,6 +26,10 @@ public abstract class EventSourcedAggregate implements Aggregate {
         lastEventId = eventStream.getLastEventId();
     }
 
+    public boolean isNew() {
+        return isNull(lastEventId);
+    }
+
     public EventId getLastEventId() {
         return lastEventId;
     }
@@ -33,6 +39,7 @@ public abstract class EventSourcedAggregate implements Aggregate {
     }
 
     protected void apply(Event event) {
+        when(event);
         mutatingEvents.add(event);
     }
 

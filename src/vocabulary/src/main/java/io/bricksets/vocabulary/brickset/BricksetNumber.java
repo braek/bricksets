@@ -12,7 +12,7 @@ public final class BricksetNumber implements ValueObject {
 
     private final String value;
 
-    private BricksetNumber(String str) {
+    private BricksetNumber(final String str) {
         final var sanitized = ofNullable(str)
                 .map(String::trim)
                 .orElse(null);
@@ -20,6 +20,10 @@ public final class BricksetNumber implements ValueObject {
             throw new InvalidBricksetNumberException(str);
         }
         this.value = sanitized;
+    }
+
+    public static BricksetNumber fromString(final String str) {
+        return new BricksetNumber(str);
     }
 
     @Override

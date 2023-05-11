@@ -21,7 +21,7 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
 
     @Override
     public Optional<Brickset> get(final BricksetId bricksetId) {
-        var eventStream = getBricksetEventStream(bricksetId);
+        var eventStream = query(bricksetId);
         if (eventStream.isEmpty() || eventStream.containsInstanceOf(BricksetRemoved.class)) {
             return Optional.empty();
         }
@@ -30,14 +30,22 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
 
     @Override
     public void save(final Brickset brickset) {
-        var eventStream = getBricksetEventStream(brickset.getId());
+        if (brickset.getMutatingEvents().isEmpty()) {
+            return;
+        }
+        var eventStream = query(brickset.getId());
         if (eventStream.isEmpty()) {
+            store(brickset.getMutatingEvents());
             return;
         }
         if (!Objects.equals(eventStream.getLastEventId(), brickset.getLastEventId())) {
             throw new EventStreamOptimisticLockException(brickset.getLastEventId());
         }
-        brickset.getMutatingEvents().forEach(event -> {
+        store(brickset.getMutatingEvents());
+    }
+
+    private void store(List<Event> events) {
+        events.forEach(event -> {
             if (event instanceof BricksetCreated created) {
                 numbers.add(created.number());
             }
@@ -45,10 +53,10 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
                 numbers.remove(removed.number());
             }
         });
-        eventStore.addAll(brickset.getMutatingEvents());
+        eventStore.addAll(events);
     }
 
-    private EventStream getBricksetEventStream(final BricksetId bricksetId) {
+    private EventStream query(final BricksetId bricksetId) {
         return new EventStream(eventStore.stream()
                 .filter(it -> it.tags().contains(bricksetId))
                 .toList());

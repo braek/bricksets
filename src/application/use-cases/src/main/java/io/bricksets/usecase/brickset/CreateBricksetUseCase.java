@@ -42,5 +42,6 @@ public final class CreateBricksetUseCase implements CreateBrickset, UseCase<Crea
         final Brickset brickset = Brickset.create(command.number(), command.title());
         bricksetRepository.save(brickset);
         eventPublisher.publish(brickset.getMutatingEvents());
+        presenter.created(brickset.getId());
     }
 }

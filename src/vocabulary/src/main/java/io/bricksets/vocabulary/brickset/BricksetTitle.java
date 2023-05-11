@@ -21,6 +21,10 @@ public final class BricksetTitle implements ValueObject {
         this.value = sanitized;
     }
 
+    public static BricksetTitle fromString(final String str) {
+        return new BricksetTitle(str);
+    }
+
     @Override
     public String getValue() {
         return value;
