@@ -38,5 +38,5 @@ public abstract class EventSourcedAggregate implements Aggregate {
         mutatingEvents.add(event);
     }
 
-    protected abstract AggregateId getId();
+    public abstract AggregateId getId();
 }

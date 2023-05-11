@@ -26,7 +26,7 @@ public final class Brickset extends EventSourcedAggregate {
     }
 
     @Override
-    protected BricksetId getId() {
+    public BricksetId getId() {
         return id;
     }
 
