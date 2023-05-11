@@ -21,7 +21,7 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
 
     @Override
     public Optional<Brickset> get(final BricksetId bricksetId) {
-        var eventStream = query(bricksetId);
+        var eventStream = getEventStreamForBrickset(bricksetId);
         if (eventStream.isEmpty() || eventStream.containsInstanceOf(BricksetRemoved.class)) {
             return Optional.empty();
         }
@@ -33,7 +33,7 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
         if (brickset.getMutatingEvents().isEmpty()) {
             return;
         }
-        var eventStream = query(brickset.getId());
+        var eventStream = getEventStreamForBrickset(brickset.getId());
         if (eventStream.isEmpty()) {
             store(brickset.getMutatingEvents());
             return;
@@ -56,7 +56,7 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
         eventStore.addAll(events);
     }
 
-    private EventStream query(final BricksetId bricksetId) {
+    private EventStream getEventStreamForBrickset(final BricksetId bricksetId) {
         return new EventStream(eventStore.stream()
                 .filter(it -> it.tags().contains(bricksetId))
                 .toList());
