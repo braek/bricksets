@@ -20,12 +20,14 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
     @Override
     public boolean exists(final BricksetNumber number) {
         var numbers = eventStore.stream()
-                .filter(it -> it instanceof BricksetCreated)
-                .map(it -> ((BricksetCreated) it).number())
+                .filter(BricksetCreated.class::isInstance)
+                .map(BricksetCreated.class::cast)
+                .map(BricksetCreated::number)
                 .collect(Collectors.toSet());
         var removed = eventStore.stream()
-                .filter(it -> it instanceof BricksetRemoved)
-                .map(it -> ((BricksetRemoved) it).number())
+                .filter(BricksetRemoved.class::isInstance)
+                .map(BricksetRemoved.class::cast)
+                .map(BricksetRemoved::number)
                 .collect(Collectors.toSet());
         numbers.removeAll(removed);
         return numbers.contains(number);
