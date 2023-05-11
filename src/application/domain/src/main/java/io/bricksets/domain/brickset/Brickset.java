@@ -57,20 +57,20 @@ public final class Brickset extends EventSourcedAggregate {
         apply(new BricksetRemoved(id));
     }
 
-    private void when(BricksetCreated bricksetCreated) {
-        this.id = bricksetCreated.bricksetId();
-        this.number = bricksetCreated.number();
-        this.title = bricksetCreated.title();
-        this.createdAt = bricksetCreated.timestamp();
-        this.modifiedAt = bricksetCreated.timestamp();
+    private void when(BricksetCreated created) {
+        this.id = created.bricksetId();
+        this.number = created.number();
+        this.title = created.title();
+        this.createdAt = created.timestamp();
+        this.modifiedAt = created.timestamp();
     }
 
-    private void when(BricksetModified bricksetModified) {
-        this.title = bricksetModified.title();
-        this.modifiedAt = bricksetModified.timestamp();
+    private void when(BricksetModified modified) {
+        this.title = modified.title();
+        this.modifiedAt = modified.timestamp();
     }
 
-    private void when(BricksetRemoved bricksetRemoved) {
-        this.removedAt = bricksetRemoved.timestamp();
+    private void when(BricksetRemoved removed) {
+        this.removedAt = removed.timestamp();
     }
 }

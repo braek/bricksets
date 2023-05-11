@@ -4,11 +4,14 @@ import io.bricksets.domain.event.Event;
 import io.bricksets.vocabulary.brickset.BricksetId;
 import io.bricksets.vocabulary.brickset.BricksetNumber;
 import io.bricksets.vocabulary.brickset.BricksetTitle;
+import io.bricksets.vocabulary.domain.AggregateId;
 import io.bricksets.vocabulary.domain.event.EventId;
 import io.bricksets.vocabulary.time.Timestamp;
 
-public record BricksetCreated(EventId id, Timestamp timestamp, BricksetId bricksetId, BricksetNumber number, BricksetTitle title) implements Event {
+import java.util.Set;
+
+public record BricksetCreated(EventId id, Timestamp timestamp, Set<AggregateId> identifiers, BricksetId bricksetId, BricksetNumber number, BricksetTitle title) implements Event {
     public BricksetCreated(BricksetId bricksetId, BricksetNumber number, BricksetTitle title) {
-        this(EventId.createNew(), Timestamp.now(), bricksetId, number, title);
+        this(EventId.createNew(), Timestamp.now(), Set.of(bricksetId), bricksetId, number, title);
     }
 }
