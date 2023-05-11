@@ -26,10 +26,6 @@ public abstract class EventSourcedAggregate implements Aggregate {
         lastEventId = eventStream.getLastEventId();
     }
 
-    public boolean isNew() {
-        return isNull(lastEventId);
-    }
-
     public EventId getLastEventId() {
         return lastEventId;
     }
