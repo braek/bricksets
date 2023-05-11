@@ -55,7 +55,7 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
         if (!Objects.equals(eventStream.getLastEventId(), brickset.getLastEventId())) {
             throw new EventStreamOptimisticLockException(brickset.getLastEventId());
         }
-        eventStore.addAll(eventStream.events());
+        eventStore.addAll(brickset.getMutatingEvents());
     }
 
     private EventStream getEventStreamForBrickset(final BricksetId bricksetId) {
