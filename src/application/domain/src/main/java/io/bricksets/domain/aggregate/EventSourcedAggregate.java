@@ -8,8 +8,6 @@ import io.bricksets.vocabulary.domain.event.EventId;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Objects.isNull;
-
 public abstract class EventSourcedAggregate implements Aggregate {
 
     private final List<Event> mutatingEvents = new ArrayList<>();
