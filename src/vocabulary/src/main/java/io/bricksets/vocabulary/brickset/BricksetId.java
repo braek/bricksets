@@ -13,6 +13,10 @@ public final class BricksetId implements AggregateId {
         this.value = value;
     }
 
+    public static BricksetId createNew() {
+        return new BricksetId(UUID.randomUUID());
+    }
+
     @Override
     public String toString() {
         return value.toString();
