@@ -8,7 +8,7 @@ import io.bricksets.vocabulary.time.Timestamp;
 
 import java.util.Set;
 
-public record BricksetRemoved(EventId id, Timestamp timestamp, Set<AggregateId> identifiers, BricksetId bricksetId) implements Event {
+public record BricksetRemoved(EventId id, Timestamp timestamp, Set<AggregateId> tags, BricksetId bricksetId) implements Event {
     public BricksetRemoved(BricksetId bricksetId) {
         this(EventId.createNew(), Timestamp.now(), Set.of(bricksetId), bricksetId);
     }
