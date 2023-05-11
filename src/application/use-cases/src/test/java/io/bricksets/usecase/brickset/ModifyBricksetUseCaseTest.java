@@ -87,4 +87,32 @@ public class ModifyBricksetUseCaseTest {
             fail();
         }
     }
+
+    @Nested
+    @DisplayName("when Brickset not found")
+    class TestWhenBricksetNotFound implements ModifyBricksetPresenter {
+
+        private boolean bricksetNotFoundCalled;
+
+        @BeforeEach
+        void setup() {
+            useCase.modifyBrickset(BricksetId.createNew(), BricksetTitle.fromString("Maersk Train"), this);
+        }
+
+        @Test
+        @DisplayName("it should provide feedback")
+        void feedbackProvided() {
+            assertTrue(bricksetNotFoundCalled);
+        }
+
+        @Override
+        public void modified(BricksetId bricksetId) {
+            fail();
+        }
+
+        @Override
+        public void bricksetNotFound() {
+            bricksetNotFoundCalled = true;
+        }
+    }
 }
