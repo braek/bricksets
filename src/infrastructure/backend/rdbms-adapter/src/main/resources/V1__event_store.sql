@@ -1,7 +1,7 @@
 CREATE TABLE event
 (
     id          UUID      NOT NULL,
-    timestamp   TIMESTAMP NOT NULL,
+    occurred_at TIMESTAMP NOT NULL,
     position    BIGSERIAL NOT NULL,
     event_class VARCHAR   NOT NULL,
     event_value JSONB     NOT NULL,

@@ -9,8 +9,8 @@ import io.bricksets.vocabulary.time.Timestamp;
 
 import java.util.Set;
 
-public record BricksetRemoved(EventId id, Timestamp timestamp, Set<AggregateId> tags, BricksetId bricksetId, BricksetNumber number) implements Event {
-    public BricksetRemoved(Timestamp timestamp, BricksetId bricksetId, BricksetNumber number) {
-        this(EventId.createNew(), timestamp, Set.of(bricksetId), bricksetId, number);
+public record BricksetRemoved(EventId id, Timestamp occurredAt, Set<AggregateId> tags, BricksetId bricksetId, BricksetNumber number) implements Event {
+    public BricksetRemoved(Timestamp occurredAt, BricksetId bricksetId, BricksetNumber number) {
+        this(EventId.createNew(), occurredAt, Set.of(bricksetId), bricksetId, number);
     }
 }

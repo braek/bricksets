@@ -80,11 +80,11 @@ public final class Brickset extends EventSourcedAggregate {
         this.id = created.bricksetId();
         this.number = created.number();
         this.title = created.title();
-        this.createdAt = created.timestamp();
+        this.createdAt = created.occurredAt();
     }
 
     private void when(BricksetModified modified) {
         this.title = modified.title();
-        this.modifiedAt = modified.timestamp();
+        this.modifiedAt = modified.occurredAt();
     }
 }
