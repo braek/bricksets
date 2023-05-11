@@ -18,7 +18,7 @@ public abstract class EventSourcedAggregate implements Aggregate {
 
     public EventSourcedAggregate(EventStream eventStream) {
         if (eventStream.isEmpty()) {
-            throw new EmptyEventStreamException(getClass());
+            throw new EventStreamEmptyException(getClass());
         }
         eventStream.events().forEach(this::when);
         lastEventId = eventStream.events().get(eventStream.events().size() - 1).id();

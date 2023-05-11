@@ -1,5 +1,6 @@
 package io.bricksets.test;
 
+import io.bricksets.domain.aggregate.EventStreamOptimisticLockException;
 import io.bricksets.domain.brickset.Brickset;
 import io.bricksets.domain.brickset.BricksetNumberService;
 import io.bricksets.domain.brickset.BricksetRemoved;
@@ -39,7 +40,7 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
             return;
         }
         if (!Objects.equals(eventStream.getLastEventId(), brickset.getLastEventId())) {
-
+            throw new EventStreamOptimisticLockException();
         }
         eventStore.addAll(brickset.getMutatingEvents());
     }
