@@ -1,4 +1,4 @@
-package io.bricksets.domain.aggregate;
+package io.bricksets.domain.event;
 
 public final class EventStreamOptimisticLockException extends RuntimeException {
 }

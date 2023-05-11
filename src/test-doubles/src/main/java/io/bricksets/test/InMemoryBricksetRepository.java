@@ -1,6 +1,6 @@
 package io.bricksets.test;
 
-import io.bricksets.domain.aggregate.EventStreamOptimisticLockException;
+import io.bricksets.domain.event.EventStreamOptimisticLockException;
 import io.bricksets.domain.brickset.Brickset;
 import io.bricksets.domain.brickset.BricksetNumberService;
 import io.bricksets.domain.brickset.BricksetRemoved;

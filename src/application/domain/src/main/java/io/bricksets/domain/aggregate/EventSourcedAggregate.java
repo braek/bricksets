@@ -2,6 +2,7 @@ package io.bricksets.domain.aggregate;
 
 import io.bricksets.domain.event.Event;
 import io.bricksets.domain.event.EventStream;
+import io.bricksets.domain.event.EventStreamEmptyException;
 import io.bricksets.vocabulary.domain.AggregateId;
 import io.bricksets.vocabulary.domain.event.EventId;
 
@@ -37,6 +38,4 @@ public abstract class EventSourcedAggregate implements Aggregate {
     }
 
     protected abstract void when(Event event);
-
-    public abstract AggregateId getId();
 }
