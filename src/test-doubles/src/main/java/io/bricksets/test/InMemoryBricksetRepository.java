@@ -7,15 +7,27 @@ import io.bricksets.domain.event.EventStreamOptimisticLockException;
 import io.bricksets.vocabulary.brickset.BricksetId;
 import io.bricksets.vocabulary.brickset.BricksetNumber;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public final class InMemoryBricksetRepository implements BricksetRepository, BricksetNumberService {
 
     private final List<Event> eventStore = new ArrayList<>();
-    private final Set<BricksetNumber> numbers = new HashSet<>();
 
     @Override
     public boolean exists(final BricksetNumber number) {
+        var numbers = eventStore.stream()
+                .filter(it -> it instanceof BricksetCreated)
+                .map(it -> ((BricksetCreated) it).number())
+                .collect(Collectors.toSet());
+        var removedNumbers = eventStore.stream()
+                .filter(it -> it instanceof BricksetRemoved)
+                .map(it -> ((BricksetRemoved) it).number())
+                .collect(Collectors.toSet());
+        numbers.removeAll(removedNumbers);
         return numbers.contains(number);
     }
 
@@ -35,25 +47,13 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
         }
         var eventStream = getEventStreamForBrickset(brickset.getId());
         if (eventStream.isEmpty()) {
-            store(brickset.getMutatingEvents());
+            eventStore.addAll(eventStream.events());
             return;
         }
         if (!Objects.equals(eventStream.getLastEventId(), brickset.getLastEventId())) {
             throw new EventStreamOptimisticLockException(brickset.getLastEventId());
         }
-        store(brickset.getMutatingEvents());
-    }
-
-    private void store(List<Event> events) {
-        events.forEach(event -> {
-            if (event instanceof BricksetCreated created) {
-                numbers.add(created.number());
-            }
-            if (event instanceof BricksetRemoved removed) {
-                numbers.remove(removed.number());
-            }
-        });
-        eventStore.addAll(events);
+        eventStore.addAll(eventStream.events());
     }
 
     private EventStream getEventStreamForBrickset(final BricksetId bricksetId) {
