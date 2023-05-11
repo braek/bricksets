@@ -20,12 +20,12 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
     private final List<Event> eventStore = new ArrayList<>();
 
     @Override
-    public boolean exists(BricksetNumber number) {
+    public boolean exists(final BricksetNumber number) {
         return false;
     }
 
     @Override
-    public Optional<Brickset> get(BricksetId bricksetId) {
+    public Optional<Brickset> get(final BricksetId bricksetId) {
         var eventStream = getBricksetEventStream(bricksetId);
         if (eventStream.isEmpty() || eventStream.containsInstanceOf(BricksetRemoved.class)) {
             return Optional.empty();
@@ -34,7 +34,7 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
     }
 
     @Override
-    public void save(Brickset brickset) {
+    public void save(final Brickset brickset) {
         var eventStream = getBricksetEventStream(brickset.getId());
         if (eventStream.isEmpty()) {
             return;
