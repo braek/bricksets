@@ -35,7 +35,7 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
             return;
         }
         if (!Objects.equals(eventStream.getLastEventId(), brickset.getLastEventId())) {
-            throw new EventStreamOptimisticLockException();
+            throw new EventStreamOptimisticLockException(brickset.getLastEventId());
         }
         brickset.getMutatingEvents().forEach(event -> {
             if (event instanceof BricksetCreated created) {
