@@ -11,6 +11,7 @@ import io.bricksets.test.MockTimeService;
 import io.bricksets.vocabulary.brickset.BricksetId;
 import io.bricksets.vocabulary.brickset.BricksetNumber;
 import io.bricksets.vocabulary.brickset.BricksetTitle;
+import io.bricksets.vocabulary.time.Timestamp;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -68,10 +69,11 @@ class CreateBricksetUseCaseTest {
         void eventsPublished() {
             eventPublisher.verifyEvents(List.of(
                     new BricksetCreated(
-                            timeService.now(),
+                            Timestamp.fromString("2023-04-04T16:30:00Z"),
                             bricksetId,
                             number,
-                            title)
+                            title
+                    )
             ));
         }
 

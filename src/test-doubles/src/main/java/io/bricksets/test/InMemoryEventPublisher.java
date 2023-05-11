@@ -16,7 +16,7 @@ public final class InMemoryEventPublisher implements EventPublisher {
 
     public void verifyEvents(List<Event> expectedEvents) {
         final RecursiveComparisonConfiguration config = RecursiveComparisonConfiguration.builder()
-                .withIgnoredFields("id", "timestamp")
+                .withIgnoredFields("id")
                 .build();
         assertThat(events).usingRecursiveComparison(config).isEqualTo(expectedEvents);
     }

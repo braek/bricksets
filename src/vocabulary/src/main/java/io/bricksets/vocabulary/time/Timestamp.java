@@ -19,6 +19,10 @@ public final class Timestamp implements ValueObject {
         return new Timestamp(instant);
     }
 
+    public static Timestamp fromString(final String str) {
+        return new Timestamp(Instant.parse(str));
+    }
+
     @Override
     public String toString() {
         return value.toString();
