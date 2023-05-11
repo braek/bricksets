@@ -1,6 +1,8 @@
 package io.bricksets.usecase.brickset;
 
 import io.bricksets.api.CreateBricksetPresenter;
+import io.bricksets.domain.brickset.Brickset;
+import io.bricksets.domain.brickset.BricksetCreated;
 import io.bricksets.test.InMemoryBricksetRepository;
 import io.bricksets.test.InMemoryEventPublisher;
 import io.bricksets.test.MockCreateBricksetPresenter;
@@ -12,6 +14,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -29,10 +34,13 @@ class CreateBricksetUseCaseTest {
         private boolean createdCalled;
         private final BricksetNumber number = BricksetNumber.fromString("40580");
         private final BricksetTitle title = BricksetTitle.fromString("Blacktron Cruiser");
+        private BricksetId bricksetId;
+        private Brickset brickset;
 
         @BeforeEach
         void setup() {
             useCase.execute(new CreateBricksetCommand(number, title), this);
+            brickset = bricksetRepository.get(bricksetId).orElseThrow();
         }
 
         @Test
@@ -41,9 +49,33 @@ class CreateBricksetUseCaseTest {
             assertTrue(createdCalled);
         }
 
+        @Test
+        @DisplayName("it should persist state")
+        void statePersisted() {
+            assertThat(brickset.getId()).isEqualTo(bricksetId);
+            assertThat(brickset.getTitle()).isEqualTo(title);
+            assertThat(brickset.getNumber()).isEqualTo(number);
+            assertThat(brickset.getCreatedAt()).isNotNull();
+            assertThat(brickset.getModifiedAt()).isNull();
+            assertThat(brickset.getRemovedAt()).isNull();
+        }
+
+        @Test
+        @DisplayName("it should publish events")
+        void eventsPublished() {
+            eventPublisher.verifyEvents(List.of(
+                    new BricksetCreated(
+                            bricksetId,
+                            number,
+                            title
+                    )
+            ));
+        }
+
         @Override
         public void created(BricksetId bricksetId) {
-            createdCalled = true;
+            this.createdCalled = true;
+            this.bricksetId = bricksetId;
         }
 
         @Override

@@ -30,6 +30,26 @@ public final class Brickset extends EventSourcedAggregate {
         return id;
     }
 
+    public BricksetNumber getNumber() {
+        return number;
+    }
+
+    public BricksetTitle getTitle() {
+        return title;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public Timestamp getModifiedAt() {
+        return modifiedAt;
+    }
+
+    public Timestamp getRemovedAt() {
+        return removedAt;
+    }
+
     @Override
     protected void when(Event event) {
         if (event instanceof BricksetCreated created) {
