@@ -46,10 +46,6 @@ public final class Brickset extends EventSourcedAggregate {
         return modifiedAt;
     }
 
-    public Timestamp getRemovedAt() {
-        return removedAt;
-    }
-
     @Override
     protected void when(Event event) {
         if (event instanceof BricksetCreated created) {
