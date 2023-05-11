@@ -34,7 +34,7 @@ public final class CreateBricksetUseCase implements CreateBrickset, UseCase<Crea
             presenter.bricksetNumberAlreadyExists();
             return;
         }
-        var brickset = Brickset.create(command.number(), command.title());
+        final Brickset brickset = Brickset.create(command.number(), command.title());
         bricksetRepository.save(brickset);
         eventPublisher.publish(brickset.getMutatingEvents());
     }
