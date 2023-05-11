@@ -3,6 +3,7 @@ package io.bricksets.domain.brickset;
 import io.bricksets.domain.aggregate.EventSourcedAggregate;
 import io.bricksets.domain.event.Event;
 import io.bricksets.domain.event.EventStream;
+import io.bricksets.domain.time.TimeService;
 import io.bricksets.vocabulary.brickset.BricksetId;
 import io.bricksets.vocabulary.brickset.BricksetNumber;
 import io.bricksets.vocabulary.brickset.BricksetTitle;
@@ -67,18 +68,18 @@ public final class Brickset extends EventSourcedAggregate {
         throw new IllegalStateException(String.format("Cannot process event of type %s", event.getClass().getSimpleName()));
     }
 
-    public static Brickset create(BricksetNumber number, BricksetTitle title) {
+    public static Brickset create(BricksetNumber number, BricksetTitle title, TimeService timeService) {
         var brickset = new Brickset();
-        brickset.apply(new BricksetCreated(BricksetId.createNew(), number, title));
+        brickset.apply(new BricksetCreated(timeService.now(), BricksetId.createNew(), number, title));
         return brickset;
     }
 
-    public void modify(BricksetTitle title) {
-        apply(new BricksetModified(id, title));
+    public void modify(BricksetTitle title, TimeService timeService) {
+        apply(new BricksetModified(timeService.now(), id, title));
     }
 
-    public void remove() {
-        apply(new BricksetRemoved(id, number));
+    public void remove(TimeService timeService) {
+        apply(new BricksetRemoved(timeService.now(), id, number));
     }
 
     private void when(BricksetCreated created) {

@@ -5,16 +5,18 @@ import io.bricksets.vocabulary.domain.ValueObject;
 import java.time.Instant;
 import java.util.Objects;
 
+import static java.util.Objects.requireNonNull;
+
 public final class Timestamp implements ValueObject {
 
     private final Instant value;
 
     private Timestamp(Instant value) {
-        this.value = value;
+        this.value = requireNonNull(value);
     }
 
-    public static Timestamp now() {
-        return new Timestamp(Instant.now());
+    public static Timestamp fromInstant(Instant instant) {
+        return new Timestamp(instant);
     }
 
     @Override

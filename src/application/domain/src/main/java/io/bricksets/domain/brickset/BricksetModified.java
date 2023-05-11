@@ -10,7 +10,7 @@ import io.bricksets.vocabulary.time.Timestamp;
 import java.util.Set;
 
 public record BricksetModified(EventId id, Timestamp timestamp, Set<AggregateId> tags, BricksetId bricksetId, BricksetTitle title) implements Event {
-    public BricksetModified(BricksetId bricksetId, BricksetTitle title) {
-        this(EventId.createNew(), Timestamp.now(), Set.of(bricksetId), bricksetId, title);
+    public BricksetModified(Timestamp timestamp, BricksetId bricksetId, BricksetTitle title) {
+        this(EventId.createNew(), timestamp, Set.of(bricksetId), bricksetId, title);
     }
 }

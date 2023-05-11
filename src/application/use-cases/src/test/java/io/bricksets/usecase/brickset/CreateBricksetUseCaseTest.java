@@ -3,9 +3,11 @@ package io.bricksets.usecase.brickset;
 import io.bricksets.api.CreateBricksetPresenter;
 import io.bricksets.domain.brickset.Brickset;
 import io.bricksets.domain.brickset.BricksetCreated;
+import io.bricksets.domain.time.TimeService;
 import io.bricksets.test.InMemoryBricksetRepository;
 import io.bricksets.test.InMemoryEventPublisher;
 import io.bricksets.test.MockCreateBricksetPresenter;
+import io.bricksets.test.MockTimeService;
 import io.bricksets.vocabulary.brickset.BricksetId;
 import io.bricksets.vocabulary.brickset.BricksetNumber;
 import io.bricksets.vocabulary.brickset.BricksetTitle;
@@ -25,7 +27,8 @@ class CreateBricksetUseCaseTest {
 
     private final InMemoryBricksetRepository bricksetRepository = new InMemoryBricksetRepository();
     private final InMemoryEventPublisher eventPublisher = new InMemoryEventPublisher();
-    private final CreateBricksetUseCase useCase = new CreateBricksetUseCase(bricksetRepository, bricksetRepository, eventPublisher);
+    private final TimeService timeService = new MockTimeService();
+    private final CreateBricksetUseCase useCase = new CreateBricksetUseCase(bricksetRepository, bricksetRepository, timeService, eventPublisher);
 
     @Nested
     @DisplayName("when Brickset successfully created")
@@ -65,10 +68,10 @@ class CreateBricksetUseCaseTest {
         void eventsPublished() {
             eventPublisher.verifyEvents(List.of(
                     new BricksetCreated(
+                            timeService.now(),
                             bricksetId,
                             number,
-                            title
-                    )
+                            title)
             ));
         }
 
