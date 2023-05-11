@@ -1,5 +1,7 @@
 package io.bricksets.domain.event;
 
+import io.bricksets.vocabulary.domain.event.EventId;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +16,13 @@ public record EventStream(List<Event> events) {
 
     public boolean isEmpty() {
         return events.isEmpty();
+    }
+
+    public EventId getLastEventId() {
+        if (!isEmpty()) {
+            return null;
+        }
+        return events.get(events.size() - 1).id();
     }
 
     public boolean containsInstanceOf(final Class<? extends Event> clazz) {

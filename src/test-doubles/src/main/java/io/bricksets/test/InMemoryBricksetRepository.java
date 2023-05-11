@@ -11,6 +11,7 @@ import io.bricksets.vocabulary.brickset.BricksetNumber;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public final class InMemoryBricksetRepository implements BricksetRepository, BricksetNumberService {
@@ -33,6 +34,13 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
 
     @Override
     public void save(Brickset brickset) {
+        var eventStream = getBricksetEventStream(brickset.getId());
+        if (eventStream.isEmpty()) {
+            return;
+        }
+        if (!Objects.equals(eventStream.getLastEventId(), brickset.getLastEventId())) {
+
+        }
         eventStore.addAll(brickset.getMutatingEvents());
     }
 
