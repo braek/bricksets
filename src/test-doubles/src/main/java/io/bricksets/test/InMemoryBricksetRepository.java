@@ -49,7 +49,7 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
         }
         var eventStream = getEventStreamForBrickset(brickset.getId());
         if (eventStream.isEmpty()) {
-            eventStore.addAll(eventStream.events());
+            eventStore.addAll(brickset.getMutatingEvents());
             return;
         }
         if (!Objects.equals(eventStream.getLastEventId(), brickset.getLastEventId())) {
