@@ -59,7 +59,7 @@ class CreateBricksetUseCaseTest {
             assertThat(brickset.getId()).isEqualTo(bricksetId);
             assertThat(brickset.getTitle()).isEqualTo(title);
             assertThat(brickset.getNumber()).isEqualTo(number);
-            assertThat(brickset.getCreatedAt()).isNotNull();
+            assertThat(brickset.getCreatedAt()).isEqualTo(Timestamp.fromString("2023-04-04T16:30:00Z"));
             assertThat(brickset.getModifiedAt()).isNull();
             assertThat(brickset.getRemovedAt()).isNull();
         }
