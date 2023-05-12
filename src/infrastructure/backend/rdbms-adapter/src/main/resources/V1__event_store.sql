@@ -6,7 +6,7 @@ CREATE TABLE event
     event_class VARCHAR   NOT NULL,
     event_value JSONB     NOT NULL,
     CONSTRAINT pk_event PRIMARY KEY (id),
-    CONSTRAINT unique_position UNIQUE (position)
+    CONSTRAINT uc_position UNIQUE (position)
 );
 CREATE TABLE tag
 (
