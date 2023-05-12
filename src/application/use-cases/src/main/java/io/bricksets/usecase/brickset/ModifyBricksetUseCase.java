@@ -25,7 +25,7 @@ public final class ModifyBricksetUseCase implements ModifyBrickset, UseCase<Modi
 
     @Override
     public void modifyBrickset(BricksetId bricksetId, BricksetTitle title, ModifyBricksetPresenter presenter) {
-        requireNonNull(bricksetId, "ID cannot be NULL");
+        requireNonNull(bricksetId, "Brickset ID cannot be NULL");
         requireNonNull(title, "Title cannot be NULL");
         requireNonNull(presenter, "Presenter cannot be NULL");
         execute(new ModifyBricksetCommand(bricksetId, title), presenter);

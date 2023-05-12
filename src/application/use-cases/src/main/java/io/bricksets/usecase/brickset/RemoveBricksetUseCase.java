@@ -24,7 +24,7 @@ public final class RemoveBricksetUseCase implements RemoveBrickset, UseCase<Remo
 
     @Override
     public void removeBrickset(BricksetId bricksetId, RemoveBricksetPresenter presenter) {
-        requireNonNull(bricksetId, "ID cannot be NULL");
+        requireNonNull(bricksetId, "Brickset ID cannot be NULL");
         requireNonNull(presenter, "Presenter cannot be NULL");
         execute(new RemoveBricksetCommand(bricksetId), presenter);
     }
