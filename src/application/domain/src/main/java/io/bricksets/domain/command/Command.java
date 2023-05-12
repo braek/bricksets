@@ -1,3 +1,5 @@
 package io.bricksets.domain.command;
 
-public interface Command {}
+// Marker interface for commands (CQRS)
+public interface Command {
+}

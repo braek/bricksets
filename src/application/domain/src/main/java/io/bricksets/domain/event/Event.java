@@ -6,6 +6,7 @@ import io.bricksets.vocabulary.time.Timestamp;
 
 import java.util.Set;
 
+// Marker interface for domain events
 public interface Event {
 
     EventId id();
