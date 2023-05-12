@@ -8,8 +8,6 @@ import io.bricksets.domain.time.TimeService;
 import io.bricksets.usecase.UseCase;
 import io.bricksets.vocabulary.brickset.BricksetId;
 
-import static java.util.Objects.requireNonNull;
-
 public final class RemoveBricksetUseCase implements RemoveBrickset, UseCase<RemoveBricksetCommand, RemoveBricksetPresenter> {
 
     private final BricksetRepository bricksetRepository;
@@ -24,8 +22,6 @@ public final class RemoveBricksetUseCase implements RemoveBrickset, UseCase<Remo
 
     @Override
     public void removeBrickset(BricksetId bricksetId, RemoveBricksetPresenter presenter) {
-        requireNonNull(bricksetId, "Brickset ID cannot be NULL");
-        requireNonNull(presenter, "Presenter cannot be NULL");
         execute(new RemoveBricksetCommand(bricksetId), presenter);
     }
 

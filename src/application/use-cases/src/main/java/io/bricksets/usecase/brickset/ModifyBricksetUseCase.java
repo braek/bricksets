@@ -9,8 +9,6 @@ import io.bricksets.usecase.UseCase;
 import io.bricksets.vocabulary.brickset.BricksetId;
 import io.bricksets.vocabulary.brickset.BricksetTitle;
 
-import static java.util.Objects.requireNonNull;
-
 public final class ModifyBricksetUseCase implements ModifyBrickset, UseCase<ModifyBricksetCommand, ModifyBricksetPresenter> {
 
     private final BricksetRepository bricksetRepository;
@@ -25,9 +23,6 @@ public final class ModifyBricksetUseCase implements ModifyBrickset, UseCase<Modi
 
     @Override
     public void modifyBrickset(BricksetId bricksetId, BricksetTitle title, ModifyBricksetPresenter presenter) {
-        requireNonNull(bricksetId, "Brickset ID cannot be NULL");
-        requireNonNull(title, "Title cannot be NULL");
-        requireNonNull(presenter, "Presenter cannot be NULL");
         execute(new ModifyBricksetCommand(bricksetId, title), presenter);
     }
 
