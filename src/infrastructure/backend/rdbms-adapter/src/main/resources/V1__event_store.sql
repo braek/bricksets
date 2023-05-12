@@ -8,7 +8,7 @@ CREATE TABLE event
     CONSTRAINT pk_event PRIMARY KEY (id),
     CONSTRAINT unique_position UNIQUE (position)
 );
-CREATE TABLE tag
+CREATE TABLE event_tag
 (
     event_id  UUID    NOT NULL,
     tag_class VARCHAR NOT NULL,
