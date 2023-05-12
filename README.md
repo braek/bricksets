@@ -1,3 +1,4 @@
-# Hexagonal Architecture Base Project
+# Event Sourcing Sandbox Project
 
-This is a base project to get started with the hexagonal architecture.
+## Resources
+
