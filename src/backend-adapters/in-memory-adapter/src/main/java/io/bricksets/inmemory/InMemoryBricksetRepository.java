@@ -22,12 +22,12 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
                 .map(BricksetCreated.class::cast)
                 .map(it -> Map.entry(it.bricksetId(), it.number()))
                 .forEach(it -> numbers.put(it.getKey(), it.getValue()));
-        var removed = eventStore.stream()
+        eventStore.stream()
                 .filter(BricksetRemoved.class::isInstance)
                 .map(BricksetRemoved.class::cast)
                 .map(BricksetRemoved::bricksetId)
-                .collect(Collectors.toSet());
-        removed.forEach(numbers::remove);
+                .collect(Collectors.toSet())
+                .forEach(numbers::remove);
         return numbers.containsValue(number);
     }
 
