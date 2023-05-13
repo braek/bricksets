@@ -63,8 +63,7 @@ public class RemoveBricksetUseCaseTest {
             eventPublisher.verifyEvents(List.of(
                     new BricksetRemoved(
                             Timestamp.fromString("2023-04-04T16:31:00.000Z"),
-                            brickset.getId(),
-                            brickset.getNumber()
+                            brickset.getId()
                     )
             ));
         }

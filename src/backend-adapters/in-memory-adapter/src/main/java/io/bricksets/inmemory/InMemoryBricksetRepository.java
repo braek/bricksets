@@ -7,10 +7,7 @@ import io.bricksets.domain.event.EventStreamOptimisticLockException;
 import io.bricksets.vocabulary.brickset.BricksetId;
 import io.bricksets.vocabulary.brickset.BricksetNumber;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public final class InMemoryBricksetRepository implements BricksetRepository, BricksetNumberService {
@@ -19,18 +16,19 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
 
     @Override
     public boolean exists(final BricksetNumber number) {
-        var numbers = eventStore.stream()
+        var numbers = new HashMap<BricksetId, BricksetNumber>();
+        eventStore.stream()
                 .filter(BricksetCreated.class::isInstance)
                 .map(BricksetCreated.class::cast)
-                .map(BricksetCreated::number)
-                .collect(Collectors.toSet());
+                .map(it -> Map.entry(it.bricksetId(), it.number()))
+                .forEach(it -> numbers.put(it.getKey(), it.getValue()));
         var removed = eventStore.stream()
                 .filter(BricksetRemoved.class::isInstance)
                 .map(BricksetRemoved.class::cast)
-                .map(BricksetRemoved::number)
+                .map(BricksetRemoved::bricksetId)
                 .collect(Collectors.toSet());
-        numbers.removeAll(removed);
-        return numbers.contains(number);
+        removed.forEach(numbers::remove);
+        return numbers.containsValue(number);
     }
 
     @Override
