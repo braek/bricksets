@@ -44,14 +44,20 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
 
     @Override
     public void save(final Brickset brickset) {
+
+        // Nothing changed in the aggregate
         if (brickset.getMutatingEvents().isEmpty()) {
             return;
         }
+
+        // The aggregate was a new instance
         var eventStream = query(brickset.getId());
         if (eventStream.isEmpty()) {
             eventStore.addAll(brickset.getMutatingEvents());
             return;
         }
+
+        // Update the aggregate, if optimistic locking does not fail
         if (!Objects.equals(eventStream.getLastEventId(), brickset.getLastEventId())) {
             throw new EventStreamOptimisticLockException(brickset.getLastEventId());
         }
