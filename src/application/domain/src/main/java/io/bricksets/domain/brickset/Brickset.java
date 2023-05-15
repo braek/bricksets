@@ -56,9 +56,6 @@ public final class Brickset extends EventSourcedAggregate {
             when(modified);
             return;
         }
-        if (event instanceof BricksetRemoved) {
-            return;
-        }
         throw new IllegalStateException(String.format("Cannot process event of type %s", event.getClass().getSimpleName()));
     }
 
