@@ -12,6 +12,8 @@ import io.bricksets.vocabulary.brickset.BricksetNumber;
 import io.bricksets.vocabulary.brickset.BricksetTitle;
 import io.bricksets.vocabulary.time.Timestamp;
 
+import static java.util.Objects.requireNonNull;
+
 public final class Brickset extends EventSourcedAggregate {
 
     private BricksetId id;
@@ -66,12 +68,15 @@ public final class Brickset extends EventSourcedAggregate {
     }
 
     public static Brickset create(BricksetNumber number, BricksetTitle title, TimeService timeService) {
+        requireNonNull(number);
+        requireNonNull(title);
         var brickset = new Brickset();
         brickset.apply(new BricksetCreated(timeService.now(), BricksetId.createNew(), number, title));
         return brickset;
     }
 
     public void modify(BricksetTitle title, TimeService timeService) {
+        requireNonNull(title);
         apply(new BricksetModified(timeService.now(), id, title));
     }
 
