@@ -11,7 +11,7 @@ public interface Event {
 
     EventId id();
 
-    Timestamp occurred();
+    Timestamp occurredOn();
 
     Set<AggregateId> tags();
 }

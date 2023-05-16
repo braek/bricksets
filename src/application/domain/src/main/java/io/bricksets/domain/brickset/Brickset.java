@@ -14,8 +14,8 @@ public final class Brickset extends EventSourcedAggregate {
     private BricksetId id;
     private BricksetNumber number;
     private BricksetTitle title;
-    private Timestamp created;
-    private Timestamp modified;
+    private Timestamp createdOn;
+    private Timestamp modifiedOn;
 
     private Brickset() {
         super();
@@ -38,12 +38,12 @@ public final class Brickset extends EventSourcedAggregate {
         return title;
     }
 
-    public Timestamp getCreated() {
-        return created;
+    public Timestamp getCreatedOn() {
+        return createdOn;
     }
 
-    public Timestamp getModified() {
-        return modified;
+    public Timestamp getModifiedOn() {
+        return modifiedOn;
     }
 
     @Override
@@ -56,7 +56,7 @@ public final class Brickset extends EventSourcedAggregate {
             when(modified);
             return;
         }
-        if (event instanceof BricksetRemoved removed) {
+        if (event instanceof BricksetRemoved) {
             return;
         }
         throw new IllegalStateException(String.format("Cannot process event of type %s", event.getClass().getSimpleName()));
@@ -80,11 +80,11 @@ public final class Brickset extends EventSourcedAggregate {
         this.id = created.bricksetId();
         this.number = created.number();
         this.title = created.title();
-        this.created = created.occurred();
+        this.createdOn = created.occurredOn();
     }
 
     private void when(BricksetModified modified) {
         this.title = modified.title();
-        this.modified = modified.occurred();
+        this.modifiedOn = modified.occurredOn();
     }
 }

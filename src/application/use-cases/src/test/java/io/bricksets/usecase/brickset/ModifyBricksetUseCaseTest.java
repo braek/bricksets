@@ -60,8 +60,8 @@ public class ModifyBricksetUseCaseTest {
             assertThat(updatedBrickset.getId()).isEqualTo(brickset.getId());
             assertThat(updatedBrickset.getNumber()).isEqualTo(number);
             assertThat(updatedBrickset.getTitle()).isEqualTo(newTitle);
-            assertThat(updatedBrickset.getCreated()).isEqualTo(Timestamp.fromString("2023-04-04T16:30:00.000Z"));
-            assertThat(updatedBrickset.getModified()).isEqualTo(Timestamp.fromString("2023-04-04T16:31:00.000Z"));
+            assertThat(updatedBrickset.getCreatedOn()).isEqualTo(Timestamp.fromString("2023-04-04T16:30:00.000Z"));
+            assertThat(updatedBrickset.getModifiedOn()).isEqualTo(Timestamp.fromString("2023-04-04T16:31:00.000Z"));
         }
 
         @Test
