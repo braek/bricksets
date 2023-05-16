@@ -1,6 +1,8 @@
 package io.bricksets.inmemory;
 
 import io.bricksets.domain.brickset.*;
+import io.bricksets.domain.brickset.event.BricksetCreated;
+import io.bricksets.domain.brickset.event.BricksetRemoved;
 import io.bricksets.domain.event.Event;
 import io.bricksets.domain.event.EventStream;
 import io.bricksets.domain.event.EventStreamOptimisticLockException;

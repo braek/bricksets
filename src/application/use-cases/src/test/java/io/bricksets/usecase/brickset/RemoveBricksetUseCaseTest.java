@@ -2,7 +2,7 @@ package io.bricksets.usecase.brickset;
 
 import io.bricksets.api.RemoveBricksetPresenter;
 import io.bricksets.domain.brickset.Brickset;
-import io.bricksets.domain.brickset.BricksetRemoved;
+import io.bricksets.domain.brickset.event.BricksetRemoved;
 import io.bricksets.domain.time.TimeService;
 import io.bricksets.inmemory.InMemoryBricksetRepository;
 import io.bricksets.inmemory.InMemoryEventPublisher;

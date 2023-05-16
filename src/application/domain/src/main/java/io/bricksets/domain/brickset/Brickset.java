@@ -1,6 +1,9 @@
 package io.bricksets.domain.brickset;
 
 import io.bricksets.domain.aggregate.EventSourcedAggregate;
+import io.bricksets.domain.brickset.event.BricksetCreated;
+import io.bricksets.domain.brickset.event.BricksetModified;
+import io.bricksets.domain.brickset.event.BricksetRemoved;
 import io.bricksets.domain.event.Event;
 import io.bricksets.domain.event.EventStream;
 import io.bricksets.domain.time.TimeService;

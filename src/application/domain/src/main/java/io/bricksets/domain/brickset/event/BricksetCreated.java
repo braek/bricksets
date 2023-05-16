@@ -1,4 +1,4 @@
-package io.bricksets.domain.brickset;
+package io.bricksets.domain.brickset.event;
 
 import io.bricksets.domain.event.Event;
 import io.bricksets.vocabulary.brickset.BricksetId;
