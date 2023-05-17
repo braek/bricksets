@@ -1,0 +1,12 @@
+dependencies {
+    implementation project(':api')
+    implementation project(':domain')
+    implementation project(':queries')
+    implementation project(':use-cases')
+    implementation project(':vocabulary')
+
+    implementation project(':rdbms-adapter')
+    implementation project(':time-adapter')
+}
+
+description = 'main'
