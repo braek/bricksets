@@ -1,9 +1,19 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+}
+
 plugins {
     id 'java'
+    id 'org.springframework.boot' version '2.7.12'
 }
 
 subprojects {
     apply plugin: 'java-library'
+    apply plugin: 'io.spring.dependency-management'
 
     test {
         useJUnitPlatform()
