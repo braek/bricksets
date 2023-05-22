@@ -8,7 +8,7 @@ dependencies {
     implementation project(':rdbms-adapter')
     implementation project(':time-adapter')
 
-//    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 }
 
 description = 'main'
