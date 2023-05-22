@@ -3,4 +3,4 @@ dependencies {
     implementation project(':vocabulary')
 }
 
-description = 'time-adapter'
+description = 'system-time-adapter'

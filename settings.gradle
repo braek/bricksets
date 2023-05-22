@@ -17,8 +17,8 @@ include(':vocabulary')
 project(':vocabulary').projectDir = file('src/vocabulary')
 
 // Adapters
-include(':time-adapter')
-project(':time-adapter').projectDir = file('src/backend-adapters/time-adapter')
+include(':system-time-adapter')
+project(':system-time-adapter').projectDir = file('src/backend-adapters/system-time-adapter')
 include(':in-memory-adapter')
 project(':in-memory-adapter').projectDir = file('src/backend-adapters/in-memory-adapter')
 include(':rdbms-adapter')

@@ -6,7 +6,7 @@ dependencies {
     implementation project(':vocabulary')
 
     implementation project(':in-memory-adapter')
-    implementation project(':time-adapter')
+    implementation project(':system-time-adapter')
     implementation project(':swagger-adapter')
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
