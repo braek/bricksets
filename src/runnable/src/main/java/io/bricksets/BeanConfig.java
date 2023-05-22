@@ -1,4 +1,4 @@
-package io.bricksets.runnable;
+package io.bricksets;
 
 import io.bricksets.api.CreateBrickset;
 import io.bricksets.api.ModifyBrickset;

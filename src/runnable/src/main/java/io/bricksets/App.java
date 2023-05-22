@@ -1,4 +1,4 @@
-package io.bricksets.runnable;
+package io.bricksets;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

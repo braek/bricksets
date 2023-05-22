@@ -23,6 +23,8 @@ include(':in-memory-adapter')
 project(':in-memory-adapter').projectDir = file('src/backend-adapters/in-memory-adapter')
 include(':rdbms-adapter')
 project(':rdbms-adapter').projectDir = file('src/backend-adapters/rdbms-adapter')
+include(':swagger-adapter')
+project(':swagger-adapter').projectDir = file('src/frontend-adapters/swagger-adapter')
 
 // Main
 include(':runnable')
