@@ -1,7 +1,7 @@
 package io.bricksets.usecase.brickset;
 
-import io.bricksets.api.CreateBrickset;
-import io.bricksets.api.CreateBricksetPresenter;
+import io.bricksets.facade.CreateBrickset;
+import io.bricksets.facade.CreateBricksetPresenter;
 import io.bricksets.domain.brickset.Brickset;
 import io.bricksets.domain.brickset.BricksetNumberService;
 import io.bricksets.domain.brickset.BricksetRepository;

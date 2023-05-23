@@ -1,6 +1,6 @@
 package io.bricksets.usecase.brickset;
 
-import io.bricksets.api.RemoveBricksetPresenter;
+import io.bricksets.facade.RemoveBricksetPresenter;
 import io.bricksets.domain.brickset.Brickset;
 import io.bricksets.domain.brickset.event.BricksetRemoved;
 import io.bricksets.domain.time.TimeService;

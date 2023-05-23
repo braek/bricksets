@@ -1,13 +1,8 @@
 dependencies {
     implementation project(':facade')
     implementation project(':domain')
-    implementation project(':queries')
-    implementation project(':use-cases')
     implementation project(':vocabulary')
 
     implementation 'org.junit.jupiter:junit-jupiter'
     implementation 'org.assertj:assertj-core'
 }
-
-
-description = 'test-doubles'

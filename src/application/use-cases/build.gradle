@@ -6,5 +6,3 @@ dependencies {
     testImplementation project(':test-doubles')
     testImplementation project(':in-memory-adapter')
 }
-
-description = 'use-cases'
