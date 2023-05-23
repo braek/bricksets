@@ -1,8 +1,8 @@
 rootProject.name = 'bricksets'
 
 // Application
-include(':api')
-project(':api').projectDir = file('src/application/api')
+include(':facade')
+project(':facade').projectDir = file('src/application/facade')
 include(':domain')
 project(':domain').projectDir = file('src/application/domain')
 include(':use-cases')

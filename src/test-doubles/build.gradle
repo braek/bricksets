@@ -1,5 +1,5 @@
 dependencies {
-    implementation project(':api')
+    implementation project(':facade')
     implementation project(':domain')
     implementation project(':queries')
     implementation project(':use-cases')
