@@ -52,20 +52,20 @@ public class RdbmsBricksetRepository implements BricksetRepository, BricksetNumb
             throw new EventStreamOptimisticLockException(brickset.getLastEventId());
         }
 
-        events.forEach(it -> {
+        events.forEach(event -> {
 
             // Store event
             var eventRecord = context.newRecord(Event.EVENT);
-            eventRecord.setId(it.id().getValue());
-            eventRecord.setOccurredOn(it.occurredOn().toLocalDateTime());
-            eventRecord.setEventClass(it.getClass().getSimpleName());
-            eventRecord.setEventValue(EventMapper.INSTANCE.serialize(it));
+            eventRecord.setId(event.id().getValue());
+            eventRecord.setOccurredOn(event.occurredOn().toLocalDateTime());
+            eventRecord.setEventClass(event.getClass().getSimpleName());
+            eventRecord.setEventValue(EventMapper.INSTANCE.serialize(event));
             eventRecord.store();
 
             // Store tags
-            it.tags().forEach(tag -> {
+            event.tags().forEach(tag -> {
                 var tagRecord = context.newRecord(Tag.TAG);
-                tagRecord.setEventId(it.id().getValue());
+                tagRecord.setEventId(event.id().getValue());
                 tagRecord.setTagClass(tag.getClass().getSimpleName());
                 tagRecord.setTagValue(UUID.fromString(tag.getValue().toString()));
                 tagRecord.store();
