@@ -1,4 +1,71 @@
+plugins {
+    id 'org.flywaydb.flyway' version '9.8.1'
+    id 'nu.studer.jooq' version '5.2.1'
+}
+
+configurations {
+    flywayMigration
+}
+
 dependencies {
     implementation project(':domain')
     implementation project(':vocabulary')
+    runtimeOnly 'org.postgresql:postgresql'
+
+    flywayMigration 'org.postgresql:postgresql'
+    jooqGenerator 'org.postgresql:postgresql'
+}
+
+flyway {
+    configurations = ['flywayMigration']
+    url = 'jdbc:postgresql://localhost:6000/sandbox'
+    user = 'sandbox'
+    password = 'sandbox'
+}
+
+jooq {
+    configurations {
+        main {
+            generateSchemaSourceOnCompilation = false
+            generationTool {
+                logging = org.jooq.meta.jaxb.Logging.DEBUG
+                jdbc {
+                    driver = 'org.postgresql.Driver'
+                    url = flyway.url
+                    user = flyway.user
+                    password = flyway.password
+                }
+                generator {
+                    name = 'org.jooq.codegen.DefaultGenerator'
+                    database {
+                        name = 'org.jooq.meta.postgres.PostgresDatabase'
+                        inputSchema = 'sandbox'
+                        recordVersionFields = 'version'
+                    }
+                    generate {
+                        deprecated = false
+                        records = true
+                        immutablePojos = false
+                        fluentSetters = true
+                    }
+                    target {
+                        packageName = 'io.bricksets.rdbms'
+                        directory = 'src/jooq/java'
+                    }
+                }
+            }
+        }
+    }
+}
+
+sourceSets {
+    main {
+        java {}
+    }
+    jooq {
+        java {}
+    }
+    test {
+        java {}
+    }
 }
