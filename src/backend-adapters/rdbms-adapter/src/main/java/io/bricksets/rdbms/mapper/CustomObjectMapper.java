@@ -3,6 +3,7 @@ package io.bricksets.rdbms.mapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import io.bricksets.domain.event.Event;
 import io.bricksets.vocabulary.brickset.BricksetId;
 import io.bricksets.vocabulary.brickset.BricksetNumber;
 import io.bricksets.vocabulary.brickset.BricksetTitle;
@@ -20,6 +21,9 @@ public final class CustomObjectMapper extends ObjectMapper {
         bindings.addSerializer(BricksetTitle.class, new ToStringSerializer());
         bindings.addSerializer(EventId.class, new ToStringSerializer());
         bindings.addSerializer(Timestamp.class, new ToStringSerializer());
+
+        // Mixins
+        bindings.setMixInAnnotation(Event.class, EventMixin.class);
 
         registerModule(bindings);
     }
