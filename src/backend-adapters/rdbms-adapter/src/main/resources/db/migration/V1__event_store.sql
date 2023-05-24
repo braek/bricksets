@@ -2,7 +2,7 @@ CREATE TABLE event
 (
     id          UUID      NOT NULL,
     position    BIGSERIAL NOT NULL,
-    occurred_at TIMESTAMP NOT NULL,
+    occurred_on TIMESTAMP NOT NULL,
     event_class VARCHAR   NOT NULL,
     event_value JSONB     NOT NULL,
     CONSTRAINT pk_event PRIMARY KEY (id),
