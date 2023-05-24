@@ -3,6 +3,7 @@ package io.bricksets.vocabulary.time;
 import io.bricksets.vocabulary.domain.ValueObject;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
@@ -44,5 +45,9 @@ public final class Timestamp implements ValueObject {
     @Override
     public Instant getValue() {
         return value;
+    }
+
+    public LocalDateTime toLocalDateTime() {
+        return null;
     }
 }
