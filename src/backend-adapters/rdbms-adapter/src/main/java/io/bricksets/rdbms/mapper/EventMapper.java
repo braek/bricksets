@@ -27,13 +27,13 @@ public enum EventMapper {
 
     public Event deserialize(final JSONB json, final String clazz) {
         try {
-            return objectMapper.readValue(json.data(), mapClazz(clazz));
+            return objectMapper.readValue(json.data(), mapEventType(clazz));
         } catch (final JsonProcessingException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private Class<? extends Event> mapClazz(final String clazz) {
+    private Class<? extends Event> mapEventType(final String clazz) {
         final Map<String, Class<? extends Event>> eventTypes = new HashMap<>();
         eventTypes.put(BricksetCreated.class.getSimpleName(), BricksetCreated.class);
         eventTypes.put(BricksetModified.class.getSimpleName(), BricksetModified.class);
