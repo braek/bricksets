@@ -11,12 +11,13 @@ import static java.util.Optional.ofNullable;
 public final class BricksetNumber implements ValueObject {
 
     private final String value;
+    private final static Pattern REGEX = Pattern.compile("^\\d{4,6}$");
 
     private BricksetNumber(final String str) {
         final var sanitized = ofNullable(str)
                 .map(String::trim)
                 .orElse(null);
-        if (isNull(sanitized) || !Pattern.compile("^\\d{4,6}$").matcher(sanitized).matches()) {
+        if (isNull(sanitized) || !REGEX.matcher(sanitized).matches()) {
             throw new InvalidBricksetNumberException(str);
         }
         this.value = sanitized;

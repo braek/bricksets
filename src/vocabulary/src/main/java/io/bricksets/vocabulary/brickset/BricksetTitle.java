@@ -14,6 +14,7 @@ public final class BricksetTitle implements ValueObject {
     private BricksetTitle(final String str) {
         final var sanitized = ofNullable(str)
                 .map(String::trim)
+                .map(it -> it.replace("\n", ""))
                 .orElse(null);
         if (isNull(sanitized) || sanitized.length() > 100) {
             throw new InvalidBricksetTitleException(str);
