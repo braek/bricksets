@@ -84,6 +84,7 @@ public class RdbmsBricksetRepository implements BricksetRepository, BricksetNumb
                 ))
                 .orderBy(Event.EVENT.POSITION.desc())
                 .fetch();
+        // TODO: revise deserialization
         records.forEach(it -> events.add(EventMapper.INSTANCE.deserialize(it.getEventValue(), it.getEventClass())));
         return new EventStream(events);
     }
