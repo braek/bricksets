@@ -82,7 +82,7 @@ public class RdbmsBricksetRepository implements BricksetRepository, BricksetNumb
                                 .where(Tag.TAG.TAG_CLASS.eq(BricksetId.class.getSimpleName()))
                                 .and(Tag.TAG.TAG_VALUE.eq(bricksetId.getValue()))
                 ))
-                .orderBy(Event.EVENT.POSITION.desc())
+                .orderBy(Event.EVENT.POSITION.asc())
                 .fetch();
         // TODO: revise deserialization
         records.forEach(it -> events.add(EventMapper.INSTANCE.deserialize(it.getEventValue(), it.getEventClass())));
