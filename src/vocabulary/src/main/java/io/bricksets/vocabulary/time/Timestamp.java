@@ -4,6 +4,7 @@ import io.bricksets.vocabulary.domain.ValueObject;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
@@ -24,6 +25,15 @@ public final class Timestamp implements ValueObject {
         return new Timestamp(Instant.parse(str));
     }
 
+    public LocalDateTime toLocalDateTime() {
+        return LocalDateTime.ofInstant(value, ZoneOffset.UTC);
+    }
+
+    @Override
+    public Instant getValue() {
+        return value;
+    }
+
     @Override
     public String toString() {
         return value.toString();
@@ -40,14 +50,5 @@ public final class Timestamp implements ValueObject {
     @Override
     public int hashCode() {
         return Objects.hash(getValue());
-    }
-
-    @Override
-    public Instant getValue() {
-        return value;
-    }
-
-    public LocalDateTime toLocalDateTime() {
-        return null;
     }
 }
