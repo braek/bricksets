@@ -62,9 +62,9 @@ public class Event extends TableImpl<EventRecord> {
     public final TableField<EventRecord, Long> POSITION = createField(DSL.name("position"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
-     * The column <code>sandbox.event.occurred_at</code>.
+     * The column <code>sandbox.event.occurred_on</code>.
      */
-    public final TableField<EventRecord, LocalDateTime> OCCURRED_AT = createField(DSL.name("occurred_at"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
+    public final TableField<EventRecord, LocalDateTime> OCCURRED_ON = createField(DSL.name("occurred_on"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
 
     /**
      * The column <code>sandbox.event.event_class</code>.

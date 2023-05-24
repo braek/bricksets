@@ -57,7 +57,7 @@ public class RdbmsBricksetRepository implements BricksetRepository, BricksetNumb
             // Store event
             var eventRecord = context.newRecord(Event.EVENT);
             eventRecord.setId(it.id().getValue());
-            eventRecord.setOccurredAt(it.occurredOn().toLocalDateTime());
+            eventRecord.setOccurredOn(it.occurredOn().toLocalDateTime());
             eventRecord.setEventClass(it.getClass().getSimpleName());
             eventRecord.setEventValue(EventMapper.INSTANCE.serialize(it));
             eventRecord.store();

@@ -56,17 +56,17 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
     }
 
     /**
-     * Setter for <code>sandbox.event.occurred_at</code>.
+     * Setter for <code>sandbox.event.occurred_on</code>.
      */
-    public EventRecord setOccurredAt(LocalDateTime value) {
+    public EventRecord setOccurredOn(LocalDateTime value) {
         set(2, value);
         return this;
     }
 
     /**
-     * Getter for <code>sandbox.event.occurred_at</code>.
+     * Getter for <code>sandbox.event.occurred_on</code>.
      */
-    public LocalDateTime getOccurredAt() {
+    public LocalDateTime getOccurredOn() {
         return (LocalDateTime) get(2);
     }
 
@@ -135,7 +135,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public Field<LocalDateTime> field3() {
-        return Event.EVENT.OCCURRED_AT;
+        return Event.EVENT.OCCURRED_ON;
     }
 
     @Override
@@ -160,7 +160,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public LocalDateTime component3() {
-        return getOccurredAt();
+        return getOccurredOn();
     }
 
     @Override
@@ -185,7 +185,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public LocalDateTime value3() {
-        return getOccurredAt();
+        return getOccurredOn();
     }
 
     @Override
@@ -212,7 +212,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public EventRecord value3(LocalDateTime value) {
-        setOccurredAt(value);
+        setOccurredOn(value);
         return this;
     }
 
@@ -252,12 +252,12 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
     /**
      * Create a detached, initialised EventRecord
      */
-    public EventRecord(UUID id, Long position, LocalDateTime occurredAt, String eventClass, JSONB eventValue) {
+    public EventRecord(UUID id, Long position, LocalDateTime occurredOn, String eventClass, JSONB eventValue) {
         super(Event.EVENT);
 
         setId(id);
         setPosition(position);
-        setOccurredAt(occurredAt);
+        setOccurredOn(occurredOn);
         setEventClass(eventClass);
         setEventValue(eventValue);
     }
