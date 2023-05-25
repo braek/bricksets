@@ -27,6 +27,10 @@ public abstract class EventSourcedAggregate implements Aggregate {
         return mutations;
     }
 
+    public boolean isStatusQuo() {
+        return mutations.isEmpty();
+    }
+
     protected void apply(Event event) {
         when(event);
         mutations.events().add(event);
