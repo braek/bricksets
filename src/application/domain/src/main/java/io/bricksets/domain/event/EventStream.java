@@ -31,7 +31,7 @@ public record EventStream(List<Event> events) {
                 .anyMatch(it -> it.equals(clazz));
     }
 
-    public void copy(final EventStream eventStream) {
+    public void absorb(final EventStream eventStream) {
         this.events.clear();
         this.events.addAll(eventStream.events());
     }

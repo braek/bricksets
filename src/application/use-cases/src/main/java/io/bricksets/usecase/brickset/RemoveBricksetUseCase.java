@@ -30,7 +30,7 @@ public final class RemoveBricksetUseCase implements RemoveBrickset, UseCase<Remo
         bricksetRepository.get(command.bricksetId()).ifPresentOrElse(it -> {
             it.remove(timeService);
             bricksetRepository.save(it);
-            eventPublisher.publish(it.getMutatingEvents());
+            eventPublisher.publish(it.getMutations());
             presenter.removed(command.bricksetId());
         }, presenter::bricksetNotFound);
     }

@@ -45,7 +45,7 @@ public class RdbmsBricksetRepository implements BricksetRepository, BricksetNumb
 
     @Override
     public void save(final Brickset brickset) {
-        var mutations = brickset.getMutatingEvents();
+        var mutations = brickset.getMutations();
 
         // No mutations
         if (mutations.isEmpty()) {

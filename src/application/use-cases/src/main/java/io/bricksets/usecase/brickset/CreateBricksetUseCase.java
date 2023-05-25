@@ -39,7 +39,7 @@ public final class CreateBricksetUseCase implements CreateBrickset, UseCase<Crea
         }
         final Brickset brickset = Brickset.create(command.number(), command.title(), timeService);
         bricksetRepository.save(brickset);
-        eventPublisher.publish(brickset.getMutatingEvents());
+        eventPublisher.publish(brickset.getMutations());
         presenter.created(brickset.getId());
     }
 }

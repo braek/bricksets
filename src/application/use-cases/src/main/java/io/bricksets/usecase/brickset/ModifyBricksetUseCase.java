@@ -31,7 +31,7 @@ public final class ModifyBricksetUseCase implements ModifyBrickset, UseCase<Modi
         bricksetRepository.get(command.bricksetId()).ifPresentOrElse(it -> {
             it.modify(command.title(), timeService);
             bricksetRepository.save(it);
-            eventPublisher.publish(it.getMutatingEvents());
+            eventPublisher.publish(it.getMutations());
             presenter.modified(command.bricksetId());
         }, presenter::bricksetNotFound);
     }
