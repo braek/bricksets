@@ -14,6 +14,9 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'org.springframework.boot:spring-boot-starter-jooq'
 
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation project(':test-doubles')
+
     runtimeOnly 'org.postgresql:postgresql'
 
     flywayMigration 'org.postgresql:postgresql'
@@ -44,7 +47,6 @@ jooq {
                     database {
                         name = 'org.jooq.meta.postgres.PostgresDatabase'
                         inputSchema = 'sandbox'
-                        recordVersionFields = 'version'
                     }
                     generate {
                         deprecated = false
