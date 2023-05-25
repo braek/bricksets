@@ -5,7 +5,7 @@ import io.bricksets.domain.brickset.event.BricksetCreated;
 import io.bricksets.domain.brickset.event.BricksetRemoved;
 import io.bricksets.domain.event.Event;
 import io.bricksets.domain.event.EventStream;
-import io.bricksets.domain.event.EventStreamOptimisticLockException;
+import io.bricksets.domain.event.EventStreamOptimisticLockingException;
 import io.bricksets.vocabulary.brickset.BricksetId;
 import io.bricksets.vocabulary.brickset.BricksetNumber;
 
@@ -59,7 +59,7 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
 
         // Update the aggregate, if optimistic locking does not fail
         if (!Objects.equals(eventStream.getLastEventId(), brickset.getLastEventId())) {
-            throw new EventStreamOptimisticLockException(brickset.getLastEventId());
+            throw new EventStreamOptimisticLockingException(brickset.getLastEventId());
         }
         eventStore.addAll(brickset.getMutatingEvents());
     }
