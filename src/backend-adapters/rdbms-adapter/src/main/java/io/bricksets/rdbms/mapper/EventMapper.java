@@ -31,7 +31,7 @@ public enum EventMapper {
         }
     }
 
-    public <T extends Event> T deserialize(final JSONB json, final Class<T> clazz) {
+    private <T extends Event> T deserialize(final JSONB json, final Class<T> clazz) {
         try {
             return objectMapper.readValue(json.data(), clazz);
         } catch (final JsonProcessingException e) {
