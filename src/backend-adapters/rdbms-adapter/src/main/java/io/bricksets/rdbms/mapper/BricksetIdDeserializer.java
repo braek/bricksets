@@ -13,7 +13,7 @@ public final class BricksetIdDeserializer extends FromStringDeserializer<Brickse
     }
 
     @Override
-    protected BricksetId _deserialize(String value, DeserializationContext context) {
+    protected BricksetId _deserialize(final String value, final DeserializationContext context) {
         return BricksetId.fromUuid(UUID.fromString(value));
     }
 }
