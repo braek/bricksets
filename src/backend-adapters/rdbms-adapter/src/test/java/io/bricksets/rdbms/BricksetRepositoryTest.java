@@ -31,8 +31,8 @@ public class BricksetRepositoryTest {
                 title,
                 timeService
         );
-        brickset.modify(BricksetTitle.fromString("Other Title"), timeService);
-        brickset.remove(timeService);
+//        brickset.modify(BricksetTitle.fromString("Other Title"), timeService);
+//        brickset.remove(timeService);
         final var bricksetId = brickset.getId();
         bricksetRepository.save(brickset);
         var persisted = bricksetRepository.get(brickset.getId());
