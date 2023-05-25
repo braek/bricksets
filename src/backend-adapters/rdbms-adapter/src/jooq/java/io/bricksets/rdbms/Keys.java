@@ -4,12 +4,12 @@
 package io.bricksets.rdbms;
 
 
-import io.bricksets.rdbms.tables.Events;
+import io.bricksets.rdbms.tables.Event;
 import io.bricksets.rdbms.tables.FlywaySchemaHistory;
-import io.bricksets.rdbms.tables.Tags;
-import io.bricksets.rdbms.tables.records.EventsRecord;
+import io.bricksets.rdbms.tables.Tag;
+import io.bricksets.rdbms.tables.records.EventRecord;
 import io.bricksets.rdbms.tables.records.FlywaySchemaHistoryRecord;
-import io.bricksets.rdbms.tables.records.TagsRecord;
+import io.bricksets.rdbms.tables.records.TagRecord;
 
 import org.jooq.ForeignKey;
 import org.jooq.TableField;
@@ -29,14 +29,14 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<EventsRecord> PK_EVENT = Internal.createUniqueKey(Events.EVENTS, DSL.name("pk_event"), new TableField[] { Events.EVENTS.ID }, true);
-    public static final UniqueKey<EventsRecord> UC_POSITION = Internal.createUniqueKey(Events.EVENTS, DSL.name("uc_position"), new TableField[] { Events.EVENTS.POSITION }, true);
+    public static final UniqueKey<EventRecord> PK_EVENT = Internal.createUniqueKey(Event.EVENT, DSL.name("pk_event"), new TableField[] { Event.EVENT.ID }, true);
+    public static final UniqueKey<EventRecord> UC_POSITION = Internal.createUniqueKey(Event.EVENT, DSL.name("uc_position"), new TableField[] { Event.EVENT.POSITION }, true);
     public static final UniqueKey<FlywaySchemaHistoryRecord> FLYWAY_SCHEMA_HISTORY_PK = Internal.createUniqueKey(FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, DSL.name("flyway_schema_history_pk"), new TableField[] { FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK }, true);
-    public static final UniqueKey<TagsRecord> PK_TAG = Internal.createUniqueKey(Tags.TAGS, DSL.name("pk_tag"), new TableField[] { Tags.TAGS.EVENT_ID, Tags.TAGS.TAG_CLASS, Tags.TAGS.TAG_VALUE }, true);
+    public static final UniqueKey<TagRecord> PK_TAG = Internal.createUniqueKey(Tag.TAG, DSL.name("pk_tag"), new TableField[] { Tag.TAG.EVENT_ID, Tag.TAG.TAG_CLASS, Tag.TAG.TAG_VALUE }, true);
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final ForeignKey<TagsRecord, EventsRecord> TAGS__FK_TAG_EVENT = Internal.createForeignKey(Tags.TAGS, DSL.name("fk_tag_event"), new TableField[] { Tags.TAGS.EVENT_ID }, Keys.PK_EVENT, new TableField[] { Events.EVENTS.ID }, true);
+    public static final ForeignKey<TagRecord, EventRecord> TAG__FK_TAG_EVENT = Internal.createForeignKey(Tag.TAG, DSL.name("fk_tag_event"), new TableField[] { Tag.TAG.EVENT_ID }, Keys.PK_EVENT, new TableField[] { Event.EVENT.ID }, true);
 }

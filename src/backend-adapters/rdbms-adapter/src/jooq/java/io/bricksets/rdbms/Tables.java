@@ -4,9 +4,9 @@
 package io.bricksets.rdbms;
 
 
-import io.bricksets.rdbms.tables.Events;
+import io.bricksets.rdbms.tables.Event;
 import io.bricksets.rdbms.tables.FlywaySchemaHistory;
-import io.bricksets.rdbms.tables.Tags;
+import io.bricksets.rdbms.tables.Tag;
 
 
 /**
@@ -16,9 +16,9 @@ import io.bricksets.rdbms.tables.Tags;
 public class Tables {
 
     /**
-     * The table <code>sandbox.events</code>.
+     * The table <code>sandbox.event</code>.
      */
-    public static final Events EVENTS = Events.EVENTS;
+    public static final Event EVENT = Event.EVENT;
 
     /**
      * The table <code>sandbox.flyway_schema_history</code>.
@@ -26,7 +26,7 @@ public class Tables {
     public static final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
 
     /**
-     * The table <code>sandbox.tags</code>.
+     * The table <code>sandbox.tag</code>.
      */
-    public static final Tags TAGS = Tags.TAGS;
+    public static final Tag TAG = Tag.TAG;
 }

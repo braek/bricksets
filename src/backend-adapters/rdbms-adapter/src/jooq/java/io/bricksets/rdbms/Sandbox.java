@@ -4,9 +4,9 @@
 package io.bricksets.rdbms;
 
 
-import io.bricksets.rdbms.tables.Events;
+import io.bricksets.rdbms.tables.Event;
 import io.bricksets.rdbms.tables.FlywaySchemaHistory;
-import io.bricksets.rdbms.tables.Tags;
+import io.bricksets.rdbms.tables.Tag;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,9 +31,9 @@ public class Sandbox extends SchemaImpl {
     public static final Sandbox SANDBOX = new Sandbox();
 
     /**
-     * The table <code>sandbox.events</code>.
+     * The table <code>sandbox.event</code>.
      */
-    public final Events EVENTS = Events.EVENTS;
+    public final Event EVENT = Event.EVENT;
 
     /**
      * The table <code>sandbox.flyway_schema_history</code>.
@@ -41,9 +41,9 @@ public class Sandbox extends SchemaImpl {
     public final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
 
     /**
-     * The table <code>sandbox.tags</code>.
+     * The table <code>sandbox.tag</code>.
      */
-    public final Tags TAGS = Tags.TAGS;
+    public final Tag TAG = Tag.TAG;
 
     /**
      * No further instances allowed
@@ -61,14 +61,14 @@ public class Sandbox extends SchemaImpl {
     @Override
     public final List<Sequence<?>> getSequences() {
         return Arrays.<Sequence<?>>asList(
-            Sequences.EVENTS_POSITION_SEQ);
+            Sequences.EVENT_POSITION_SEQ);
     }
 
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.<Table<?>>asList(
-            Events.EVENTS,
+            Event.EVENT,
             FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY,
-            Tags.TAGS);
+            Tag.TAG);
     }
 }
