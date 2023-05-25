@@ -22,7 +22,7 @@ public abstract class RdbmsBaseRepository {
 
     protected final DSLContext dsl;
 
-    public RdbmsBaseRepository(DSLContext dsl) {
+    public RdbmsBaseRepository(final DSLContext dsl) {
         this.dsl = dsl;
     }
 
@@ -42,7 +42,7 @@ public abstract class RdbmsBaseRepository {
         return new EventStream(events);
     }
 
-    protected void save(EventSourcedAggregate aggregate) {
+    protected void save(final EventSourcedAggregate aggregate) {
 
         // No mutations
         if (aggregate.isStatusQuo()) {
