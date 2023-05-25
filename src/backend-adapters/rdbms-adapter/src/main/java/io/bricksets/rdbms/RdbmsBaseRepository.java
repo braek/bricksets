@@ -52,12 +52,12 @@ public abstract class RdbmsBaseRepository {
     protected void save(final EventSourcedAggregate aggregate) {
 
         // No mutations
-        if (aggregate.inStatusQuo()) {
+        if (aggregate.isStatusQuo()) {
             return;
         }
 
         // Optimistic locking
-        if (aggregate.isExistingAggregate()) {
+        if (aggregate.isPersisted()) {
             var persistedEventStream = getEventStream(aggregate.getId());
             if (!Objects.equals(aggregate.getStatusQuoPointer(), persistedEventStream.getPointer())) {
                 throw new EventStreamOptimisticLockingException(aggregate.getStatusQuoPointer());

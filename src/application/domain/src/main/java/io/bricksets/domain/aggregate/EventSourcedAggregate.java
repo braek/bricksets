@@ -27,11 +27,11 @@ public abstract class EventSourcedAggregate implements Aggregate {
         return mutations;
     }
 
-    public boolean inStatusQuo() {
+    public boolean isStatusQuo() {
         return mutations.isEmpty();
     }
 
-    public boolean isExistingAggregate() {
+    public boolean isPersisted() {
         return !statusQuo.isEmpty();
     }
 
