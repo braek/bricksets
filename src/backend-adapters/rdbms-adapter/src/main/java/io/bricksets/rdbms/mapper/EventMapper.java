@@ -3,13 +3,17 @@ package io.bricksets.rdbms.mapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.bricksets.domain.brickset.event.BricksetCreated;
-import io.bricksets.domain.brickset.event.BricksetModified;
-import io.bricksets.domain.brickset.event.BricksetRemoved;
 import io.bricksets.domain.event.Event;
+import io.bricksets.rdbms.tables.records.EventRecord;
+import io.bricksets.rdbms.tables.records.TagRecord;
+import io.bricksets.vocabulary.domain.AggregateId;
+import io.bricksets.vocabulary.domain.event.EventId;
+import io.bricksets.vocabulary.time.Timestamp;
 import org.jooq.JSONB;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public enum EventMapper {
 
@@ -25,22 +29,28 @@ public enum EventMapper {
         }
     }
 
-    public Event deserialize(final JSONB json, final String clazz) {
+    public <T extends Event> T deserialize(final JSONB json, final Class<T> clazz) {
         try {
-            return objectMapper.readValue(json.data(), mapEventType(clazz));
+            return objectMapper.readValue(json.data(), clazz);
         } catch (final JsonProcessingException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private Class<? extends Event> mapEventType(final String clazz) {
-        final Map<String, Class<? extends Event>> eventTypes = new HashMap<>();
-        eventTypes.put(BricksetCreated.class.getSimpleName(), BricksetCreated.class);
-        eventTypes.put(BricksetModified.class.getSimpleName(), BricksetModified.class);
-        eventTypes.put(BricksetRemoved.class.getSimpleName(), BricksetRemoved.class);
-        if (eventTypes.containsKey(clazz)) {
-            return eventTypes.get(clazz);
+    public Event map(final EventRecord eventRecord, final List<TagRecord> tagRecords) {
+        final Set<AggregateId> tags = new HashSet<>();
+        tagRecords.forEach(it -> tags.add(TagMapper.INSTANCE.map(it)));
+        if (eventRecord.getEventClass().equals(BricksetCreated.class.getSimpleName())) {
+            var event = deserialize(eventRecord.getEventValue(), BricksetCreated.class);
+            return new BricksetCreated(
+                    EventId.fromUuid(eventRecord.getId()),
+                    Timestamp.fromLocalDateTime(eventRecord.getOccurredOn()),
+                    tags,
+                    event.bricksetId(),
+                    event.number(),
+                    event.title()
+            );
         }
-        throw new RuntimeException(String.format("Cannot convert input string (%s) to Event class", clazz));
+        throw new IllegalArgumentException("Cannot map EventRecord to Event");
     }
 }
