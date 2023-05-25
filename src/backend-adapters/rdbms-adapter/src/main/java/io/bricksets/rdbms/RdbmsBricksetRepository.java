@@ -66,7 +66,6 @@ public class RdbmsBricksetRepository implements BricksetRepository, BricksetNumb
             event.tags().forEach(tag -> {
                 var tagRecord = context.newRecord(Tag.TAG);
                 tagRecord.setEventId(event.id().getValue());
-
                 tagRecord.setTagClass(tag.getClass().getSimpleName());
                 tagRecord.setTagValue(UUID.fromString(tag.getValue().toString()));
                 tagRecord.store();
