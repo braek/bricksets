@@ -5,7 +5,6 @@ import io.bricksets.domain.event.Event;
 import io.bricksets.domain.event.EventStream;
 import io.bricksets.domain.event.EventStreamOptimisticLockingException;
 import io.bricksets.rdbms.mapper.EventMapper;
-import io.bricksets.rdbms.tables.Events;
 import io.bricksets.vocabulary.domain.AggregateId;
 import org.jooq.DSLContext;
 
@@ -64,7 +63,7 @@ public abstract class RdbmsBaseRepository {
         mutations.events().forEach(event -> {
 
             // Store event
-            var eventRecord = dsl.newRecord(Events.EVENTS);
+            var eventRecord = dsl.newRecord(EVENTS);
             eventRecord.setId(event.id().getValue());
             eventRecord.setOccurredOn(event.occurredOn().toLocalDateTime());
             eventRecord.setEventClass(event.getClass().getSimpleName());
