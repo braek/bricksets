@@ -39,39 +39,49 @@ public enum EventMapper {
         }
     }
 
-    public Event map(final EventRecord eventRecord, final List<TagRecord> tagRecords) {
-        final Set<AggregateId> tags = new HashSet<>();
-        tagRecords.forEach(it -> tags.add(TagMapper.INSTANCE.map(it)));
-        if (eventRecord.getEventClass().equals(BricksetCreated.class.getSimpleName())) {
-            var event = deserialize(eventRecord.getEventValue(), BricksetCreated.class);
+    public Event map(final EventRecord event, final List<TagRecord> tags) {
+
+        // Create tags
+        final Set<AggregateId> aggregateIds = new HashSet<>();
+        tags.forEach(it -> aggregateIds.add(TagMapper.INSTANCE.map(it)));
+
+        // BricksetCreated
+        if (event.getEventClass().equals(BricksetCreated.class.getSimpleName())) {
+            var content = deserialize(event.getEventValue(), BricksetCreated.class);
             return new BricksetCreated(
-                    EventId.fromUuid(eventRecord.getId()),
-                    Timestamp.fromLocalDateTime(eventRecord.getOccurredOn()),
-                    tags,
-                    event.bricksetId(),
-                    event.number(),
-                    event.title()
+                    EventId.fromUuid(event.getId()),
+                    Timestamp.fromLocalDateTime(event.getOccurredOn()),
+                    aggregateIds,
+                    content.bricksetId(),
+                    content.number(),
+                    content.title()
             );
         }
-        if (eventRecord.getEventClass().equals(BricksetModified.class.getSimpleName())) {
-            var event = deserialize(eventRecord.getEventValue(), BricksetModified.class);
+
+        // BricksetModified
+        if (event.getEventClass().equals(BricksetModified.class.getSimpleName())) {
+            var content = deserialize(event.getEventValue(), BricksetModified.class);
             return new BricksetModified(
-                    EventId.fromUuid(eventRecord.getId()),
-                    Timestamp.fromLocalDateTime(eventRecord.getOccurredOn()),
-                    tags,
-                    event.bricksetId(),
-                    event.title()
+                    EventId.fromUuid(event.getId()),
+                    Timestamp.fromLocalDateTime(event.getOccurredOn()),
+                    aggregateIds,
+                    content.bricksetId(),
+                    content.title()
             );
         }
-        if (eventRecord.getEventClass().equals(BricksetRemoved.class.getSimpleName())) {
-            var event = deserialize(eventRecord.getEventValue(), BricksetRemoved.class);
+
+        // BricksetRemoved
+        if (event.getEventClass().equals(BricksetRemoved.class.getSimpleName())) {
+            var content = deserialize(event.getEventValue(), BricksetRemoved.class);
             return new BricksetRemoved(
-                    EventId.fromUuid(eventRecord.getId()),
-                    Timestamp.fromLocalDateTime(eventRecord.getOccurredOn()),
-                    tags,
-                    event.bricksetId()
+                    EventId.fromUuid(event.getId()),
+                    Timestamp.fromLocalDateTime(event.getOccurredOn()),
+                    aggregateIds,
+                    content.bricksetId()
             );
         }
-        throw new IllegalArgumentException("Cannot map EventRecord to Event");
+
+        // Throw exception
+        throw new IllegalArgumentException(String.format("Cannot map EventRecord (%s) to Event", event.getEventClass()));
     }
 }
