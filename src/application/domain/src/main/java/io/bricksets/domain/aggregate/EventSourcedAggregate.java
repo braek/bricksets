@@ -20,7 +20,7 @@ public abstract class EventSourcedAggregate implements Aggregate {
     }
 
     public EventId getStatusQuoPointer() {
-        return statusQuo.getLastEventId();
+        return statusQuo.getPointer();
     }
 
     public EventStream getMutations() {

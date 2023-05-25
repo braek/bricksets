@@ -60,7 +60,7 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
         }
 
         // Update the aggregate, if optimistic locking does not fail
-        if (!Objects.equals(eventStream.getLastEventId(), brickset.getStatusQuoPointer())) {
+        if (!Objects.equals(eventStream.getPointer(), brickset.getStatusQuoPointer())) {
             throw new EventStreamOptimisticLockingException(brickset.getStatusQuoPointer());
         }
         eventStore.addAll(brickset.getMutations().events());

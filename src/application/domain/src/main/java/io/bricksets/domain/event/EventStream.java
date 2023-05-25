@@ -18,7 +18,7 @@ public record EventStream(List<Event> events) {
         return events.isEmpty();
     }
 
-    public EventId getLastEventId() {
+    public EventId getPointer() {
         return events.stream()
                 .reduce((first, last) -> last)
                 .map(Event::id)
