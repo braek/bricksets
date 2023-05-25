@@ -5,28 +5,25 @@ import io.bricksets.domain.brickset.BricksetNumberService;
 import io.bricksets.domain.brickset.BricksetRepository;
 import io.bricksets.domain.event.EventStream;
 import io.bricksets.rdbms.mapper.EventMapper;
-import io.bricksets.rdbms.tables.Event;
-import io.bricksets.rdbms.tables.Tag;
+import io.bricksets.rdbms.tables.Events;
 import io.bricksets.vocabulary.brickset.BricksetId;
 import io.bricksets.vocabulary.brickset.BricksetNumber;
 import org.jooq.DSLContext;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static io.bricksets.rdbms.Tables.EVENTS;
+import static io.bricksets.rdbms.tables.Tags.TAGS;
 import static org.jooq.impl.DSL.row;
 import static org.jooq.impl.DSL.select;
 
-@Transactional
-public class RdbmsBricksetRepository implements BricksetRepository, BricksetNumberService {
-
-    private final DSLContext context;
+public class RdbmsBricksetRepository extends RdbmsBaseRepository implements BricksetRepository, BricksetNumberService {
 
     public RdbmsBricksetRepository(final DSLContext context) {
-        this.context = context;
+        super(context);
     }
 
     @Override
@@ -59,7 +56,7 @@ public class RdbmsBricksetRepository implements BricksetRepository, BricksetNumb
         mutations.events().forEach(event -> {
 
             // Store event
-            var eventRecord = context.newRecord(Event.EVENT);
+            var eventRecord = dsl.newRecord(Events.EVENTS);
             eventRecord.setId(event.id().getValue());
             eventRecord.setOccurredOn(event.occurredOn().toLocalDateTime());
             eventRecord.setEventClass(event.getClass().getSimpleName());
@@ -68,7 +65,7 @@ public class RdbmsBricksetRepository implements BricksetRepository, BricksetNumb
 
             // Store tags
             event.tags().forEach(tag -> {
-                var tagRecord = context.newRecord(Tag.TAG);
+                var tagRecord = dsl.newRecord(TAGS);
                 tagRecord.setEventId(event.id().getValue());
                 tagRecord.setTagClass(tag.getClass().getSimpleName());
                 tagRecord.setTagValue(UUID.fromString(tag.getValue().toString()));
@@ -79,14 +76,14 @@ public class RdbmsBricksetRepository implements BricksetRepository, BricksetNumb
 
     private EventStream query(final BricksetId bricksetId) {
         final List<io.bricksets.domain.event.Event> events = new ArrayList<>();
-        var records = context.selectFrom(Event.EVENT)
-                .where(row(Event.EVENT.ID).in(
-                        select(Tag.TAG.EVENT_ID)
-                                .from(Tag.TAG)
-                                .where(Tag.TAG.TAG_CLASS.eq(BricksetId.class.getSimpleName()))
-                                .and(Tag.TAG.TAG_VALUE.eq(bricksetId.getValue()))
+        var records = dsl.selectFrom(EVENTS)
+                .where(row(EVENTS.ID).in(
+                        select(TAGS.EVENT_ID)
+                                .from(TAGS)
+                                .where(TAGS.TAG_CLASS.eq(BricksetId.class.getSimpleName()))
+                                .and(TAGS.TAG_VALUE.eq(bricksetId.getValue()))
                 ))
-                .orderBy(Event.EVENT.POSITION.asc())
+                .orderBy(EVENTS.POSITION.asc())
                 .fetch();
         // TODO: revise deserialization
         records.forEach(it -> events.add(EventMapper.INSTANCE.deserialize(it.getEventValue(), it.getEventClass())));

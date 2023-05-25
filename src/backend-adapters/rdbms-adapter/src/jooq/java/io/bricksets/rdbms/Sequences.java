@@ -16,7 +16,7 @@ import org.jooq.impl.SQLDataType;
 public class Sequences {
 
     /**
-     * The sequence <code>sandbox.event_position_seq</code>
+     * The sequence <code>sandbox.events_position_seq</code>
      */
-    public static final Sequence<Long> EVENT_POSITION_SEQ = Internal.createSequence("event_position_seq", Sandbox.SANDBOX, SQLDataType.BIGINT.nullable(false), null, null, null, null, false, null);
+    public static final Sequence<Long> EVENTS_POSITION_SEQ = Internal.createSequence("events_position_seq", Sandbox.SANDBOX, SQLDataType.BIGINT.nullable(false), null, null, null, null, false, null);
 }
