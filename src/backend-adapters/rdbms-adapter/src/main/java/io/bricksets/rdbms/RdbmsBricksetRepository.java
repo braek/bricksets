@@ -49,7 +49,7 @@ public class RdbmsBricksetRepository extends RdbmsBaseRepository implements Bric
         // Optimistic locking
         var persistedState = getEventStream(brickset.getId());
         if (!Objects.equals(brickset.getStatusQuoPointer(), persistedState.getPointer())) {
-            throw new EventStreamOptimisticLockingException("");
+            throw new EventStreamOptimisticLockingException(brickset.getStatusQuoPointer());
         }
 
         mutations.events().forEach(event -> {
