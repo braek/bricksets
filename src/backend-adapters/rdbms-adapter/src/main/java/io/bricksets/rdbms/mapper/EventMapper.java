@@ -41,6 +41,6 @@ public enum EventMapper {
         if (eventTypes.containsKey(clazz)) {
             return eventTypes.get(clazz);
         }
-        throw new RuntimeException(String.format("Cannot convert input %s to event class", clazz));
+        throw new RuntimeException(String.format("Cannot convert input string (%s) to event class", clazz));
     }
 }
