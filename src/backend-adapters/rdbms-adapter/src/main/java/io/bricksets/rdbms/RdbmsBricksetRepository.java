@@ -45,10 +45,10 @@ public class RdbmsBricksetRepository implements BricksetRepository, BricksetNumb
 
     @Override
     public void save(final Brickset brickset) {
-        var events = brickset.getMutatingEvents();
+        var mutations = brickset.getMutatingEvents();
 
         // No mutations
-        if (events.isEmpty()) {
+        if (mutations.isEmpty()) {
             return;
         }
 
@@ -56,7 +56,7 @@ public class RdbmsBricksetRepository implements BricksetRepository, BricksetNumb
         var latestState = query(brickset.getId());
         brickset.evaluateOptimisticLocking(latestState);
 
-        events.forEach(event -> {
+        mutations.events().forEach(event -> {
 
             // Store event
             var eventRecord = context.newRecord(Event.EVENT);
