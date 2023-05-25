@@ -1,6 +1,8 @@
 package io.bricksets.inmemory;
 
-import io.bricksets.domain.brickset.*;
+import io.bricksets.domain.brickset.Brickset;
+import io.bricksets.domain.brickset.BricksetNumberService;
+import io.bricksets.domain.brickset.BricksetRepository;
 import io.bricksets.domain.brickset.event.BricksetCreated;
 import io.bricksets.domain.brickset.event.BricksetRemoved;
 import io.bricksets.domain.event.Event;
@@ -53,7 +55,7 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
         // The aggregate was a new instance
         var eventStream = query(brickset.getId());
         if (eventStream.isEmpty()) {
-            eventStore.addAll(brickset.getMutatingEvents());
+            eventStore.addAll(brickset.getMutatingEvents().events());
             return;
         }
 
@@ -61,7 +63,7 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
         if (!Objects.equals(eventStream.getLastEventId(), brickset.getLastEventId())) {
             throw new EventStreamOptimisticLockingException(brickset.getLastEventId());
         }
-        eventStore.addAll(brickset.getMutatingEvents());
+        eventStore.addAll(brickset.getMutatingEvents().events());
     }
 
     private EventStream query(final BricksetId bricksetId) {

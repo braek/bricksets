@@ -7,4 +7,6 @@ public interface EventPublisher {
     void publish(Event event);
 
     void publish(List<Event> events);
+
+    void publish(EventStream eventStream);
 }
