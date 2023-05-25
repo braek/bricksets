@@ -23,22 +23,22 @@ public class RdbmsBricksetRepository implements BricksetRepository, BricksetNumb
 
     private final DSLContext context;
 
-    public RdbmsBricksetRepository(DSLContext context) {
+    public RdbmsBricksetRepository(final DSLContext context) {
         this.context = context;
     }
 
     @Override
-    public boolean exists(BricksetNumber number) {
+    public boolean exists(final BricksetNumber number) {
         return false;
     }
 
     @Override
-    public Optional<Brickset> get(BricksetId bricksetId) {
+    public Optional<Brickset> get(final BricksetId bricksetId) {
         return Optional.empty();
     }
 
     @Override
-    public void save(Brickset brickset) {
+    public void save(final Brickset brickset) {
         var events = brickset.getMutatingEvents();
 
         // No mutations
@@ -66,6 +66,7 @@ public class RdbmsBricksetRepository implements BricksetRepository, BricksetNumb
             event.tags().forEach(tag -> {
                 var tagRecord = context.newRecord(Tag.TAG);
                 tagRecord.setEventId(event.id().getValue());
+
                 tagRecord.setTagClass(tag.getClass().getSimpleName());
                 tagRecord.setTagValue(UUID.fromString(tag.getValue().toString()));
                 tagRecord.store();
@@ -73,7 +74,7 @@ public class RdbmsBricksetRepository implements BricksetRepository, BricksetNumb
         });
     }
 
-    private EventStream query(BricksetId bricksetId) {
+    private EventStream query(final BricksetId bricksetId) {
         final List<io.bricksets.domain.event.Event> events = new ArrayList<>();
         var records = context.selectFrom(Event.EVENT)
                 .where(row(Event.EVENT.ID).in(
