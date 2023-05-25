@@ -7,6 +7,7 @@ import io.bricksets.vocabulary.time.Timestamp;
 
 import java.util.Set;
 
+// Make sure that ID, occurred on and tags are ignored from Event content, because these are separate columns or tables
 public abstract class EventMixin {
 
     @JsonIgnore
