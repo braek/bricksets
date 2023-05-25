@@ -4,7 +4,6 @@ import io.bricksets.domain.brickset.Brickset;
 import io.bricksets.domain.brickset.BricksetNumberService;
 import io.bricksets.domain.brickset.BricksetRepository;
 import io.bricksets.domain.event.EventStream;
-import io.bricksets.domain.event.EventStreamOptimisticLockingException;
 import io.bricksets.rdbms.mapper.EventMapper;
 import io.bricksets.rdbms.tables.Event;
 import io.bricksets.rdbms.tables.Tag;
@@ -13,7 +12,10 @@ import io.bricksets.vocabulary.brickset.BricksetNumber;
 import org.jooq.DSLContext;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import static org.jooq.impl.DSL.row;
 import static org.jooq.impl.DSL.select;
@@ -51,10 +53,8 @@ public class RdbmsBricksetRepository implements BricksetRepository, BricksetNumb
         }
 
         // Optimistic locking
-        var eventStream = query(brickset.getId());
-        if (!Objects.equals(eventStream.getLastEventId(), brickset.getLastEventId())) {
-            throw new EventStreamOptimisticLockingException(brickset.getLastEventId());
-        }
+        var latestState = query(brickset.getId());
+        brickset.evaluateOptimisticLocking(latestState);
 
         events.forEach(event -> {
 
