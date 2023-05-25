@@ -46,7 +46,7 @@ public abstract class RdbmsBaseRepository {
         var partial = EventMapper.INSTANCE.deserialize(record.getEventValue(), record.getEventClass());
         if (partial instanceof BricksetCreated created) {
             return new BricksetCreated(
-                    EventId.fromString(record.getId().toString()),
+                    EventId.fromUuid(record.getId()),
                     Timestamp.fromLocalDateTime(record.getOccurredOn()),
                     Set.of(created.bricksetId()),
                     created.bricksetId(),

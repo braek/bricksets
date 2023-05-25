@@ -21,6 +21,10 @@ public final class EventId implements ValueObject {
         return new EventId(UUID.fromString(str));
     }
 
+    public static EventId fromUuid(UUID uuid) {
+        return new EventId(uuid);
+    }
+
     @Override
     public UUID getValue() {
         return value;
