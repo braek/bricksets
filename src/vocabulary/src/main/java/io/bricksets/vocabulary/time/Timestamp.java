@@ -13,11 +13,11 @@ public final class Timestamp implements ValueObject {
 
     private final Instant value;
 
-    private Timestamp(Instant value) {
+    private Timestamp(final Instant value) {
         this.value = requireNonNull(value);
     }
 
-    public static Timestamp fromInstant(Instant instant) {
+    public static Timestamp fromInstant(final Instant instant) {
         return new Timestamp(instant);
     }
 
