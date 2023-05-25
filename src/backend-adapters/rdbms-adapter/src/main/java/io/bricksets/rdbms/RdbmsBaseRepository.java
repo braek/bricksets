@@ -6,6 +6,7 @@ import io.bricksets.domain.event.Event;
 import io.bricksets.domain.event.EventStream;
 import io.bricksets.domain.event.EventStreamOptimisticLockingException;
 import io.bricksets.rdbms.mapper.EventMapper;
+import io.bricksets.rdbms.mapper.TagMapper;
 import io.bricksets.rdbms.tables.records.EventRecord;
 import io.bricksets.vocabulary.domain.AggregateId;
 import io.bricksets.vocabulary.domain.event.EventId;
@@ -44,17 +45,25 @@ public abstract class RdbmsBaseRepository {
 
     private Event mapEvent(final EventRecord record) {
         var partial = EventMapper.INSTANCE.deserialize(record.getEventValue(), record.getEventClass());
+        var tags = mapTags(partial.id());
         if (partial instanceof BricksetCreated created) {
             return new BricksetCreated(
                     EventId.fromUuid(record.getId()),
                     Timestamp.fromLocalDateTime(record.getOccurredOn()),
-                    Set.of(created.bricksetId()),
+                    tags,
                     created.bricksetId(),
                     created.number(),
                     created.title()
             );
         }
         throw new IllegalStateException("Cannot map this event for persistence");
+    }
+
+    private Set<AggregateId> mapTags(EventId id) {
+        final Set<AggregateId> tags = new HashSet<>();
+        var rows = dsl.selectFrom(TAG).where(TAG.EVENT_ID.eq(id.getValue())).fetch();
+        rows.forEach(it -> tags.add(TagMapper.INSTANCE.map(it)));
+        return tags;
     }
 
     protected void save(final EventSourcedAggregate aggregate) {
