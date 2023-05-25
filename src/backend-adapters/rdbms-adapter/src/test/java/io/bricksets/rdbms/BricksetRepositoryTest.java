@@ -23,7 +23,7 @@ public class BricksetRepositoryTest {
     private TimeService timeService;
 
     @Test
-    void testIt() {
+    void testCreation() {
         final var number = BricksetNumber.fromString("12345");
         final var title = BricksetTitle.fromString("Kristof Test");
         final var brickset = Brickset.create(
@@ -31,8 +31,6 @@ public class BricksetRepositoryTest {
                 title,
                 timeService
         );
-//        brickset.modify(BricksetTitle.fromString("Other Title"), timeService);
-//        brickset.remove(timeService);
         final var bricksetId = brickset.getId();
         bricksetRepository.save(brickset);
         var persisted = bricksetRepository.get(brickset.getId());
