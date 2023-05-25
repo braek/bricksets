@@ -77,7 +77,8 @@ public enum EventMapper {
                     EventId.fromUuid(event.getId()),
                     Timestamp.fromLocalDateTime(event.getOccurredOn()),
                     aggregateIds,
-                    content.bricksetId()
+                    content.bricksetId(),
+                    content.number()
             );
         }
 

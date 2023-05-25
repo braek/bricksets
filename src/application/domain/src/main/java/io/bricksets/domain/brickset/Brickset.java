@@ -81,7 +81,7 @@ public final class Brickset extends EventSourcedAggregate {
     }
 
     public void remove(TimeService timeService) {
-        apply(new BricksetRemoved(timeService.now(), id));
+        apply(new BricksetRemoved(timeService.now(), id, number));
     }
 
     private void when(BricksetCreated created) {
