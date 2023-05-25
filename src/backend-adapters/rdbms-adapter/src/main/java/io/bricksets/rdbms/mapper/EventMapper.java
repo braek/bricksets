@@ -3,6 +3,8 @@ package io.bricksets.rdbms.mapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.bricksets.domain.brickset.event.BricksetCreated;
+import io.bricksets.domain.brickset.event.BricksetModified;
+import io.bricksets.domain.brickset.event.BricksetRemoved;
 import io.bricksets.domain.event.Event;
 import io.bricksets.rdbms.tables.records.EventRecord;
 import io.bricksets.rdbms.tables.records.TagRecord;
@@ -49,6 +51,25 @@ public enum EventMapper {
                     event.bricksetId(),
                     event.number(),
                     event.title()
+            );
+        }
+        if (eventRecord.getEventClass().equals(BricksetModified.class.getSimpleName())) {
+            var event = deserialize(eventRecord.getEventValue(), BricksetModified.class);
+            return new BricksetModified(
+                    EventId.fromUuid(eventRecord.getId()),
+                    Timestamp.fromLocalDateTime(eventRecord.getOccurredOn()),
+                    tags,
+                    event.bricksetId(),
+                    event.title()
+            );
+        }
+        if (eventRecord.getEventClass().equals(BricksetRemoved.class.getSimpleName())) {
+            var event = deserialize(eventRecord.getEventValue(), BricksetRemoved.class);
+            return new BricksetRemoved(
+                    EventId.fromUuid(eventRecord.getId()),
+                    Timestamp.fromLocalDateTime(eventRecord.getOccurredOn()),
+                    tags,
+                    event.bricksetId()
             );
         }
         throw new IllegalArgumentException("Cannot map EventRecord to Event");
