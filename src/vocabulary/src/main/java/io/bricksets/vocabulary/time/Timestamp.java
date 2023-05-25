@@ -29,6 +29,10 @@ public final class Timestamp implements ValueObject {
         return LocalDateTime.ofInstant(value, ZoneOffset.UTC);
     }
 
+    public static Timestamp fromLocalDateTime(final LocalDateTime localDateTime) {
+        return new Timestamp(localDateTime.toInstant(ZoneOffset.UTC));
+    }
+
     @Override
     public Instant getValue() {
         return value;

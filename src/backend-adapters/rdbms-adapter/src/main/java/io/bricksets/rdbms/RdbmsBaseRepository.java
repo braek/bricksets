@@ -1,17 +1,18 @@
 package io.bricksets.rdbms;
 
 import io.bricksets.domain.aggregate.EventSourcedAggregate;
+import io.bricksets.domain.brickset.event.BricksetCreated;
 import io.bricksets.domain.event.Event;
 import io.bricksets.domain.event.EventStream;
 import io.bricksets.domain.event.EventStreamOptimisticLockingException;
 import io.bricksets.rdbms.mapper.EventMapper;
+import io.bricksets.rdbms.tables.records.EventsRecord;
 import io.bricksets.vocabulary.domain.AggregateId;
+import io.bricksets.vocabulary.domain.event.EventId;
+import io.bricksets.vocabulary.time.Timestamp;
 import org.jooq.DSLContext;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 import static io.bricksets.rdbms.Tables.EVENTS;
 import static io.bricksets.rdbms.tables.Tags.TAGS;
@@ -37,9 +38,23 @@ public abstract class RdbmsBaseRepository {
                 ))
                 .orderBy(EVENTS.POSITION.asc())
                 .fetch();
-        // TODO: revise deserialization
-        records.forEach(it -> events.add(EventMapper.INSTANCE.deserialize(it.getEventValue(), it.getEventClass())));
+        records.forEach(record -> events.add(mapEvent(record)));
         return new EventStream(events);
+    }
+
+    private Event mapEvent(final EventsRecord record) {
+        var partial = EventMapper.INSTANCE.deserialize(record.getEventValue(), record.getEventClass());
+        if (partial instanceof BricksetCreated created) {
+            return new BricksetCreated(
+                    EventId.fromString(record.getId().toString()),
+                    Timestamp.fromLocalDateTime(record.getOccurredOn()),
+                    Set.of(created.bricksetId()),
+                    created.bricksetId(),
+                    created.number(),
+                    created.title()
+            );
+        }
+        throw new IllegalStateException("Cannot map this event for persistence");
     }
 
     protected void save(final EventSourcedAggregate aggregate) {
