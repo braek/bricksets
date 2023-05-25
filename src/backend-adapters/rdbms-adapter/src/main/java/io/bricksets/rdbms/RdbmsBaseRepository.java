@@ -8,7 +8,6 @@ import io.bricksets.rdbms.mapper.EventMapper;
 import io.bricksets.rdbms.tables.Events;
 import io.bricksets.vocabulary.domain.AggregateId;
 import org.jooq.DSLContext;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +60,7 @@ public abstract class RdbmsBaseRepository {
         persist(aggregate.getMutations());
     }
 
-    protected void persist(final EventStream mutations) {
+    private void persist(final EventStream mutations) {
         mutations.events().forEach(event -> {
 
             // Store event
