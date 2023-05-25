@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
@@ -23,11 +24,23 @@ public class BricksetRepositoryTest {
 
     @Test
     void testIt() {
-        bricksetRepository.save(Brickset.create(
-                BricksetNumber.fromString("12345"),
-                BricksetTitle.fromString("Kristof Test"),
+        final var number = BricksetNumber.fromString("12345");
+        final var title = BricksetTitle.fromString("Kristof Test");
+        final var brickset = Brickset.create(
+                number,
+                title,
                 timeService
-        ));
-        assertTrue(false);
+        );
+        final var bricksetId = brickset.getId();
+        bricksetRepository.save(brickset);
+        var persisted = bricksetRepository.get(brickset.getId());
+        assertThat(persisted).hasValueSatisfying(it -> {
+            assertThat(it.getId()).isEqualTo(bricksetId);
+            assertThat(it.getNumber()).isEqualTo(number);
+            assertThat(it.getTitle()).isEqualTo(title);
+            assertThat(it.getModifiedOn()).isNull();
+            assertTrue(it.getMutations().isEmpty());
+            assertThat(it.getStatusQuoPointer()).isNotNull();
+        });
     }
 }

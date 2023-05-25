@@ -15,8 +15,8 @@ public abstract class EventSourcedAggregate implements Aggregate {
     }
 
     public EventSourcedAggregate(final EventStream statusQuo) {
-        statusQuo.absorb(statusQuo);
-        statusQuo.events().forEach(this::when);
+        this.statusQuo.absorb(statusQuo);
+        this.statusQuo.events().forEach(this::when);
     }
 
     public EventId getStatusQuoPointer() {
