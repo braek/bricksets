@@ -34,7 +34,11 @@ public class RdbmsBricksetRepository implements BricksetRepository, BricksetNumb
 
     @Override
     public Optional<Brickset> get(final BricksetId bricksetId) {
-        return Optional.empty();
+        var eventStream = query(bricksetId);
+        if (eventStream.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(new Brickset(eventStream));
     }
 
     @Override
