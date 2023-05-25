@@ -17,9 +17,9 @@ public abstract class EventSourcedAggregate implements Aggregate {
     public EventSourcedAggregate() {
     }
 
-    public EventSourcedAggregate(final EventStream eventStream) {
-        eventStream.copy(eventStream);
-        eventStream.events().forEach(this::when);
+    public EventSourcedAggregate(final EventStream currentState) {
+        currentState.copy(currentState);
+        currentState.events().forEach(this::when);
     }
 
     public void evaluateOptimisticLocking(final EventStream latestState) {
