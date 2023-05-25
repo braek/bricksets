@@ -57,7 +57,7 @@ public abstract class RdbmsBaseRepository {
         }
 
         // Optimistic locking
-        if (!aggregate.hasStatusQuo()) {
+        if (aggregate.hasStatusQuo()) {
             var persistedEventStream = getEventStream(aggregate.getId());
             if (!Objects.equals(aggregate.getStatusQuoPointer(), persistedEventStream.getPointer())) {
                 throw new EventStreamOptimisticLockingException(aggregate.getStatusQuoPointer());
