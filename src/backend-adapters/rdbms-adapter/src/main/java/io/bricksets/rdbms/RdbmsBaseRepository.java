@@ -27,7 +27,7 @@ public abstract class RdbmsBaseRepository {
         this.dsl = dsl;
     }
 
-    protected EventStream getEventStream(final AggregateId aggregateId) {
+    protected final EventStream getEventStream(final AggregateId aggregateId) {
         final List<Event> events = new ArrayList<>();
         var records = dsl.selectFrom(EVENT)
                 .where(row(EVENT.ID).in(
@@ -49,7 +49,7 @@ public abstract class RdbmsBaseRepository {
         return EventMapper.INSTANCE.map(event, tags);
     }
 
-    protected void save(final EventSourcedAggregate aggregate) {
+    protected final void save(final EventSourcedAggregate aggregate) {
 
         // No mutations: do nothing
         if (aggregate.hasNoMutations()) {
