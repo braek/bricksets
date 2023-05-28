@@ -31,10 +31,6 @@ public abstract class EventSourcedAggregate implements Aggregate {
         return mutations.isEmpty();
     }
 
-    public final boolean isNotNew() {
-        return !statusQuo.isEmpty();
-    }
-
     protected final void apply(final Event event) {
         dispatch(event);
         mutations.events().add(event);
