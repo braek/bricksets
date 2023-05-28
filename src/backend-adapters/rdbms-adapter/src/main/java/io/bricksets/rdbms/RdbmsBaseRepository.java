@@ -52,6 +52,7 @@ public abstract class RdbmsBaseRepository {
 
     protected void save(final EventSourcedAggregate aggregate) {
 
+        // No mutations: do nothing
         if (aggregate.hasNoMutations()) {
             return;
         }
@@ -62,6 +63,7 @@ public abstract class RdbmsBaseRepository {
             throw new EventStreamOptimisticLockingException(aggregate.getLastEventId());
         }
 
+        // Persist mutations
         persist(aggregate.getMutations());
     }
 
