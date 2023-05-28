@@ -61,7 +61,7 @@ public class Tag extends TableImpl<TagRecord> {
     /**
      * The column <code>sandbox.tag.tag_value</code>.
      */
-    public final TableField<TagRecord, UUID> TAG_VALUE = createField(DSL.name("tag_value"), SQLDataType.UUID.nullable(false), this, "");
+    public final TableField<TagRecord, String> TAG_VALUE = createField(DSL.name("tag_value"), SQLDataType.VARCHAR.nullable(false), this, "");
 
     private Tag(Name alias, Table<TagRecord> aliased) {
         this(alias, aliased, null);
@@ -156,7 +156,7 @@ public class Tag extends TableImpl<TagRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row3<UUID, String, UUID> fieldsRow() {
+    public Row3<UUID, String, String> fieldsRow() {
         return (Row3) super.fieldsRow();
     }
 }

@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static io.bricksets.rdbms.Tables.EVENT;
 import static io.bricksets.rdbms.Tables.TAG;
@@ -35,7 +34,7 @@ public abstract class RdbmsBaseRepository {
                         select(TAG.EVENT_ID)
                                 .from(TAG)
                                 .where(TAG.TAG_CLASS.eq(aggregateId.getClass().getSimpleName()))
-                                .and(TAG.TAG_VALUE.eq((UUID) aggregateId.getValue()))
+                                .and(TAG.TAG_VALUE.eq(aggregateId.toString()))
                 ))
                 .orderBy(EVENT.POSITION.asc())
                 .fetch();
@@ -83,7 +82,7 @@ public abstract class RdbmsBaseRepository {
                 var tagRecord = dsl.newRecord(TAG);
                 tagRecord.setEventId(event.id().getValue());
                 tagRecord.setTagClass(tag.getClass().getSimpleName());
-                tagRecord.setTagValue(UUID.fromString(tag.getValue().toString()));
+                tagRecord.setTagValue(tag.toString());
                 tagRecord.store();
             });
         });

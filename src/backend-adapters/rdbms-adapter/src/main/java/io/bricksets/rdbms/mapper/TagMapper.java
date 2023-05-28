@@ -10,7 +10,7 @@ public enum TagMapper {
 
     public AggregateId map(final TagRecord record) {
         if (record.getTagClass().equals(BricksetId.class.getSimpleName())) {
-            return BricksetId.fromUuid(record.getTagValue());
+            return BricksetId.fromString(record.getTagValue());
         }
         throw new IllegalArgumentException(String.format("Cannot map TagRecord (%s) to AggregateId", record.getTagClass()));
     }

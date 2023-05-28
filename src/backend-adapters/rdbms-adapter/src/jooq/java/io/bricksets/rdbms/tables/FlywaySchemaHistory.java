@@ -154,11 +154,6 @@ public class FlywaySchemaHistory extends TableImpl<FlywaySchemaHistoryRecord> {
     }
 
     @Override
-    public TableField<FlywaySchemaHistoryRecord, String> getRecordVersion() {
-        return VERSION;
-    }
-
-    @Override
     public FlywaySchemaHistory as(String alias) {
         return new FlywaySchemaHistory(DSL.name(alias), this);
     }

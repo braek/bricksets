@@ -21,6 +21,10 @@ public final class BricksetId implements AggregateId {
         return new BricksetId(uuid);
     }
 
+    public static BricksetId fromString(final String str) {
+        return new BricksetId(UUID.fromString(str));
+    }
+
     @Override
     public String toString() {
         return value.toString();

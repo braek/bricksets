@@ -12,7 +12,7 @@ CREATE TABLE tag
 (
     event_id  UUID    NOT NULL,
     tag_class VARCHAR NOT NULL,
-    tag_value UUID    NOT NULL,
+    tag_value VARCHAR NOT NULL,
     CONSTRAINT pk_tag PRIMARY KEY (event_id, tag_class, tag_value),
     CONSTRAINT fk_tag_event FOREIGN KEY (event_id) REFERENCES event (id)
 );
