@@ -1,9 +1,9 @@
 package io.bricksets.usecase.brickset;
 
-import io.bricksets.facade.RemoveBricksetPresenter;
 import io.bricksets.domain.brickset.Brickset;
 import io.bricksets.domain.brickset.event.BricksetRemoved;
 import io.bricksets.domain.time.TimeService;
+import io.bricksets.facade.RemoveBricksetPresenter;
 import io.bricksets.inmemory.InMemoryBricksetRepository;
 import io.bricksets.inmemory.InMemoryEventPublisher;
 import io.bricksets.test.MockTimeService;
@@ -63,8 +63,7 @@ public class RemoveBricksetUseCaseTest {
             eventPublisher.verifyEvents(List.of(
                     new BricksetRemoved(
                             Timestamp.fromString("2023-04-04T16:31:00.000Z"),
-                            brickset.getId(),
-                            brickset.getNumber()
+                            brickset.getId()
                     )
             ));
         }
