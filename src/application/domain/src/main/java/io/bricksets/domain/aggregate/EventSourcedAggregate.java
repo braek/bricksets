@@ -16,7 +16,7 @@ public abstract class EventSourcedAggregate implements Aggregate {
 
     public EventSourcedAggregate(final EventStream statusQuo) {
         this.statusQuo.copy(statusQuo);
-        this.statusQuo.events().forEach(this::when);
+        this.statusQuo.events().forEach(this::dispatch);
     }
 
     public EventId getLastEventId() {
@@ -36,9 +36,9 @@ public abstract class EventSourcedAggregate implements Aggregate {
     }
 
     protected void apply(Event event) {
-        when(event);
+        dispatch(event);
         mutations.events().add(event);
     }
 
-    protected abstract void when(Event event);
+    protected abstract void dispatch(Event event);
 }
