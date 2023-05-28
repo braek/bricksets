@@ -22,7 +22,7 @@ public record EventStream(List<Event> events) {
         return events.stream()
                 .reduce((first, last) -> last)
                 .map(Event::id)
-                .orElseThrow();
+                .orElse(null);
     }
 
     public boolean containsEventOfType(final Class<? extends Event> clazz) {

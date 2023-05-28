@@ -11,7 +11,6 @@ import org.jooq.DSLContext;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 import static io.bricksets.rdbms.Tables.EVENT;
@@ -51,20 +50,16 @@ public abstract class RdbmsBaseRepository {
 
     protected void save(final EventSourcedAggregate aggregate) {
 
-        // No mutations
-        if (aggregate.isNotMutated()) {
+        if (aggregate.hasNoMutations()) {
             return;
         }
 
         // Optimistic locking
-        if (aggregate.isNotNew()) {
-            var persistedEventStream = getEventStream(aggregate.getId());
-            if (!Objects.equals(aggregate.getLastEventId(), persistedEventStream.getLastEventId())) {
-                throw new EventStreamOptimisticLockingException(aggregate.getLastEventId());
-            }
+        var persisted = getEventStream(aggregate.getId());
+        if (aggregate.isNotEqualTo(persisted)) {
+            throw new EventStreamOptimisticLockingException(aggregate.getLastEventId());
         }
 
-        // Persist mutations
         persist(aggregate.getMutations());
     }
 

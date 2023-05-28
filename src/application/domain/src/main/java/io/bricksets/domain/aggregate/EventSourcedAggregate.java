@@ -19,26 +19,30 @@ public abstract class EventSourcedAggregate implements Aggregate {
         this.statusQuo.events().forEach(this::dispatch);
     }
 
-    public EventId getLastEventId() {
+    public final EventId getLastEventId() {
         return statusQuo.getLastEventId();
     }
 
-    public EventStream getMutations() {
+    public final EventStream getMutations() {
         return mutations;
     }
 
-    public boolean isNotMutated() {
+    public final boolean hasNoMutations() {
         return mutations.isEmpty();
     }
 
-    public boolean isNotNew() {
+    public final boolean isNotNew() {
         return !statusQuo.isEmpty();
     }
 
-    protected void apply(Event event) {
+    protected final void apply(final Event event) {
         dispatch(event);
         mutations.events().add(event);
     }
 
-    protected abstract void dispatch(Event event);
+    public final boolean isNotEqualTo(final EventStream eventStream) {
+        return !statusQuo.equals(eventStream);
+    }
+
+    protected abstract void dispatch(final Event event);
 }
