@@ -8,6 +8,7 @@ import io.bricksets.rdbms.mapper.EventMapper;
 import io.bricksets.rdbms.tables.records.EventRecord;
 import io.bricksets.vocabulary.domain.AggregateId;
 import org.jooq.DSLContext;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ import static io.bricksets.rdbms.Tables.TAG;
 import static org.jooq.impl.DSL.row;
 import static org.jooq.impl.DSL.select;
 
+@Transactional
 public abstract class RdbmsBaseRepository {
 
     protected final DSLContext dsl;
