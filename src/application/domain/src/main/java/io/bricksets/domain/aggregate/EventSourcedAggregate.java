@@ -27,7 +27,7 @@ public abstract class EventSourcedAggregate implements Aggregate {
         return mutations;
     }
 
-    public boolean hasNoMutations() {
+    public boolean isNotMutated() {
         return mutations.isEmpty();
     }
 

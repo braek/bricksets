@@ -52,7 +52,7 @@ public abstract class RdbmsBaseRepository {
     protected void save(final EventSourcedAggregate aggregate) {
 
         // No mutations
-        if (aggregate.hasNoMutations()) {
+        if (aggregate.isNotMutated()) {
             return;
         }
 
