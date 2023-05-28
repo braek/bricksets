@@ -52,15 +52,15 @@ public abstract class RdbmsBaseRepository {
     protected void save(final EventSourcedAggregate aggregate) {
 
         // No mutations
-        if (aggregate.isStatusQuo()) {
+        if (aggregate.hasNoMutations()) {
             return;
         }
 
         // Optimistic locking
-        if (aggregate.isPersisted()) {
+        if (aggregate.isNotNew()) {
             var persistedEventStream = getEventStream(aggregate.getId());
-            if (!Objects.equals(aggregate.getStatusQuoPointer(), persistedEventStream.getPointer())) {
-                throw new EventStreamOptimisticLockingException(aggregate.getStatusQuoPointer());
+            if (!Objects.equals(aggregate.getLastEventId(), persistedEventStream.getLastEventId())) {
+                throw new EventStreamOptimisticLockingException(aggregate.getLastEventId());
             }
         }
 

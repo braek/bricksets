@@ -38,7 +38,7 @@ public class BricksetRepositoryTest {
             assertThat(it.getTitle()).isEqualTo(title);
             assertThat(it.getModifiedOn()).isNull();
             assertTrue(it.getMutations().isEmpty());
-            assertThat(it.getStatusQuoPointer()).isNotNull();
+            assertThat(it.getLastEventId()).isNotNull();
         });
     }
 }

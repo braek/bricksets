@@ -19,19 +19,19 @@ public abstract class EventSourcedAggregate implements Aggregate {
         this.statusQuo.events().forEach(this::when);
     }
 
-    public EventId getStatusQuoPointer() {
-        return statusQuo.getPointer();
+    public EventId getLastEventId() {
+        return statusQuo.getLastEventId();
     }
 
     public EventStream getMutations() {
         return mutations;
     }
 
-    public boolean isStatusQuo() {
+    public boolean hasNoMutations() {
         return mutations.isEmpty();
     }
 
-    public boolean isPersisted() {
+    public boolean isNotNew() {
         return !statusQuo.isEmpty();
     }
 
