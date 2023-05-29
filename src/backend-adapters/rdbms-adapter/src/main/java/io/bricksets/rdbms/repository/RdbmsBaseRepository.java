@@ -48,7 +48,8 @@ public abstract class RdbmsBaseRepository {
         return EventMapper.INSTANCE.map(event, tags);
     }
 
-    protected final void save(final EventSourcedAggregate aggregate) {
+    @Transactional
+    protected void save(final EventSourcedAggregate aggregate) {
 
         // No mutations: do nothing
         if (aggregate.hasNoMutations()) {
