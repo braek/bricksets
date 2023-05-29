@@ -6,6 +6,9 @@ io.bricksets:
     username: sandbox
     password: sandbox
 
-spring:
-  jpa:
-    show-sql: true
+logging:
+  level:
+    org:
+      jooq:
+        tools:
+          LoggerListener: DEBUG
