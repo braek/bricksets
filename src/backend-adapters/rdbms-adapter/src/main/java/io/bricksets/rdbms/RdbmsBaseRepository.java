@@ -18,7 +18,6 @@ import static io.bricksets.rdbms.Tables.TAG;
 import static org.jooq.impl.DSL.row;
 import static org.jooq.impl.DSL.select;
 
-@Transactional
 public abstract class RdbmsBaseRepository {
 
     protected final DSLContext dsl;

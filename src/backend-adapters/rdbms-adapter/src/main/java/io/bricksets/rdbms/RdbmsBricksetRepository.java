@@ -9,6 +9,7 @@ import io.bricksets.rdbms.mapper.EventMapper;
 import io.bricksets.vocabulary.brickset.BricksetId;
 import io.bricksets.vocabulary.brickset.BricksetNumber;
 import org.jooq.DSLContext;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,6 +56,7 @@ public class RdbmsBricksetRepository extends RdbmsBaseRepository implements Bric
     }
 
     @Override
+    @Transactional
     public void save(final Brickset brickset) {
         super.save(brickset);
     }
