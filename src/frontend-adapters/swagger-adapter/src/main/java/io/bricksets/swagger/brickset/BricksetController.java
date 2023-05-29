@@ -35,32 +35,21 @@ public class BricksetController implements CreateBricksetEndpoint, ModifyBrickse
     @Override
     public ResponseEntity<Object> createBrickset(CreateBricksetRequest request) {
         var presenter = new CreateBricksetRestPresenter();
-        createBrickset.createBrickset(
-                BricksetNumber.fromString(request.number()),
-                BricksetTitle.fromString(request.title()),
-                presenter
-        );
+        createBrickset.createBrickset(BricksetNumber.fromString(request.number()), BricksetTitle.fromString(request.title()), presenter);
         return presenter.getResponse();
     }
 
     @Override
     public ResponseEntity<Object> modifyBrickset(UUID bricksetId, ModifyBricksetRequest request) {
         var presenter = new ModifyBricksetRestPresenter();
-        modifyBrickset.modifyBrickset(
-                BricksetId.fromUuid(bricksetId),
-                BricksetTitle.fromString(request.title()),
-                presenter
-        );
+        modifyBrickset.modifyBrickset(BricksetId.fromUuid(bricksetId), BricksetTitle.fromString(request.title()), presenter);
         return presenter.getResponse();
     }
 
     @Override
     public ResponseEntity<Object> removeBrickset(UUID bricksetId) {
         var presenter = new RemoveBricksetRestPresenter();
-        removeBrickset.removeBrickset(
-                BricksetId.fromUuid(bricksetId),
-                presenter
-        );
+        removeBrickset.removeBrickset(BricksetId.fromUuid(bricksetId), presenter);
         return presenter.getResponse();
     }
 }
