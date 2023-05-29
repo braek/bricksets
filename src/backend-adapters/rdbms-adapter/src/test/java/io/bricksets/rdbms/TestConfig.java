@@ -1,6 +1,7 @@
 package io.bricksets.rdbms;
 
 import io.bricksets.domain.time.TimeService;
+import io.bricksets.rdbms.repository.RdbmsBricksetRepository;
 import io.bricksets.test.MockTimeService;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;

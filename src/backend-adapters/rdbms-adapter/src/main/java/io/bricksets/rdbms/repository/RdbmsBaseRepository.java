@@ -1,4 +1,4 @@
-package io.bricksets.rdbms;
+package io.bricksets.rdbms.repository;
 
 import io.bricksets.domain.aggregate.EventSourcedAggregate;
 import io.bricksets.domain.event.Event;

@@ -6,6 +6,7 @@ dependencies {
     implementation project(':vocabulary')
 
     implementation project(':in-memory-adapter')
+    implementation project(':rdbms-adapter')
     implementation project(':system-time-adapter')
     implementation project(':swagger-adapter')
 
