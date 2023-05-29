@@ -5,5 +5,5 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.UUID;
 
 @Schema
-public record BricksetCreatedResponse(UUID bricksetId) {
+public record BricksetCreatedResponse(@Schema(requiredMode = Schema.RequiredMode.REQUIRED) UUID bricksetId) {
 }
