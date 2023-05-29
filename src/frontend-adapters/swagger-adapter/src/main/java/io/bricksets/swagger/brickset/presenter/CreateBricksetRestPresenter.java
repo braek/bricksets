@@ -1,6 +1,6 @@
 package io.bricksets.swagger.brickset.presenter;
 
-import io.bricksets.facade.CreateBricksetPresenter;
+import io.bricksets.api.CreateBricksetPresenter;
 import io.bricksets.swagger.brickset.response.BricksetCreatedResponse;
 import io.bricksets.swagger.presenter.RestPresenter;
 import io.bricksets.swagger.response.ErrorResponse;

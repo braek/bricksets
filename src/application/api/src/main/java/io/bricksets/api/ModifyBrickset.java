@@ -1,4 +1,4 @@
-package io.bricksets.facade;
+package io.bricksets.api;
 
 import io.bricksets.vocabulary.brickset.BricksetId;
 import io.bricksets.vocabulary.brickset.BricksetTitle;

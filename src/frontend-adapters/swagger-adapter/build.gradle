@@ -1,5 +1,5 @@
 dependencies {
-    implementation project(':facade')
+    implementation project(':api')
     implementation project(':vocabulary')
 
     implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
