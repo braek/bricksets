@@ -1,21 +1,30 @@
 package io.bricksets.swagger.brickset;
 
 import io.bricksets.facade.CreateBrickset;
+import io.bricksets.facade.ModifyBrickset;
 import io.bricksets.swagger.brickset.endpoint.CreateBricksetEndpoint;
+import io.bricksets.swagger.brickset.endpoint.ModifyBricksetEndpoint;
 import io.bricksets.swagger.brickset.presenter.CreateBricksetRestPresenter;
+import io.bricksets.swagger.brickset.presenter.ModifyBricksetRestPresenter;
 import io.bricksets.swagger.brickset.request.CreateBricksetRequest;
+import io.bricksets.swagger.brickset.request.ModifyBricksetRequest;
+import io.bricksets.vocabulary.brickset.BricksetId;
 import io.bricksets.vocabulary.brickset.BricksetNumber;
 import io.bricksets.vocabulary.brickset.BricksetTitle;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
-public class BricksetController implements CreateBricksetEndpoint {
+public class BricksetController implements CreateBricksetEndpoint, ModifyBricksetEndpoint {
 
     private final CreateBrickset createBrickset;
+    private final ModifyBrickset modifyBrickset;
 
-    public BricksetController(CreateBrickset createBrickset) {
+    public BricksetController(CreateBrickset createBrickset, ModifyBrickset modifyBrickset) {
         this.createBrickset = createBrickset;
+        this.modifyBrickset = modifyBrickset;
     }
 
     @Override
@@ -23,6 +32,17 @@ public class BricksetController implements CreateBricksetEndpoint {
         var presenter = new CreateBricksetRestPresenter();
         createBrickset.createBrickset(
                 BricksetNumber.fromString(request.number()),
+                BricksetTitle.fromString(request.title()),
+                presenter
+        );
+        return presenter.getResponse();
+    }
+
+    @Override
+    public ResponseEntity<Object> modifyBrickset(UUID bricksetId, ModifyBricksetRequest request) {
+        var presenter = new ModifyBricksetRestPresenter();
+        modifyBrickset.modifyBrickset(
+                BricksetId.fromUuid(bricksetId),
                 BricksetTitle.fromString(request.title()),
                 presenter
         );
