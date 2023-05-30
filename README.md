@@ -2,3 +2,4 @@
 
 ## Resources
 
+* [Kill Aggregate! - Sara Pellegrini](https://www.youtube.com/watch?v=DhhxKoOpJe0)
