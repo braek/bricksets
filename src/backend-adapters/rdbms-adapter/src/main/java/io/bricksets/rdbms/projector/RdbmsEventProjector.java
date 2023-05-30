@@ -28,16 +28,19 @@ public class RdbmsEventProjector implements EventProjector {
             record.setNumber(theEvent.number().getValue());
             record.setCreatedOn(theEvent.occurredOn().toLocalDateTime());
             record.store();
+            return;
         }
         if (event instanceof BricksetModified theEvent) {
             final var record = dsl.fetchSingle(BRICKSET, BRICKSET.ID.eq(theEvent.bricksetId().getValue()));
             record.setTitle(theEvent.title().getValue());
             record.setModifiedOn(theEvent.occurredOn().toLocalDateTime());
             record.store();
+            return;
         }
         if (event instanceof BricksetRemoved theEvent) {
             final var record = dsl.fetchSingle(BRICKSET, BRICKSET.ID.eq(theEvent.bricksetId().getValue()));
             record.delete();
+            return;
         }
         throw new IllegalArgumentException(String.format("Cannot project this type of Event (%s)", event.getClass().getSimpleName()));
     }
