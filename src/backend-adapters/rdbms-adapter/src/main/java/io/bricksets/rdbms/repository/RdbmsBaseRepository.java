@@ -11,12 +11,12 @@ import org.jooq.DSLContext;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static io.bricksets.rdbms.Tables.EVENT;
 import static io.bricksets.rdbms.Tables.TAG;
-import static org.jooq.impl.DSL.row;
-import static org.jooq.impl.DSL.select;
+import static org.jooq.impl.DSL.*;
 
 public abstract class RdbmsBaseRepository {
 
@@ -24,6 +24,19 @@ public abstract class RdbmsBaseRepository {
 
     public RdbmsBaseRepository(final DSLContext dsl) {
         this.dsl = dsl;
+    }
+
+    protected final EventStream getEventStream(Class<? extends Event>... eventTypes) {
+        final var eventTypesToFilter = Arrays.stream(eventTypes).toList();
+        final List<Event> events = new ArrayList<>();
+        final var filter = noCondition();
+        eventTypesToFilter.forEach(it -> filter.or(EVENT.EVENT_CLASS.eq(it.getSimpleName())));
+        var records = dsl.selectFrom(EVENT)
+                .where(filter)
+                .orderBy(EVENT.POSITION.asc())
+                .fetch();
+        records.forEach(record -> events.add(mapEvent(record)));
+        return new EventStream(events);
     }
 
     protected final EventStream getEventStream(final AggregateId aggregateId) {
