@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Configuration;
 public class BackendConfig {
 
     @Bean
-    InMemoryEventPubSub eventPublisher(final ProjectorPolicy projectorPolicy) {
-        final var eventPublisher = new InMemoryEventPubSub();
-        eventPublisher.subscribe(projectorPolicy);
-        return eventPublisher;
+    InMemoryEventPubSub eventPubSub(final ProjectorPolicy projectorPolicy) {
+        final var eventPubSub = new InMemoryEventPubSub();
+        eventPubSub.subscribe(projectorPolicy);
+        return eventPubSub;
     }
 
     @Bean
