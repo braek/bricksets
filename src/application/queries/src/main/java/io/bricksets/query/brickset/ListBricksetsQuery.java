@@ -7,9 +7,9 @@ import java.util.List;
 
 public final class ListBricksetsQuery implements ListBricksets {
 
-    private final BricksetViewModel viewModel;
+    private final BricksetView viewModel;
 
-    public ListBricksetsQuery(BricksetViewModel viewModel) {
+    public ListBricksetsQuery(BricksetView viewModel) {
         this.viewModel = viewModel;
     }
 

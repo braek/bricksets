@@ -4,6 +4,6 @@ import io.bricksets.vocabulary.brickset.BricksetListItem;
 
 import java.util.List;
 
-public interface BricksetViewModel {
+public interface BricksetView {
     List<BricksetListItem> listBricksets();
 }

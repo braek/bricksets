@@ -2,7 +2,7 @@ package io.bricksets.rdbms;
 
 import io.bricksets.rdbms.projector.RdbmsEventProjector;
 import io.bricksets.rdbms.repository.RdbmsBricksetRepository;
-import io.bricksets.rdbms.viewmodel.RdbmsBricksetViewModel;
+import io.bricksets.rdbms.viewmodel.RdbmsBricksetView;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.conf.Settings;
@@ -73,7 +73,7 @@ public class RdbmsConfig {
     }
 
     @Bean
-    RdbmsBricksetViewModel bricksetViewModel(final DSLContext dsl) {
-        return new RdbmsBricksetViewModel(dsl);
+    RdbmsBricksetView bricksetViewModel(final DSLContext dsl) {
+        return new RdbmsBricksetView(dsl);
     }
 }

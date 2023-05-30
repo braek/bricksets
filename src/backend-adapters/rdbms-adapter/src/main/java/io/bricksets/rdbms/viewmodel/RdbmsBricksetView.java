@@ -1,6 +1,6 @@
 package io.bricksets.rdbms.viewmodel;
 
-import io.bricksets.query.brickset.BricksetViewModel;
+import io.bricksets.query.brickset.BricksetView;
 import io.bricksets.rdbms.Tables;
 import io.bricksets.vocabulary.brickset.BricksetId;
 import io.bricksets.vocabulary.brickset.BricksetListItem;
@@ -11,11 +11,11 @@ import org.jooq.DSLContext;
 
 import java.util.List;
 
-public final class RdbmsBricksetViewModel implements BricksetViewModel {
+public final class RdbmsBricksetView implements BricksetView {
 
     private final DSLContext dsl;
 
-    public RdbmsBricksetViewModel(DSLContext dsl) {
+    public RdbmsBricksetView(DSLContext dsl) {
         this.dsl = dsl;
     }
 
