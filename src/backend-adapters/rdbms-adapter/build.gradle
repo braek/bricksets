@@ -9,6 +9,7 @@ configurations {
 
 dependencies {
     implementation project(':domain')
+    implementation project(':queries')
     implementation project(':vocabulary')
 
     implementation 'com.fasterxml.jackson.core:jackson-databind'

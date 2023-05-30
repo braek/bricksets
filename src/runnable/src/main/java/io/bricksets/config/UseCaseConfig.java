@@ -1,8 +1,8 @@
 package io.bricksets.config;
 
-import io.bricksets.api.CreateBrickset;
-import io.bricksets.api.ModifyBrickset;
-import io.bricksets.api.RemoveBrickset;
+import io.bricksets.api.brickset.CreateBrickset;
+import io.bricksets.api.brickset.ModifyBrickset;
+import io.bricksets.api.brickset.RemoveBrickset;
 import io.bricksets.domain.brickset.BricksetNumberService;
 import io.bricksets.domain.brickset.BricksetRepository;
 import io.bricksets.domain.event.EventProjector;

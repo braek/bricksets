@@ -1,7 +1,7 @@
 package io.bricksets.usecase.brickset;
 
-import io.bricksets.api.ModifyBrickset;
-import io.bricksets.api.ModifyBricksetPresenter;
+import io.bricksets.api.brickset.ModifyBrickset;
+import io.bricksets.api.brickset.ModifyBricksetPresenter;
 import io.bricksets.domain.brickset.BricksetRepository;
 import io.bricksets.domain.event.EventPublisher;
 import io.bricksets.domain.time.TimeService;

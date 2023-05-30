@@ -1,8 +1,8 @@
 package io.bricksets.swagger.brickset;
 
-import io.bricksets.api.CreateBrickset;
-import io.bricksets.api.ModifyBrickset;
-import io.bricksets.api.RemoveBrickset;
+import io.bricksets.api.brickset.CreateBrickset;
+import io.bricksets.api.brickset.ModifyBrickset;
+import io.bricksets.api.brickset.RemoveBrickset;
 import io.bricksets.swagger.brickset.endpoint.CreateBricksetEndpoint;
 import io.bricksets.swagger.brickset.endpoint.ModifyBricksetEndpoint;
 import io.bricksets.swagger.brickset.endpoint.RemoveBricksetEndpoint;

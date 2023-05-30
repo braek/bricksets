@@ -1,6 +1,6 @@
 package io.bricksets.swagger.brickset.presenter;
 
-import io.bricksets.api.RemoveBricksetPresenter;
+import io.bricksets.api.brickset.RemoveBricksetPresenter;
 import io.bricksets.swagger.brickset.response.BricksetRemovedResponse;
 import io.bricksets.swagger.presenter.RestPresenter;
 import io.bricksets.swagger.response.ErrorResponse;

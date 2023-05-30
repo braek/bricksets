@@ -1,6 +1,6 @@
 package io.bricksets.test;
 
-import io.bricksets.api.CreateBricksetPresenter;
+import io.bricksets.api.brickset.CreateBricksetPresenter;
 import io.bricksets.vocabulary.brickset.BricksetId;
 
 public final class MockCreateBricksetPresenter implements CreateBricksetPresenter {
