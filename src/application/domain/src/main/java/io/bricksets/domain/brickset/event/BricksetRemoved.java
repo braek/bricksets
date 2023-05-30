@@ -8,8 +8,17 @@ import io.bricksets.vocabulary.time.Timestamp;
 
 import java.util.Set;
 
-public record BricksetRemoved(EventId id, Timestamp occurredOn, Set<AggregateId> tags, BricksetId bricksetId) implements Event {
-    public BricksetRemoved(Timestamp occurredAt, BricksetId bricksetId) {
-        this(EventId.createNew(), occurredAt, Set.of(bricksetId), bricksetId);
+public record BricksetRemoved(EventId id, Timestamp occurredOn, Set<AggregateId> tags) implements Event {
+
+    public BricksetRemoved(Timestamp occurredOn, BricksetId bricksetId) {
+        this(EventId.createNew(), occurredOn, Set.of(bricksetId));
+    }
+
+    public BricksetId bricksetId() {
+        return tags.stream()
+                .filter(it -> it instanceof BricksetId)
+                .map(BricksetId.class::cast)
+                .findFirst()
+                .orElseThrow();
     }
 }

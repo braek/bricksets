@@ -9,8 +9,17 @@ import io.bricksets.vocabulary.time.Timestamp;
 
 import java.util.Set;
 
-public record BricksetModified(EventId id, Timestamp occurredOn, Set<AggregateId> tags, BricksetId bricksetId, BricksetTitle title) implements Event {
-    public BricksetModified(Timestamp occurredAt, BricksetId bricksetId, BricksetTitle title) {
-        this(EventId.createNew(), occurredAt, Set.of(bricksetId), bricksetId, title);
+public record BricksetModified(EventId id, Timestamp occurredOn, Set<AggregateId> tags, BricksetTitle title) implements Event {
+
+    public BricksetModified(Timestamp occurredOn, BricksetId bricksetId, BricksetTitle title) {
+        this(EventId.createNew(), occurredOn, Set.of(bricksetId), title);
+    }
+
+    public BricksetId bricksetId() {
+        return tags.stream()
+                .filter(it -> it instanceof BricksetId)
+                .map(BricksetId.class::cast)
+                .findFirst()
+                .orElseThrow();
     }
 }

@@ -52,7 +52,6 @@ public enum EventMapper {
                     EventId.fromUuid(event.getId()),
                     Timestamp.fromLocalDateTime(event.getOccurredOn()),
                     aggregateIds,
-                    content.bricksetId(),
                     content.number(),
                     content.title()
             );
@@ -65,7 +64,6 @@ public enum EventMapper {
                     EventId.fromUuid(event.getId()),
                     Timestamp.fromLocalDateTime(event.getOccurredOn()),
                     aggregateIds,
-                    content.bricksetId(),
                     content.title()
             );
         }
@@ -76,8 +74,7 @@ public enum EventMapper {
             return new BricksetRemoved(
                     EventId.fromUuid(event.getId()),
                     Timestamp.fromLocalDateTime(event.getOccurredOn()),
-                    aggregateIds,
-                    content.bricksetId()
+                    aggregateIds
             );
         }
 
