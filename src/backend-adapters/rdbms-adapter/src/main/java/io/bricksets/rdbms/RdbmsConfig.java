@@ -1,6 +1,6 @@
 package io.bricksets.rdbms;
 
-import io.bricksets.rdbms.repository.RdbmsBricksetRepository;
+import io.bricksets.rdbms.repository.brickset.RdbmsBricksetRepository;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.conf.Settings;

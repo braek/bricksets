@@ -1,10 +1,11 @@
-package io.bricksets.rdbms.repository;
+package io.bricksets.rdbms.repository.brickset;
 
 import io.bricksets.domain.brickset.Brickset;
 import io.bricksets.domain.brickset.BricksetNumberService;
 import io.bricksets.domain.brickset.BricksetRepository;
 import io.bricksets.domain.brickset.event.BricksetCreated;
 import io.bricksets.domain.brickset.event.BricksetRemoved;
+import io.bricksets.rdbms.repository.RdbmsBaseRepository;
 import io.bricksets.vocabulary.brickset.BricksetId;
 import io.bricksets.vocabulary.brickset.BricksetNumber;
 import org.jooq.DSLContext;
