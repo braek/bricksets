@@ -22,6 +22,7 @@ public final class RdbmsBricksetViewModel implements BricksetViewModel {
     @Override
     public List<BricksetListItem> listBricksets() {
         return dsl.selectFrom(Tables.BRICKSET)
+                .orderBy(Tables.BRICKSET.CREATED_ON.desc())
                 .fetch()
                 .stream()
                 .map(it -> new BricksetListItem(
