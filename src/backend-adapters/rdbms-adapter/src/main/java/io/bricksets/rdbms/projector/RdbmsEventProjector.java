@@ -19,7 +19,6 @@ public class RdbmsEventProjector implements EventProjector {
         this.dsl = dsl;
     }
 
-
     @Override
     public void project(Event event) {
         if (event instanceof BricksetCreated theEvent) {
