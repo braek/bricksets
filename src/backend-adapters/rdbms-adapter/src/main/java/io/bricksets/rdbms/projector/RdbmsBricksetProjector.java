@@ -14,16 +14,16 @@ public class RdbmsBricksetProjector extends RdbmsBaseProjector implements Bricks
 
     @Override
     public void project(BricksetCreated bricksetCreated) {
-
+        // TODO: implement this
     }
 
     @Override
     public void project(BricksetModified bricksetModified) {
-
+        // TODO: implement this
     }
 
     @Override
     public void project(BricksetRemoved bricksetRemoved) {
-
+        // TODO: implement this
     }
 }
