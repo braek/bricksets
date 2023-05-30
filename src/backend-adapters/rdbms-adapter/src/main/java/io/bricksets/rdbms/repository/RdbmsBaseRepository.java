@@ -16,7 +16,8 @@ import java.util.List;
 
 import static io.bricksets.rdbms.Tables.EVENT;
 import static io.bricksets.rdbms.Tables.TAG;
-import static org.jooq.impl.DSL.*;
+import static org.jooq.impl.DSL.row;
+import static org.jooq.impl.DSL.select;
 
 public abstract class RdbmsBaseRepository {
 
@@ -27,12 +28,9 @@ public abstract class RdbmsBaseRepository {
     }
 
     protected final EventStream getEventStream(final Class<? extends Event>... eventTypes) {
-        final var eventTypesToFilter = Arrays.stream(eventTypes).toList();
         final List<Event> events = new ArrayList<>();
-        final var filter = noCondition();
-        eventTypesToFilter.forEach(it -> filter.or(EVENT.EVENT_CLASS.eq(it.getSimpleName())));
         var records = dsl.selectFrom(EVENT)
-                .where(filter)
+                .where(EVENT.EVENT_CLASS.in(Arrays.stream(eventTypes).map(Class::getSimpleName).toList()))
                 .orderBy(EVENT.POSITION.asc())
                 .fetch();
         records.forEach(record -> events.add(mapEvent(record)));
