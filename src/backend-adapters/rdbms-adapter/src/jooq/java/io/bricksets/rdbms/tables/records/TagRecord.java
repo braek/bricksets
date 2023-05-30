@@ -53,17 +53,17 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record3
     }
 
     /**
-     * Setter for <code>sandbox.tag.tag_value</code>.
+     * Setter for <code>sandbox.tag.value</code>.
      */
-    public TagRecord setTagValue(String value) {
+    public TagRecord setValue(String value) {
         set(2, value);
         return this;
     }
 
     /**
-     * Getter for <code>sandbox.tag.tag_value</code>.
+     * Getter for <code>sandbox.tag.value</code>.
      */
-    public String getTagValue() {
+    public String getValue() {
         return (String) get(2);
     }
 
@@ -102,7 +102,7 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record3
 
     @Override
     public Field<String> field3() {
-        return Tag.TAG.TAG_VALUE;
+        return Tag.TAG.VALUE;
     }
 
     @Override
@@ -117,7 +117,7 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record3
 
     @Override
     public String component3() {
-        return getTagValue();
+        return getValue();
     }
 
     @Override
@@ -132,7 +132,7 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record3
 
     @Override
     public String value3() {
-        return getTagValue();
+        return getValue();
     }
 
     @Override
@@ -149,7 +149,7 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record3
 
     @Override
     public TagRecord value3(String value) {
-        setTagValue(value);
+        setValue(value);
         return this;
     }
 
@@ -175,11 +175,11 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record3
     /**
      * Create a detached, initialised TagRecord
      */
-    public TagRecord(UUID eventId, String tagClass, String tagValue) {
+    public TagRecord(UUID eventId, String tagClass, String value) {
         super(Tag.TAG);
 
         setEventId(eventId);
         setTagClass(tagClass);
-        setTagValue(tagValue);
+        setValue(value);
     }
 }

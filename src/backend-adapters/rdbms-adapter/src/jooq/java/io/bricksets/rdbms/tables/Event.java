@@ -72,9 +72,9 @@ public class Event extends TableImpl<EventRecord> {
     public final TableField<EventRecord, String> EVENT_CLASS = createField(DSL.name("event_class"), SQLDataType.VARCHAR.nullable(false), this, "");
 
     /**
-     * The column <code>sandbox.event.event_value</code>.
+     * The column <code>sandbox.event.content</code>.
      */
-    public final TableField<EventRecord, JSONB> EVENT_VALUE = createField(DSL.name("event_value"), SQLDataType.JSONB.nullable(false), this, "");
+    public final TableField<EventRecord, JSONB> CONTENT = createField(DSL.name("content"), SQLDataType.JSONB.nullable(false), this, "");
 
     private Event(Name alias, Table<EventRecord> aliased) {
         this(alias, aliased, null);

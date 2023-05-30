@@ -47,7 +47,7 @@ public enum EventMapper {
 
         // BricksetCreated
         if (event.getEventClass().equals(BricksetCreated.class.getSimpleName())) {
-            var content = deserialize(event.getEventValue(), BricksetCreated.class);
+            var content = deserialize(event.getContent(), BricksetCreated.class);
             return new BricksetCreated(
                     EventId.fromUuid(event.getId()),
                     Timestamp.fromLocalDateTime(event.getOccurredOn()),
@@ -59,7 +59,7 @@ public enum EventMapper {
 
         // BricksetModified
         if (event.getEventClass().equals(BricksetModified.class.getSimpleName())) {
-            var content = deserialize(event.getEventValue(), BricksetModified.class);
+            var content = deserialize(event.getContent(), BricksetModified.class);
             return new BricksetModified(
                     EventId.fromUuid(event.getId()),
                     Timestamp.fromLocalDateTime(event.getOccurredOn()),

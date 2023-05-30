@@ -59,9 +59,9 @@ public class Tag extends TableImpl<TagRecord> {
     public final TableField<TagRecord, String> TAG_CLASS = createField(DSL.name("tag_class"), SQLDataType.VARCHAR.nullable(false), this, "");
 
     /**
-     * The column <code>sandbox.tag.tag_value</code>.
+     * The column <code>sandbox.tag.value</code>.
      */
-    public final TableField<TagRecord, String> TAG_VALUE = createField(DSL.name("tag_value"), SQLDataType.VARCHAR.nullable(false), this, "");
+    public final TableField<TagRecord, String> VALUE = createField(DSL.name("value"), SQLDataType.VARCHAR.nullable(false), this, "");
 
     private Tag(Name alias, Table<TagRecord> aliased) {
         this(alias, aliased, null);

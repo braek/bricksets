@@ -86,17 +86,17 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
     }
 
     /**
-     * Setter for <code>sandbox.event.event_value</code>.
+     * Setter for <code>sandbox.event.content</code>.
      */
-    public EventRecord setEventValue(JSONB value) {
+    public EventRecord setContent(JSONB value) {
         set(4, value);
         return this;
     }
 
     /**
-     * Getter for <code>sandbox.event.event_value</code>.
+     * Getter for <code>sandbox.event.content</code>.
      */
-    public JSONB getEventValue() {
+    public JSONB getContent() {
         return (JSONB) get(4);
     }
 
@@ -145,7 +145,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public Field<JSONB> field5() {
-        return Event.EVENT.EVENT_VALUE;
+        return Event.EVENT.CONTENT;
     }
 
     @Override
@@ -170,7 +170,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public JSONB component5() {
-        return getEventValue();
+        return getContent();
     }
 
     @Override
@@ -195,7 +195,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public JSONB value5() {
-        return getEventValue();
+        return getContent();
     }
 
     @Override
@@ -224,7 +224,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public EventRecord value5(JSONB value) {
-        setEventValue(value);
+        setContent(value);
         return this;
     }
 
@@ -252,13 +252,13 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
     /**
      * Create a detached, initialised EventRecord
      */
-    public EventRecord(UUID id, Long position, LocalDateTime occurredOn, String eventClass, JSONB eventValue) {
+    public EventRecord(UUID id, Long position, LocalDateTime occurredOn, String eventClass, JSONB content) {
         super(Event.EVENT);
 
         setId(id);
         setPosition(position);
         setOccurredOn(occurredOn);
         setEventClass(eventClass);
-        setEventValue(eventValue);
+        setContent(content);
     }
 }

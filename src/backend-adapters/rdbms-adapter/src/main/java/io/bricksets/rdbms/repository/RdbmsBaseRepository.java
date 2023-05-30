@@ -49,7 +49,7 @@ public abstract class RdbmsBaseRepository {
                         select(TAG.EVENT_ID)
                                 .from(TAG)
                                 .where(TAG.TAG_CLASS.eq(aggregateId.getClass().getSimpleName()))
-                                .and(TAG.TAG_VALUE.eq(aggregateId.toString()))
+                                .and(TAG.VALUE.eq(aggregateId.toString()))
                 ))
                 .orderBy(EVENT.POSITION.asc())
                 .fetch();
@@ -89,7 +89,7 @@ public abstract class RdbmsBaseRepository {
             eventRecord.setId(event.id().getValue());
             eventRecord.setOccurredOn(event.occurredOn().toLocalDateTime());
             eventRecord.setEventClass(event.getClass().getSimpleName());
-            eventRecord.setEventValue(EventMapper.INSTANCE.serialize(event));
+            eventRecord.setContent(EventMapper.INSTANCE.serialize(event));
             eventRecord.store();
 
             // Store tags
@@ -97,7 +97,7 @@ public abstract class RdbmsBaseRepository {
                 var tagRecord = dsl.newRecord(TAG);
                 tagRecord.setEventId(event.id().getValue());
                 tagRecord.setTagClass(tag.getClass().getSimpleName());
-                tagRecord.setTagValue(tag.toString());
+                tagRecord.setValue(tag.toString());
                 tagRecord.store();
             });
         });
