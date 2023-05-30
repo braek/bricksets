@@ -70,7 +70,6 @@ public enum EventMapper {
 
         // BricksetRemoved
         if (event.getEventClass().equals(BricksetRemoved.class.getSimpleName())) {
-            var content = deserialize(event.getEventValue(), BricksetRemoved.class);
             return new BricksetRemoved(
                     EventId.fromUuid(event.getId()),
                     Timestamp.fromLocalDateTime(event.getOccurredOn()),
