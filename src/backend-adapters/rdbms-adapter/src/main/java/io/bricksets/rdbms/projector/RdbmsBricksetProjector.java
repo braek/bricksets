@@ -4,7 +4,6 @@ import io.bricksets.domain.brickset.BricksetProjector;
 import io.bricksets.domain.brickset.event.BricksetCreated;
 import io.bricksets.domain.brickset.event.BricksetModified;
 import io.bricksets.domain.brickset.event.BricksetRemoved;
-import io.bricksets.rdbms.projector.RdbmsBaseProjector;
 import org.jooq.DSLContext;
 
 public class RdbmsBricksetProjector extends RdbmsBaseProjector implements BricksetProjector {
