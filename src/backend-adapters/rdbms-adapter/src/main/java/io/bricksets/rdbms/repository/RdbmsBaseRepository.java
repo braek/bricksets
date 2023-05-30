@@ -30,8 +30,9 @@ public abstract class RdbmsBaseRepository {
 
     protected final EventStream getEventStream(final Class<? extends Event>... eventTypes) {
         final List<Event> events = new ArrayList<>();
+        final var filter = Arrays.stream(eventTypes).map(Class::getSimpleName).collect(Collectors.toSet());
         var records = dsl.selectFrom(EVENT)
-                .where(EVENT.EVENT_CLASS.in(Arrays.stream(eventTypes).map(Class::getSimpleName).collect(Collectors.toSet())))
+                .where(EVENT.EVENT_CLASS.in(filter))
                 .orderBy(EVENT.POSITION.asc())
                 .fetch();
         records.forEach(record -> events.add(mapEvent(record)));
