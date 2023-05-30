@@ -13,7 +13,7 @@ public final class InMemoryEventPubSub implements EventPublisher, EventSubscribe
     private final List<Event> events = new ArrayList<>();
     private final List<EventHandler> handlers = new ArrayList<>();
 
-    public void verifyEvents(List<Event> expectedEvents) {
+    public void verifyEvents(final List<Event> expectedEvents) {
         final RecursiveComparisonConfiguration config = RecursiveComparisonConfiguration.builder()
                 .withIgnoredFields("id")
                 .build();
@@ -21,23 +21,23 @@ public final class InMemoryEventPubSub implements EventPublisher, EventSubscribe
     }
 
     @Override
-    public void publish(Event event) {
+    public void publish(final Event event) {
         events.add(event);
         handlers.forEach(it -> it.handle(event));
     }
 
     @Override
-    public void publish(List<Event> events) {
+    public void publish(final List<Event> events) {
         events.forEach(this::publish);
     }
 
     @Override
-    public void publish(EventStream eventStream) {
+    public void publish(final EventStream eventStream) {
         publish(eventStream.events());
     }
 
     @Override
-    public void subscribe(EventHandler handler) {
+    public void subscribe(final EventHandler handler) {
         handlers.add(handler);
     }
 }
