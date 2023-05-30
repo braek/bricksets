@@ -15,12 +15,12 @@ public class RdbmsEventProjector implements EventProjector {
 
     private final DSLContext dsl;
 
-    public RdbmsEventProjector(DSLContext dsl) {
+    public RdbmsEventProjector(final DSLContext dsl) {
         this.dsl = dsl;
     }
 
     @Override
-    public void project(Event event) {
+    public void project(final Event event) {
         if (event instanceof BricksetCreated theEvent) {
             var record = dsl.newRecord(BRICKSET);
             record.setId(theEvent.bricksetId().getValue());
