@@ -5,6 +5,7 @@ import io.bricksets.domain.time.TimeService;
 import io.bricksets.rdbms.repository.RdbmsBricksetRepository;
 import io.bricksets.vocabulary.brickset.BricksetNumber;
 import io.bricksets.vocabulary.brickset.BricksetTitle;
+import io.bricksets.vocabulary.time.Timestamp;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,7 +38,8 @@ public class BricksetRepositoryTest {
             assertThat(it.getId()).isEqualTo(bricksetId);
             assertThat(it.getNumber()).isEqualTo(number);
             assertThat(it.getTitle()).isEqualTo(title);
-            assertThat(it.getModifiedOn()).isNull();
+            assertThat(it.getCreatedOn()).isEqualTo(Timestamp.fromString("2023-04-04T16:30:00.000Z"));
+            assertThat(it.getModifiedOn()).isEqualTo(Timestamp.fromString("2023-04-04T16:30:00.000Z"));
             assertTrue(it.getMutations().isEmpty());
             assertThat(it.getLastEventId()).isNotNull();
         });

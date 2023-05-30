@@ -27,6 +27,7 @@ public class RdbmsEventProjector implements EventProjector {
             record.setTitle(theEvent.title().getValue());
             record.setNumber(theEvent.number().getValue());
             record.setCreatedOn(theEvent.occurredOn().toLocalDateTime());
+            record.setModifiedOn(theEvent.occurredOn().toLocalDateTime());
             record.store();
             return;
         }

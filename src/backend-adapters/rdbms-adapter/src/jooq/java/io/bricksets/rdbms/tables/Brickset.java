@@ -72,7 +72,7 @@ public class Brickset extends TableImpl<BricksetRecord> {
     /**
      * The column <code>sandbox.brickset.modified_on</code>.
      */
-    public final TableField<BricksetRecord, LocalDateTime> MODIFIED_ON = createField(DSL.name("modified_on"), SQLDataType.LOCALDATETIME(6), this, "");
+    public final TableField<BricksetRecord, LocalDateTime> MODIFIED_ON = createField(DSL.name("modified_on"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
 
     private Brickset(Name alias, Table<BricksetRecord> aliased) {
         this(alias, aliased, null);
