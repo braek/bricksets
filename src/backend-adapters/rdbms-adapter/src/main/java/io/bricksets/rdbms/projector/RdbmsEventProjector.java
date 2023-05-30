@@ -21,25 +21,25 @@ public class RdbmsEventProjector implements EventProjector {
 
     @Override
     public void project(final Event event) {
-        if (event instanceof BricksetCreated theEvent) {
+        if (event instanceof BricksetCreated concrete) {
             var record = dsl.newRecord(BRICKSET);
-            record.setId(theEvent.bricksetId().getValue());
-            record.setTitle(theEvent.title().getValue());
-            record.setNumber(theEvent.number().getValue());
-            record.setCreatedOn(theEvent.occurredOn().toLocalDateTime());
-            record.setModifiedOn(theEvent.occurredOn().toLocalDateTime());
+            record.setId(concrete.bricksetId().getValue());
+            record.setTitle(concrete.title().getValue());
+            record.setNumber(concrete.number().getValue());
+            record.setCreatedOn(concrete.occurredOn().toLocalDateTime());
+            record.setModifiedOn(concrete.occurredOn().toLocalDateTime());
             record.store();
             return;
         }
-        if (event instanceof BricksetModified theEvent) {
-            final var record = dsl.fetchSingle(BRICKSET, BRICKSET.ID.eq(theEvent.bricksetId().getValue()));
-            record.setTitle(theEvent.title().getValue());
-            record.setModifiedOn(theEvent.occurredOn().toLocalDateTime());
+        if (event instanceof BricksetModified concrete) {
+            final var record = dsl.fetchSingle(BRICKSET, BRICKSET.ID.eq(concrete.bricksetId().getValue()));
+            record.setTitle(concrete.title().getValue());
+            record.setModifiedOn(concrete.occurredOn().toLocalDateTime());
             record.store();
             return;
         }
-        if (event instanceof BricksetRemoved theEvent) {
-            final var record = dsl.fetchSingle(BRICKSET, BRICKSET.ID.eq(theEvent.bricksetId().getValue()));
+        if (event instanceof BricksetRemoved concrete) {
+            final var record = dsl.fetchSingle(BRICKSET, BRICKSET.ID.eq(concrete.bricksetId().getValue()));
             record.delete();
             return;
         }
