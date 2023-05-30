@@ -2,7 +2,7 @@ package io.bricksets.rdbms;
 
 import io.bricksets.domain.brickset.Brickset;
 import io.bricksets.domain.time.TimeService;
-import io.bricksets.rdbms.repository.brickset.RdbmsBricksetRepository;
+import io.bricksets.rdbms.repository.RdbmsBricksetRepository;
 import io.bricksets.vocabulary.brickset.BricksetNumber;
 import io.bricksets.vocabulary.brickset.BricksetTitle;
 import org.junit.jupiter.api.Test;

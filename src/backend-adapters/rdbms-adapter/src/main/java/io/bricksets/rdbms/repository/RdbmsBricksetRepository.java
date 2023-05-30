@@ -1,4 +1,4 @@
-package io.bricksets.rdbms.repository.brickset;
+package io.bricksets.rdbms.repository;
 
 import io.bricksets.domain.brickset.Brickset;
 import io.bricksets.domain.brickset.BricksetNumberService;

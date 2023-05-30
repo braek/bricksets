@@ -1,4 +1,4 @@
-package io.bricksets.rdbms.projector.brickset;
+package io.bricksets.rdbms.projector;
 
 import io.bricksets.domain.brickset.BricksetProjector;
 import io.bricksets.domain.brickset.event.BricksetCreated;
