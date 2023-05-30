@@ -78,7 +78,7 @@ public class BricksetController implements ListBricksetsEndpoint, CreateBrickset
                         it.id().getValue(),
                         it.number().toString(),
                         it.title().toString(),
-                        it.createdOn().toLocalDateTime()
+                        it.createdOn().getValue()
                 ))
                 .toList());
     }
