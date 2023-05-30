@@ -29,12 +29,12 @@ public abstract class RdbmsBaseRepository {
     }
 
     protected final EventStream getEventStream(final Class<? extends Event>... eventTypes) {
-        final List<Event> events = new ArrayList<>();
         final var filter = Arrays.stream(eventTypes).map(Class::getSimpleName).collect(Collectors.toSet());
         var records = dsl.selectFrom(EVENT)
                 .where(EVENT.EVENT_CLASS.in(filter))
                 .orderBy(EVENT.POSITION.asc())
                 .fetch();
+        final List<Event> events = new ArrayList<>();
         records.forEach(record -> events.add(mapEvent(record)));
         return new EventStream(events);
     }
