@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static io.bricksets.rdbms.Tables.EVENT;
 import static io.bricksets.rdbms.Tables.TAG;
@@ -30,7 +31,7 @@ public abstract class RdbmsBaseRepository {
     protected final EventStream getEventStream(final Class<? extends Event>... eventTypes) {
         final List<Event> events = new ArrayList<>();
         var records = dsl.selectFrom(EVENT)
-                .where(EVENT.EVENT_CLASS.in(Arrays.stream(eventTypes).map(Class::getSimpleName).toList()))
+                .where(EVENT.EVENT_CLASS.in(Arrays.stream(eventTypes).map(Class::getSimpleName).collect(Collectors.toSet())))
                 .orderBy(EVENT.POSITION.asc())
                 .fetch();
         records.forEach(record -> events.add(mapEvent(record)));
