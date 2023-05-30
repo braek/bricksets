@@ -68,7 +68,7 @@ public class RdbmsConfig {
     }
 
     @Bean
-    BricksetProjector bricksetProjector(DSLContext dsl) {
+    BricksetProjector bricksetProjector(final DSLContext dsl) {
         return new RdbmsBricksetProjector(dsl);
     }
 }
