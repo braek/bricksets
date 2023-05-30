@@ -17,6 +17,9 @@ import java.util.UUID;
 
 public interface ModifyBricksetEndpoint {
     @Operation(
+            tags = {
+                    "Bricksets"
+            },
             responses = {
                     @ApiResponse(
                             responseCode = "200",

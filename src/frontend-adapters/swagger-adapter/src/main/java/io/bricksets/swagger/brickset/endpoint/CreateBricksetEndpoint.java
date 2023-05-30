@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public interface CreateBricksetEndpoint {
     @Operation(
+            tags = {
+                    "Bricksets"
+            },
             responses = {
                     @ApiResponse(
                             responseCode = "201",

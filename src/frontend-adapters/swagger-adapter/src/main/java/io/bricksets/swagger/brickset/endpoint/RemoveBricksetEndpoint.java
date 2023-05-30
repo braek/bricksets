@@ -15,6 +15,9 @@ import java.util.UUID;
 
 public interface RemoveBricksetEndpoint {
     @Operation(
+            tags = {
+                    "Bricksets"
+            },
             responses = {
                     @ApiResponse(
                             responseCode = "200",
