@@ -32,9 +32,4 @@ public class UseCaseConfig {
     RemoveBrickset removeBrickset(BricksetRepository bricksetRepository, TimeService timeService, EventPublisher eventPublisher) {
         return new RemoveBricksetUseCase(bricksetRepository, timeService, eventPublisher);
     }
-
-    @Bean
-    ProjectorPolicy projectorPolicy(EventProjector eventProjector) {
-        return new ProjectorPolicy(eventProjector);
-    }
 }
