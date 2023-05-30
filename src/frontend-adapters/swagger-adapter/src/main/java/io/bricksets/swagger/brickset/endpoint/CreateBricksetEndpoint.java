@@ -5,6 +5,7 @@ import io.bricksets.swagger.brickset.response.BricksetCreatedResponse;
 import io.bricksets.swagger.response.ErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.MediaType;
@@ -17,6 +18,39 @@ public interface CreateBricksetEndpoint {
             tags = {
                     "Bricksets"
             },
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    content = @Content(
+                            examples = {
+                                    @ExampleObject(
+                                            name = "Emerald Night",
+                                            value = """
+                                                    {
+                                                    	"number": "10194",
+                                                    	"title": "Emerald Night"
+                                                    }
+                                                    """
+                                    ),
+                                    @ExampleObject(
+                                            name = "Horizon Express",
+                                            value = """
+                                                    {
+                                                    	"number": "10233",
+                                                    	"title": "Horizon Express"
+                                                    }
+                                                    """
+                                    ),
+                                    @ExampleObject(
+                                            name = "Crocodile Locomotive",
+                                            value = """
+                                                    {
+                                                    	"number": "10277",
+                                                    	"title": "Crocodile Locomotive"
+                                                    }
+                                                    """
+                                    )
+                            }
+                    )
+            ),
             responses = {
                     @ApiResponse(
                             responseCode = "201",
