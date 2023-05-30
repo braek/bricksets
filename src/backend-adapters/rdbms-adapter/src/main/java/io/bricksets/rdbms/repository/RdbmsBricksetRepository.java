@@ -27,11 +27,11 @@ public class RdbmsBricksetRepository extends RdbmsBaseRepository implements Bric
         );
         final Map<BricksetId, BricksetNumber> numbers = new HashMap<>();
         eventStream.events().forEach(event -> {
-            if (event instanceof BricksetCreated created) {
-                numbers.put(created.bricksetId(), created.number());
+            if (event instanceof BricksetCreated concrete) {
+                numbers.put(concrete.bricksetId(), concrete.number());
             }
-            if (event instanceof BricksetRemoved removed) {
-                numbers.remove(removed.bricksetId());
+            if (event instanceof BricksetRemoved concrete) {
+                numbers.remove(concrete.bricksetId());
             }
         });
         return numbers.containsValue(number);
