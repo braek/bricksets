@@ -15,7 +15,7 @@ public final class RdbmsBricksetView implements BricksetView {
 
     private final DSLContext dsl;
 
-    public RdbmsBricksetView(DSLContext dsl) {
+    public RdbmsBricksetView(final DSLContext dsl) {
         this.dsl = dsl;
     }
 
