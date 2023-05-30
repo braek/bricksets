@@ -1,4 +1,4 @@
-package io.bricksets.rdbms.viewmodel;
+package io.bricksets.rdbms.view;
 
 import io.bricksets.query.brickset.BricksetView;
 import io.bricksets.rdbms.Tables;

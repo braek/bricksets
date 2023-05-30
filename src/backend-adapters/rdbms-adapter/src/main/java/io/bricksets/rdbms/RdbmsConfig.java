@@ -2,7 +2,7 @@ package io.bricksets.rdbms;
 
 import io.bricksets.rdbms.projector.RdbmsEventProjector;
 import io.bricksets.rdbms.repository.RdbmsBricksetRepository;
-import io.bricksets.rdbms.viewmodel.RdbmsBricksetView;
+import io.bricksets.rdbms.view.RdbmsBricksetView;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
 import org.jooq.conf.Settings;
