@@ -37,7 +37,7 @@ class CreateBricksetUseCaseTest {
 
         private final BricksetNumber number = BricksetNumber.fromString("40580");
         private final BricksetTitle title = BricksetTitle.fromString("Blacktron Cruiser");
-        private final Timestamp createdAt = Timestamp.fromString("2023-04-04T16:30:00Z");
+        private final Timestamp createdOn = Timestamp.fromString("2023-04-04T16:30:00Z");
 
         private boolean createdCalled;
         private BricksetId bricksetId;
@@ -61,7 +61,7 @@ class CreateBricksetUseCaseTest {
             assertThat(brickset.getId()).isEqualTo(bricksetId);
             assertThat(brickset.getTitle()).isEqualTo(title);
             assertThat(brickset.getNumber()).isEqualTo(number);
-            assertThat(brickset.getCreatedOn()).isEqualTo(createdAt);
+            assertThat(brickset.getCreatedOn()).isEqualTo(createdOn);
             assertThat(brickset.getModifiedOn()).isNull();
         }
 
@@ -70,7 +70,7 @@ class CreateBricksetUseCaseTest {
         void eventsPublished() {
             eventPublisher.verifyEvents(List.of(
                     new BricksetCreated(
-                            createdAt,
+                            createdOn,
                             bricksetId,
                             number,
                             title
