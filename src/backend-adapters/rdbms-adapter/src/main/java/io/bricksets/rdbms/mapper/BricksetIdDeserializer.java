@@ -4,8 +4,6 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
 import io.bricksets.vocabulary.brickset.BricksetId;
 
-import java.util.UUID;
-
 public final class BricksetIdDeserializer extends FromStringDeserializer<BricksetId> {
 
     BricksetIdDeserializer() {
@@ -14,6 +12,6 @@ public final class BricksetIdDeserializer extends FromStringDeserializer<Brickse
 
     @Override
     protected BricksetId _deserialize(final String value, final DeserializationContext context) {
-        return BricksetId.fromUuid(UUID.fromString(value));
+        return BricksetId.fromString(value);
     }
 }
