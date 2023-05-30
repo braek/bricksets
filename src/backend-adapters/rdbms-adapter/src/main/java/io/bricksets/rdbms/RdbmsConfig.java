@@ -67,7 +67,7 @@ public class RdbmsConfig {
     }
 
     @Bean
-    RdbmsEventProjector bricksetProjector(final DSLContext dsl) {
+    RdbmsEventProjector eventProjector(final DSLContext dsl) {
         return new RdbmsEventProjector(dsl);
     }
 }
