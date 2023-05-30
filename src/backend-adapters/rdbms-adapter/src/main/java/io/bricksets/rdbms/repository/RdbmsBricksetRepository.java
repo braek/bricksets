@@ -23,11 +23,11 @@ public class RdbmsBricksetRepository extends RdbmsBaseRepository implements Bric
     @Override
     public boolean exists(final BricksetNumber number) {
         final Map<BricksetId, BricksetNumber> numbers = new HashMap<>();
-        var events = getEventStream(
+        var eventStream = getEventStream(
                 BricksetCreated.class,
                 BricksetRemoved.class
         );
-        events.events().forEach(event -> {
+        eventStream.events().forEach(event -> {
             if (event instanceof BricksetCreated created) {
                 numbers.put(created.bricksetId(), created.number());
             }
