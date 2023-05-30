@@ -1,4 +1,4 @@
-# Event Sourcing Sandbox Project
+# Event Sourcing POC (proof of concept)
 
 ## Resources
 

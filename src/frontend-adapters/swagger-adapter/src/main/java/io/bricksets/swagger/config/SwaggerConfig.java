@@ -15,7 +15,7 @@ public class SwaggerConfig {
     public OpenAPI openApi() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Event Sourcing Sandbox")
+                        .title("Event Sourcing POC (proof of concept)")
                         .version("dev")
                 )
                 .tags(List.of(
