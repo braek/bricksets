@@ -1,5 +1,7 @@
 package io.bricksets.rdbms;
 
+import io.bricksets.domain.brickset.BricksetProjector;
+import io.bricksets.rdbms.projector.RdbmsBricksetProjector;
 import io.bricksets.rdbms.repository.RdbmsBricksetRepository;
 import org.jooq.DSLContext;
 import org.jooq.SQLDialect;
@@ -63,5 +65,10 @@ public class RdbmsConfig {
     @Bean
     RdbmsBricksetRepository bricksetRepository(final DSLContext dsl) {
         return new RdbmsBricksetRepository(dsl);
+    }
+
+    @Bean
+    BricksetProjector bricksetProjector(DSLContext dsl) {
+        return new RdbmsBricksetProjector(dsl);
     }
 }
