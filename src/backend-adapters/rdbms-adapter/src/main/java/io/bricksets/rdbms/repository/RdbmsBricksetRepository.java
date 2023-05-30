@@ -5,7 +5,6 @@ import io.bricksets.domain.brickset.BricksetNumberService;
 import io.bricksets.domain.brickset.BricksetRepository;
 import io.bricksets.domain.brickset.event.BricksetCreated;
 import io.bricksets.domain.brickset.event.BricksetRemoved;
-import io.bricksets.rdbms.repository.RdbmsBaseRepository;
 import io.bricksets.vocabulary.brickset.BricksetId;
 import io.bricksets.vocabulary.brickset.BricksetNumber;
 import org.jooq.DSLContext;
@@ -14,8 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-
-public class RdbmsBricksetRepository extends RdbmsBaseRepository implements BricksetRepository, BricksetNumberService {
+public final class RdbmsBricksetRepository extends RdbmsBaseRepository implements BricksetRepository, BricksetNumberService {
 
     public RdbmsBricksetRepository(final DSLContext dsl) {
         super(dsl);
