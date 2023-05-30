@@ -4,7 +4,7 @@ import io.bricksets.domain.brickset.event.BricksetCreated;
 import io.bricksets.domain.brickset.event.BricksetModified;
 import io.bricksets.domain.brickset.event.BricksetRemoved;
 
-public interface BricksetEventProjector {
+public interface BricksetProjector {
 
     void project(BricksetCreated bricksetCreated);
 
