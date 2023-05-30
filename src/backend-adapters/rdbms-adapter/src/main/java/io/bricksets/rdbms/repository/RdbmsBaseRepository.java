@@ -29,6 +29,7 @@ public abstract class RdbmsBaseRepository {
         this.dsl = dsl;
     }
 
+    @SafeVarargs
     protected final EventStream openEventStream(final Class<? extends Event>... eventTypes) {
         final var filter = Arrays.stream(eventTypes)
                 .map(Class::getSimpleName)
