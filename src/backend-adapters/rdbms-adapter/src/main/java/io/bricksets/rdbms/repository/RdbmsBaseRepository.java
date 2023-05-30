@@ -26,7 +26,7 @@ public abstract class RdbmsBaseRepository {
         this.dsl = dsl;
     }
 
-    protected final EventStream getEventStream(Class<? extends Event>... eventTypes) {
+    protected final EventStream getEventStream(final Class<? extends Event>... eventTypes) {
         final var eventTypesToFilter = Arrays.stream(eventTypes).toList();
         final List<Event> events = new ArrayList<>();
         final var filter = noCondition();
