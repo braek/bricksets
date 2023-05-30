@@ -5,7 +5,7 @@ import io.bricksets.domain.brickset.Brickset;
 import io.bricksets.domain.brickset.event.BricksetCreated;
 import io.bricksets.domain.time.TimeService;
 import io.bricksets.inmemory.InMemoryBricksetRepository;
-import io.bricksets.inmemory.InMemoryEventPublisher;
+import io.bricksets.inmemory.InMemoryEventPubSub;
 import io.bricksets.test.MockCreateBricksetPresenter;
 import io.bricksets.test.MockTimeService;
 import io.bricksets.vocabulary.brickset.BricksetId;
@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 class CreateBricksetUseCaseTest {
 
     private final InMemoryBricksetRepository bricksetRepository = new InMemoryBricksetRepository();
-    private final InMemoryEventPublisher eventPublisher = new InMemoryEventPublisher();
+    private final InMemoryEventPubSub eventPublisher = new InMemoryEventPubSub();
     private final TimeService timeService = new MockTimeService();
     private final CreateBricksetUseCase useCase = new CreateBricksetUseCase(bricksetRepository, bricksetRepository, timeService, eventPublisher);
 
