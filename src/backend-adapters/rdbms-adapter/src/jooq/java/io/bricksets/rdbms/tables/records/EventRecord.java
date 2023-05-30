@@ -71,17 +71,17 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
     }
 
     /**
-     * Setter for <code>sandbox.event.event_class</code>.
+     * Setter for <code>sandbox.event.clazz</code>.
      */
-    public EventRecord setEventClass(String value) {
+    public EventRecord setClazz(String value) {
         set(3, value);
         return this;
     }
 
     /**
-     * Getter for <code>sandbox.event.event_class</code>.
+     * Getter for <code>sandbox.event.clazz</code>.
      */
-    public String getEventClass() {
+    public String getClazz() {
         return (String) get(3);
     }
 
@@ -140,7 +140,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public Field<String> field4() {
-        return Event.EVENT.EVENT_CLASS;
+        return Event.EVENT.CLAZZ;
     }
 
     @Override
@@ -165,7 +165,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public String component4() {
-        return getEventClass();
+        return getClazz();
     }
 
     @Override
@@ -190,7 +190,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public String value4() {
-        return getEventClass();
+        return getClazz();
     }
 
     @Override
@@ -218,7 +218,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public EventRecord value4(String value) {
-        setEventClass(value);
+        setClazz(value);
         return this;
     }
 
@@ -252,13 +252,13 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
     /**
      * Create a detached, initialised EventRecord
      */
-    public EventRecord(UUID id, Long position, LocalDateTime occurredOn, String eventClass, JSONB content) {
+    public EventRecord(UUID id, Long position, LocalDateTime occurredOn, String clazz, JSONB content) {
         super(Event.EVENT);
 
         setId(id);
         setPosition(position);
         setOccurredOn(occurredOn);
-        setEventClass(eventClass);
+        setClazz(clazz);
         setContent(content);
     }
 }

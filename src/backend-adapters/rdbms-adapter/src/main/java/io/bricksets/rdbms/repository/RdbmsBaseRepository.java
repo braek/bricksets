@@ -34,7 +34,7 @@ public abstract class RdbmsBaseRepository {
                 .map(Class::getSimpleName)
                 .collect(Collectors.toSet());
         final var records = dsl.selectFrom(EVENT)
-                .where(EVENT.EVENT_CLASS.in(filter))
+                .where(EVENT.CLAZZ.in(filter))
                 .orderBy(EVENT.POSITION.asc())
                 .fetch();
         final List<Event> events = new ArrayList<>();
@@ -48,7 +48,7 @@ public abstract class RdbmsBaseRepository {
                 .where(row(EVENT.ID).in(
                         select(TAG.EVENT_ID)
                                 .from(TAG)
-                                .where(TAG.TAG_CLASS.eq(aggregateId.getClass().getSimpleName()))
+                                .where(TAG.CLAZZ.eq(aggregateId.getClass().getSimpleName()))
                                 .and(TAG.VALUE.eq(aggregateId.toString()))
                 ))
                 .orderBy(EVENT.POSITION.asc())
@@ -88,7 +88,7 @@ public abstract class RdbmsBaseRepository {
             var eventRecord = dsl.newRecord(EVENT);
             eventRecord.setId(event.id().getValue());
             eventRecord.setOccurredOn(event.occurredOn().toLocalDateTime());
-            eventRecord.setEventClass(event.getClass().getSimpleName());
+            eventRecord.setClazz(event.getClass().getSimpleName());
             eventRecord.setContent(EventMapper.INSTANCE.serialize(event));
             eventRecord.store();
 
@@ -96,7 +96,7 @@ public abstract class RdbmsBaseRepository {
             event.tags().forEach(tag -> {
                 var tagRecord = dsl.newRecord(TAG);
                 tagRecord.setEventId(event.id().getValue());
-                tagRecord.setTagClass(tag.getClass().getSimpleName());
+                tagRecord.setClazz(tag.getClass().getSimpleName());
                 tagRecord.setValue(tag.toString());
                 tagRecord.store();
             });

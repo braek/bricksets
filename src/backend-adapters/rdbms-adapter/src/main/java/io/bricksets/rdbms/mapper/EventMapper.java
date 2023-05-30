@@ -46,7 +46,7 @@ public enum EventMapper {
         tags.forEach(it -> aggregateIds.add(TagMapper.INSTANCE.map(it)));
 
         // BricksetCreated
-        if (event.getEventClass().equals(BricksetCreated.class.getSimpleName())) {
+        if (event.getClazz().equals(BricksetCreated.class.getSimpleName())) {
             var content = deserialize(event.getContent(), BricksetCreated.class);
             return new BricksetCreated(
                     EventId.fromUuid(event.getId()),
@@ -58,7 +58,7 @@ public enum EventMapper {
         }
 
         // BricksetModified
-        if (event.getEventClass().equals(BricksetModified.class.getSimpleName())) {
+        if (event.getClazz().equals(BricksetModified.class.getSimpleName())) {
             var content = deserialize(event.getContent(), BricksetModified.class);
             return new BricksetModified(
                     EventId.fromUuid(event.getId()),
@@ -69,7 +69,7 @@ public enum EventMapper {
         }
 
         // BricksetRemoved
-        if (event.getEventClass().equals(BricksetRemoved.class.getSimpleName())) {
+        if (event.getClazz().equals(BricksetRemoved.class.getSimpleName())) {
             return new BricksetRemoved(
                     EventId.fromUuid(event.getId()),
                     Timestamp.fromLocalDateTime(event.getOccurredOn()),
@@ -78,6 +78,6 @@ public enum EventMapper {
         }
 
         // Throw exception
-        throw new IllegalArgumentException(String.format("Cannot map EventRecord (%s) to Event", event.getEventClass()));
+        throw new IllegalArgumentException(String.format("Cannot map EventRecord (%s) to Event", event.getClazz()));
     }
 }
