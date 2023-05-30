@@ -9,6 +9,7 @@ public record BricksetListItem(
         @Schema(requiredMode = Schema.RequiredMode.REQUIRED) UUID id,
         @Schema(requiredMode = Schema.RequiredMode.REQUIRED) String number,
         @Schema(requiredMode = Schema.RequiredMode.REQUIRED) String title,
-        @Schema(requiredMode = Schema.RequiredMode.REQUIRED) Instant createdOn
+        @Schema(requiredMode = Schema.RequiredMode.REQUIRED) Instant createdOn,
+        @Schema(requiredMode = Schema.RequiredMode.REQUIRED) Instant modifiedOn
 ) {
 }
