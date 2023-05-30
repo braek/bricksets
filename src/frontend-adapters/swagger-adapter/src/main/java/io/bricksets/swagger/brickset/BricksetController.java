@@ -41,6 +41,7 @@ public class BricksetController implements ListBricksetsEndpoint, CreateBrickset
     @Override
     public ResponseEntity<Object> createBrickset(CreateBricksetRequest request) {
         var presenter = new CreateBricksetRestPresenter();
+        // TODO: validate translation from JSON types to vocabulary types
         createBrickset.createBrickset(
                 BricksetNumber.fromString(request.number()),
                 BricksetTitle.fromString(request.title()),
@@ -52,6 +53,7 @@ public class BricksetController implements ListBricksetsEndpoint, CreateBrickset
     @Override
     public ResponseEntity<Object> modifyBrickset(UUID bricksetId, ModifyBricksetRequest request) {
         var presenter = new ModifyBricksetRestPresenter();
+        // TODO: validate translation from JSON types to vocabulary types
         modifyBrickset.modifyBrickset(
                 BricksetId.fromUuid(bricksetId),
                 BricksetTitle.fromString(request.title()),
@@ -63,6 +65,7 @@ public class BricksetController implements ListBricksetsEndpoint, CreateBrickset
     @Override
     public ResponseEntity<Object> removeBrickset(UUID bricksetId) {
         var presenter = new RemoveBricksetRestPresenter();
+        // TODO: validate translation from JSON types to vocabulary types
         removeBrickset.removeBrickset(
                 BricksetId.fromUuid(bricksetId),
                 presenter
