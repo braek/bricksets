@@ -22,7 +22,7 @@ public class RdbmsBricksetRepository extends RdbmsBaseRepository implements Bric
 
     @Override
     public boolean exists(final BricksetNumber number) {
-        var eventStream = getEventStream(
+        var eventStream = openEventStream(
                 BricksetCreated.class,
                 BricksetRemoved.class
         );
@@ -40,7 +40,7 @@ public class RdbmsBricksetRepository extends RdbmsBaseRepository implements Bric
 
     @Override
     public Optional<Brickset> get(final BricksetId bricksetId) {
-        var eventStream = getEventStream(bricksetId);
+        var eventStream = openEventStream(bricksetId);
         if (eventStream.isEmpty() || eventStream.containsEventOfType(BricksetRemoved.class)) {
             return Optional.empty();
         }

@@ -28,7 +28,7 @@ public abstract class RdbmsBaseRepository {
         this.dsl = dsl;
     }
 
-    protected final EventStream getEventStream(final Class<? extends Event>... eventTypes) {
+    protected final EventStream openEventStream(final Class<? extends Event>... eventTypes) {
         final var filter = Arrays.stream(eventTypes)
                 .map(Class::getSimpleName)
                 .collect(Collectors.toSet());
@@ -41,7 +41,7 @@ public abstract class RdbmsBaseRepository {
         return new EventStream(events);
     }
 
-    protected final EventStream getEventStream(final AggregateId aggregateId) {
+    protected final EventStream openEventStream(final AggregateId aggregateId) {
         final List<Event> events = new ArrayList<>();
         var records = dsl.selectFrom(EVENT)
                 .where(row(EVENT.ID).in(
@@ -72,7 +72,7 @@ public abstract class RdbmsBaseRepository {
         }
 
         // Optimistic locking
-        var persisted = getEventStream(aggregate.getId());
+        var persisted = openEventStream(aggregate.getId());
         if (aggregate.isNotEqualTo(persisted)) {
             throw new EventStreamOptimisticLockingException(aggregate.getLastEventId());
         }
