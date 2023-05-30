@@ -4,9 +4,11 @@
 package io.bricksets.rdbms;
 
 
+import io.bricksets.rdbms.tables.Brickset;
 import io.bricksets.rdbms.tables.Event;
 import io.bricksets.rdbms.tables.FlywaySchemaHistory;
 import io.bricksets.rdbms.tables.Tag;
+import io.bricksets.rdbms.tables.records.BricksetRecord;
 import io.bricksets.rdbms.tables.records.EventRecord;
 import io.bricksets.rdbms.tables.records.FlywaySchemaHistoryRecord;
 import io.bricksets.rdbms.tables.records.TagRecord;
@@ -29,6 +31,8 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<BricksetRecord> PK_BRICKSET = Internal.createUniqueKey(Brickset.BRICKSET, DSL.name("pk_brickset"), new TableField[] { Brickset.BRICKSET.ID }, true);
+    public static final UniqueKey<BricksetRecord> UC_NUMBER = Internal.createUniqueKey(Brickset.BRICKSET, DSL.name("uc_number"), new TableField[] { Brickset.BRICKSET.NUMBER }, true);
     public static final UniqueKey<EventRecord> PK_EVENT = Internal.createUniqueKey(Event.EVENT, DSL.name("pk_event"), new TableField[] { Event.EVENT.ID }, true);
     public static final UniqueKey<EventRecord> UC_POSITION = Internal.createUniqueKey(Event.EVENT, DSL.name("uc_position"), new TableField[] { Event.EVENT.POSITION }, true);
     public static final UniqueKey<FlywaySchemaHistoryRecord> FLYWAY_SCHEMA_HISTORY_PK = Internal.createUniqueKey(FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, DSL.name("flyway_schema_history_pk"), new TableField[] { FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK }, true);

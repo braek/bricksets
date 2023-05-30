@@ -4,6 +4,7 @@
 package io.bricksets.rdbms;
 
 
+import io.bricksets.rdbms.tables.Brickset;
 import io.bricksets.rdbms.tables.Event;
 import io.bricksets.rdbms.tables.FlywaySchemaHistory;
 import io.bricksets.rdbms.tables.Tag;
@@ -14,6 +15,11 @@ import io.bricksets.rdbms.tables.Tag;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
+
+    /**
+     * The table <code>sandbox.brickset</code>.
+     */
+    public static final Brickset BRICKSET = Brickset.BRICKSET;
 
     /**
      * The table <code>sandbox.event</code>.

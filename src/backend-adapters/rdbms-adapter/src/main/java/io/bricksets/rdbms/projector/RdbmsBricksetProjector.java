@@ -6,6 +6,8 @@ import io.bricksets.domain.brickset.event.BricksetModified;
 import io.bricksets.domain.brickset.event.BricksetRemoved;
 import org.jooq.DSLContext;
 
+import static io.bricksets.rdbms.Tables.BRICKSET;
+
 public class RdbmsBricksetProjector extends RdbmsBaseProjector implements BricksetProjector {
 
     public RdbmsBricksetProjector(DSLContext dsl) {
@@ -13,17 +15,26 @@ public class RdbmsBricksetProjector extends RdbmsBaseProjector implements Bricks
     }
 
     @Override
-    public void project(BricksetCreated bricksetCreated) {
-        // TODO: implement this
+    public void project(BricksetCreated event) {
+        final var record = dsl.newRecord(BRICKSET);
+        record.setId(event.bricksetId().getValue());
+        record.setTitle(event.title().getValue());
+        record.setNumber(event.number().getValue());
+        record.setCreatedOn(event.occurredOn().toLocalDateTime());
+        record.store();
     }
 
     @Override
-    public void project(BricksetModified bricksetModified) {
-        // TODO: implement this
+    public void project(BricksetModified event) {
+        final var record = dsl.fetchSingle(BRICKSET, BRICKSET.ID.eq(event.bricksetId().getValue()));
+        record.setTitle(event.title().getValue());
+        record.setModifiedOn(event.occurredOn().toLocalDateTime());
+        record.store();
     }
 
     @Override
-    public void project(BricksetRemoved bricksetRemoved) {
-        // TODO: implement this
+    public void project(BricksetRemoved event) {
+        final var record = dsl.fetchSingle(BRICKSET, BRICKSET.ID.eq(event.bricksetId().getValue()));
+        record.delete();
     }
 }

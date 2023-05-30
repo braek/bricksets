@@ -4,6 +4,7 @@
 package io.bricksets.rdbms;
 
 
+import io.bricksets.rdbms.tables.Brickset;
 import io.bricksets.rdbms.tables.Event;
 import io.bricksets.rdbms.tables.FlywaySchemaHistory;
 import io.bricksets.rdbms.tables.Tag;
@@ -29,6 +30,11 @@ public class Sandbox extends SchemaImpl {
      * The reference instance of <code>sandbox</code>
      */
     public static final Sandbox SANDBOX = new Sandbox();
+
+    /**
+     * The table <code>sandbox.brickset</code>.
+     */
+    public final Brickset BRICKSET = Brickset.BRICKSET;
 
     /**
      * The table <code>sandbox.event</code>.
@@ -67,6 +73,7 @@ public class Sandbox extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.<Table<?>>asList(
+            Brickset.BRICKSET,
             Event.EVENT,
             FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY,
             Tag.TAG);
