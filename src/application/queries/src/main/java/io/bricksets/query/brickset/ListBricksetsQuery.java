@@ -7,14 +7,14 @@ import java.util.List;
 
 public final class ListBricksetsQuery implements ListBricksets {
 
-    private final BricksetView viewModel;
+    private final BricksetView bricksetView;
 
-    public ListBricksetsQuery(BricksetView viewModel) {
-        this.viewModel = viewModel;
+    public ListBricksetsQuery(BricksetView bricksetView) {
+        this.bricksetView = bricksetView;
     }
 
     @Override
     public List<BricksetListItem> listBricksets() {
-        return viewModel.listBricksets();
+        return bricksetView.listBricksets();
     }
 }
