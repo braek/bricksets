@@ -17,9 +17,9 @@ public record BricksetModified(EventId id, Timestamp occurredOn, Set<AggregateId
 
     public BricksetId bricksetId() {
         return tags.stream()
-                .filter(it -> it instanceof BricksetId)
-                .map(BricksetId.class::cast)
+                .filter(BricksetId.class::isInstance)
                 .findFirst()
+                .map(BricksetId.class::cast)
                 .orElseThrow();
     }
 }
