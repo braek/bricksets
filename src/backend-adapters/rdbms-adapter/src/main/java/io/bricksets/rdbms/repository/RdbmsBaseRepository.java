@@ -32,7 +32,7 @@ public abstract class RdbmsBaseRepository {
         final var filter = Arrays.stream(eventTypes)
                 .map(Class::getSimpleName)
                 .collect(Collectors.toSet());
-        var records = dsl.selectFrom(EVENT)
+        final var records = dsl.selectFrom(EVENT)
                 .where(EVENT.EVENT_CLASS.in(filter))
                 .orderBy(EVENT.POSITION.asc())
                 .fetch();
