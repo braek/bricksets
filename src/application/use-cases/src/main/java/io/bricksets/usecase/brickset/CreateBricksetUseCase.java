@@ -18,7 +18,7 @@ public final class CreateBricksetUseCase implements CreateBrickset, UseCase<Crea
     private final TimeService timeService;
     private final EventPublisher eventPublisher;
 
-    public CreateBricksetUseCase(BricksetRepository bricksetRepository, BricksetNumberService bricksetNumberService, TimeService timeService, EventPublisher eventPublisher) {
+    public CreateBricksetUseCase(final BricksetRepository bricksetRepository, final BricksetNumberService bricksetNumberService, final TimeService timeService, final EventPublisher eventPublisher) {
         this.bricksetRepository = bricksetRepository;
         this.bricksetNumberService = bricksetNumberService;
         this.timeService = timeService;
@@ -26,12 +26,12 @@ public final class CreateBricksetUseCase implements CreateBrickset, UseCase<Crea
     }
 
     @Override
-    public void createBrickset(BricksetNumber number, BricksetTitle title, CreateBricksetPresenter presenter) {
+    public void createBrickset(final BricksetNumber number, final BricksetTitle title, final CreateBricksetPresenter presenter) {
         execute(new CreateBricksetCommand(number, title), presenter);
     }
 
     @Override
-    public void execute(CreateBricksetCommand command, CreateBricksetPresenter presenter) {
+    public void execute(final CreateBricksetCommand command, final CreateBricksetPresenter presenter) {
         // TODO: put this logic in aggregate, someday, somehow?
         if (bricksetNumberService.exists(command.number())) {
             presenter.bricksetNumberAlreadyExists();
