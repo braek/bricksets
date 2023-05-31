@@ -11,7 +11,7 @@ import static java.util.Optional.ofNullable;
 public final class BricksetNumber implements ValueObject {
 
     private final String value;
-    private final static Pattern REGEX = Pattern.compile("^\\d{4,6}$");
+    private final static Pattern REGEX = Pattern.compile("^(\\d{3}-\\d)|(\\d{4,6}(-\\d)?)$");
 
     private BricksetNumber(final String str) {
         final var sanitized = ofNullable(str)
