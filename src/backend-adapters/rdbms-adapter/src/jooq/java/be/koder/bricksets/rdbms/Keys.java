@@ -5,10 +5,10 @@ package be.koder.bricksets.rdbms;
 
 
 import be.koder.bricksets.rdbms.tables.Brickset;
-import be.koder.bricksets.rdbms.tables.records.BricksetRecord;
 import be.koder.bricksets.rdbms.tables.Event;
 import be.koder.bricksets.rdbms.tables.FlywaySchemaHistory;
 import be.koder.bricksets.rdbms.tables.Tag;
+import be.koder.bricksets.rdbms.tables.records.BricksetRecord;
 import be.koder.bricksets.rdbms.tables.records.EventRecord;
 import be.koder.bricksets.rdbms.tables.records.FlywaySchemaHistoryRecord;
 import be.koder.bricksets.rdbms.tables.records.TagRecord;

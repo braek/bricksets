@@ -4,9 +4,9 @@
 package be.koder.bricksets.rdbms.tables;
 
 
-import be.koder.bricksets.rdbms.tables.records.BricksetRecord;
 import be.koder.bricksets.rdbms.Keys;
 import be.koder.bricksets.rdbms.Sandbox;
+import be.koder.bricksets.rdbms.tables.records.BricksetRecord;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
