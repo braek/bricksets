@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConditionalOnProperty(name = "io.bricksets.rdbms.enabled", havingValue = "false")
+@ConditionalOnProperty(name = "be.koder.bricksets.rdbms.enabled", havingValue = "false")
 public class InMemoryConfig {
 
     @Bean

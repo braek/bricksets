@@ -23,16 +23,16 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 @Configuration
-@ConditionalOnProperty(name = "io.bricksets.rdbms.enabled", havingValue = "true")
+@ConditionalOnProperty(name = "be.koder.bricksets.rdbms.enabled", havingValue = "true")
 @EnableTransactionManagement
 public class RdbmsConfig {
 
     @Bean
     DataSource dataSource(
-            @Value("${io.bricksets.rdbms.driver-class-name}") final String driverClassName,
-            @Value("${io.bricksets.rdbms.url}") final String url,
-            @Value("${io.bricksets.rdbms.username}") final String username,
-            @Value("${io.bricksets.rdbms.password}") final String password
+            @Value("${be.koder.bricksets.rdbms.driver-class-name}") final String driverClassName,
+            @Value("${be.koder.bricksets.rdbms.url}") final String url,
+            @Value("${be.koder.bricksets.rdbms.username}") final String username,
+            @Value("${be.koder.bricksets.rdbms.password}") final String password
     ) {
         return DataSourceBuilder.create()
                 .driverClassName(driverClassName)

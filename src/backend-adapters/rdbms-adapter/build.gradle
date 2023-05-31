@@ -56,7 +56,7 @@ jooq {
                         fluentSetters = true
                     }
                     target {
-                        packageName = 'io.bricksets.rdbms'
+                        packageName = 'be.koder.bricksets.rdbms'
                         directory = 'src/jooq/java'
                     }
                 }
