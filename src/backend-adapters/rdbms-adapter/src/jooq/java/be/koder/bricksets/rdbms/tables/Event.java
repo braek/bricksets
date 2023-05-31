@@ -126,7 +126,7 @@ public class Event extends TableImpl<EventRecord> {
 
     @Override
     public List<UniqueKey<EventRecord>> getKeys() {
-        return Arrays.<UniqueKey<EventRecord>>asList(Keys.PK_EVENT, Keys.UC_POSITION);
+        return Arrays.<UniqueKey<EventRecord>>asList(Keys.PK_EVENT, Keys.UNIQUE_POSITION);
     }
 
     @Override
