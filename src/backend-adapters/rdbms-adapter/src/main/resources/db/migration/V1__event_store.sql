@@ -6,7 +6,7 @@ CREATE TABLE event
     clazz       VARCHAR   NOT NULL,
     content     JSONB     NOT NULL,
     CONSTRAINT pk_event PRIMARY KEY (id),
-    CONSTRAINT uc_position UNIQUE (position)
+    CONSTRAINT unique_position UNIQUE (position)
 );
 CREATE TABLE tag
 (
