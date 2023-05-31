@@ -16,17 +16,17 @@ import java.util.stream.Collectors;
 
 public final class InMemoryBricksetRepository implements BricksetRepository, BricksetNumberService {
 
-    private final List<Event> eventStore = new ArrayList<>();
+    private final List<Event> events = new ArrayList<>();
 
     @Override
     public boolean exists(final BricksetNumber number) {
         var numbers = new HashMap<BricksetId, BricksetNumber>();
-        eventStore.stream()
+        events.stream()
                 .filter(BricksetCreated.class::isInstance)
                 .map(BricksetCreated.class::cast)
                 .map(it -> Map.entry(it.bricksetId(), it.number()))
                 .forEach(it -> numbers.put(it.getKey(), it.getValue()));
-        eventStore.stream()
+        events.stream()
                 .filter(BricksetRemoved.class::isInstance)
                 .map(BricksetRemoved.class::cast)
                 .map(BricksetRemoved::bricksetId)
@@ -37,7 +37,7 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
 
     @Override
     public Optional<Brickset> get(final BricksetId bricksetId) {
-        var eventStream = query(bricksetId);
+        var eventStream = openEventStream(bricksetId);
         if (eventStream.isEmpty() || eventStream.containsEventOfType(BricksetRemoved.class)) {
             return Optional.empty();
         }
@@ -52,16 +52,16 @@ public final class InMemoryBricksetRepository implements BricksetRepository, Bri
             return;
         }
 
-        var persisted = query(brickset.getId());
+        var persisted = openEventStream(brickset.getId());
         if (brickset.isNotEqualTo(persisted)) {
             throw new EventStreamOptimisticLockingException(brickset.getLastEventId());
         }
 
-        eventStore.addAll(brickset.getMutations().events());
+        events.addAll(brickset.getMutations().events());
     }
 
-    private EventStream query(final BricksetId bricksetId) {
-        return new EventStream(eventStore.stream()
+    private EventStream openEventStream(final BricksetId bricksetId) {
+        return new EventStream(events.stream()
                 .filter(it -> it.tags().contains(bricksetId))
                 .toList());
     }

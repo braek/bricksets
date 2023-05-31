@@ -1,6 +1,6 @@
 io.bricksets:
   rdbms:
-    enabled: true
+    enabled: false
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:6000/sandbox
     username: sandbox
