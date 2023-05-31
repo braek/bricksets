@@ -119,7 +119,7 @@ public class BricksetView extends TableImpl<BricksetViewRecord> {
 
     @Override
     public List<UniqueKey<BricksetViewRecord>> getKeys() {
-        return Arrays.<UniqueKey<BricksetViewRecord>>asList(Keys.PK_BRICKSET, Keys.UC_NUMBER);
+        return Arrays.<UniqueKey<BricksetViewRecord>>asList(Keys.PK_BRICKSET, Keys.UNIQUE_NUMBER);
     }
 
     @Override

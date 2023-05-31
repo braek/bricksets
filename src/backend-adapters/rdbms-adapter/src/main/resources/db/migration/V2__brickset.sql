@@ -6,5 +6,5 @@ CREATE TABLE brickset_view
     created_on  TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     modified_on TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     CONSTRAINT pk_brickset PRIMARY KEY (id),
-    CONSTRAINT uc_number UNIQUE (number)
+    CONSTRAINT unique_number UNIQUE (number)
 );
