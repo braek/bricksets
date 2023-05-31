@@ -1,4 +1,4 @@
-CREATE TABLE brickset
+CREATE TABLE brickset_view
 (
     id          UUID    NOT NULL,
     number      VARCHAR NOT NULL,

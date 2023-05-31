@@ -4,7 +4,7 @@
 package be.koder.bricksets.rdbms;
 
 
-import be.koder.bricksets.rdbms.tables.Brickset;
+import be.koder.bricksets.rdbms.tables.BricksetView;
 import be.koder.bricksets.rdbms.tables.Event;
 import be.koder.bricksets.rdbms.tables.FlywaySchemaHistory;
 import be.koder.bricksets.rdbms.tables.Tag;
@@ -17,9 +17,9 @@ import be.koder.bricksets.rdbms.tables.Tag;
 public class Tables {
 
     /**
-     * The table <code>sandbox.brickset</code>.
+     * The table <code>sandbox.brickset_view</code>.
      */
-    public static final Brickset BRICKSET = Brickset.BRICKSET;
+    public static final BricksetView BRICKSET_VIEW = BricksetView.BRICKSET_VIEW;
 
     /**
      * The table <code>sandbox.event</code>.

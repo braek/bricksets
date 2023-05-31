@@ -1,12 +1,12 @@
 package be.koder.bricksets.rdbms.view;
 
 import be.koder.bricksets.query.brickset.BricksetView;
-import be.koder.bricksets.vocabulary.brickset.BricksetListItem;
-import be.koder.bricksets.vocabulary.time.Timestamp;
 import be.koder.bricksets.rdbms.Tables;
 import be.koder.bricksets.vocabulary.brickset.BricksetId;
+import be.koder.bricksets.vocabulary.brickset.BricksetListItem;
 import be.koder.bricksets.vocabulary.brickset.BricksetNumber;
 import be.koder.bricksets.vocabulary.brickset.BricksetTitle;
+import be.koder.bricksets.vocabulary.time.Timestamp;
 import org.jooq.DSLContext;
 
 import java.util.List;
@@ -21,8 +21,8 @@ public final class RdbmsBricksetView implements BricksetView {
 
     @Override
     public List<BricksetListItem> listBricksets() {
-        return dsl.selectFrom(Tables.BRICKSET)
-                .orderBy(Tables.BRICKSET.CREATED_ON.desc())
+        return dsl.selectFrom(Tables.BRICKSET_VIEW)
+                .orderBy(Tables.BRICKSET_VIEW.CREATED_ON.desc())
                 .fetch()
                 .stream()
                 .map(it -> new BricksetListItem(

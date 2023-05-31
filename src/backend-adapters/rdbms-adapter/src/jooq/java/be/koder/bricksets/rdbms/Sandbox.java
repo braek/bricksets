@@ -4,7 +4,7 @@
 package be.koder.bricksets.rdbms;
 
 
-import be.koder.bricksets.rdbms.tables.Brickset;
+import be.koder.bricksets.rdbms.tables.BricksetView;
 import be.koder.bricksets.rdbms.tables.Event;
 import be.koder.bricksets.rdbms.tables.FlywaySchemaHistory;
 import be.koder.bricksets.rdbms.tables.Tag;
@@ -32,9 +32,9 @@ public class Sandbox extends SchemaImpl {
     public static final Sandbox SANDBOX = new Sandbox();
 
     /**
-     * The table <code>sandbox.brickset</code>.
+     * The table <code>sandbox.brickset_view</code>.
      */
-    public final Brickset BRICKSET = Brickset.BRICKSET;
+    public final BricksetView BRICKSET_VIEW = BricksetView.BRICKSET_VIEW;
 
     /**
      * The table <code>sandbox.event</code>.
@@ -73,7 +73,7 @@ public class Sandbox extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.<Table<?>>asList(
-            Brickset.BRICKSET,
+            BricksetView.BRICKSET_VIEW,
             Event.EVENT,
             FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY,
             Tag.TAG);
