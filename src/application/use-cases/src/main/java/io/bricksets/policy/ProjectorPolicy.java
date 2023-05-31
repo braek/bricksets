@@ -8,12 +8,12 @@ public final class ProjectorPolicy implements EventHandler {
 
     private final EventProjector eventProjector;
 
-    public ProjectorPolicy(final EventProjector eventProjector) {
+    public ProjectorPolicy(EventProjector eventProjector) {
         this.eventProjector = eventProjector;
     }
 
     @Override
-    public void handle(final Event event) {
+    public void handle(Event event) {
         eventProjector.project(event);
     }
 }
