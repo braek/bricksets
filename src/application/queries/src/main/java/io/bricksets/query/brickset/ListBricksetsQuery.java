@@ -9,7 +9,7 @@ public final class ListBricksetsQuery implements ListBricksets {
 
     private final BricksetView bricksetView;
 
-    public ListBricksetsQuery(final BricksetView bricksetView) {
+    public ListBricksetsQuery(BricksetView bricksetView) {
         this.bricksetView = bricksetView;
     }
 
