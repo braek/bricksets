@@ -8,7 +8,7 @@ import be.koder.bricksets.domain.event.EventProjector;
 import org.jooq.DSLContext;
 import org.springframework.transaction.annotation.Transactional;
 
-import static be.koder.bricksets.rdbms.Tables.BRICKSET;
+import static be.koder.bricksets.rdbms.Tables.BRICKSET_VIEW;
 
 @Transactional
 public class RdbmsEventProjector implements EventProjector {
@@ -22,7 +22,7 @@ public class RdbmsEventProjector implements EventProjector {
     @Override
     public void project(final Event event) {
         if (event instanceof BricksetCreated concrete) {
-            var record = dsl.newRecord(BRICKSET);
+            var record = dsl.newRecord(BRICKSET_VIEW);
             record.setId(concrete.bricksetId().getValue());
             record.setTitle(concrete.title().getValue());
             record.setNumber(concrete.number().getValue());
@@ -32,14 +32,14 @@ public class RdbmsEventProjector implements EventProjector {
             return;
         }
         if (event instanceof BricksetModified concrete) {
-            final var record = dsl.fetchSingle(BRICKSET, BRICKSET.ID.eq(concrete.bricksetId().getValue()));
+            final var record = dsl.fetchSingle(BRICKSET_VIEW, BRICKSET_VIEW.ID.eq(concrete.bricksetId().getValue()));
             record.setTitle(concrete.title().getValue());
             record.setModifiedOn(concrete.occurredOn().toLocalDateTime());
             record.store();
             return;
         }
         if (event instanceof BricksetRemoved concrete) {
-            final var record = dsl.fetchSingle(BRICKSET, BRICKSET.ID.eq(concrete.bricksetId().getValue()));
+            final var record = dsl.fetchSingle(BRICKSET_VIEW, BRICKSET_VIEW.ID.eq(concrete.bricksetId().getValue()));
             record.delete();
             return;
         }

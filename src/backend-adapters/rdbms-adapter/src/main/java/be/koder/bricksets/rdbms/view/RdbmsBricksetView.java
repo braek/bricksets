@@ -1,7 +1,6 @@
 package be.koder.bricksets.rdbms.view;
 
 import be.koder.bricksets.query.brickset.BricksetView;
-import be.koder.bricksets.rdbms.Tables;
 import be.koder.bricksets.vocabulary.brickset.BricksetId;
 import be.koder.bricksets.vocabulary.brickset.BricksetListItem;
 import be.koder.bricksets.vocabulary.brickset.BricksetNumber;
@@ -10,6 +9,8 @@ import be.koder.bricksets.vocabulary.time.Timestamp;
 import org.jooq.DSLContext;
 
 import java.util.List;
+
+import static be.koder.bricksets.rdbms.Tables.BRICKSET_VIEW;
 
 public final class RdbmsBricksetView implements BricksetView {
 
@@ -21,8 +22,8 @@ public final class RdbmsBricksetView implements BricksetView {
 
     @Override
     public List<BricksetListItem> listBricksets() {
-        return dsl.selectFrom(Tables.BRICKSET_VIEW)
-                .orderBy(Tables.BRICKSET_VIEW.CREATED_ON.desc())
+        return dsl.selectFrom(BRICKSET_VIEW)
+                .orderBy(BRICKSET_VIEW.CREATED_ON.desc())
                 .fetch()
                 .stream()
                 .map(it -> new BricksetListItem(
