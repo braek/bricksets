@@ -10,7 +10,7 @@ Second, run this Gradle task:
 
 ```./gradlew flywayMigrate```
 
-Finally, run the Spring Boot application through a ```Run Configuration``` in IntelliJ with ```be.koder.bricksets.App``` as **main class.**
+Finally, run the **Spring Boot application** through a ```Run Configuration``` in IntelliJ with ```be.koder.bricksets.App``` as ```main class```.
 
 ## Resources
 
