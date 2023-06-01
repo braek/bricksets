@@ -38,17 +38,17 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record3
     }
 
     /**
-     * Setter for <code>sandbox.tag.clazz</code>.
+     * Setter for <code>sandbox.tag.type</code>.
      */
-    public TagRecord setClazz(String value) {
+    public TagRecord setType(String value) {
         set(1, value);
         return this;
     }
 
     /**
-     * Getter for <code>sandbox.tag.clazz</code>.
+     * Getter for <code>sandbox.tag.type</code>.
      */
-    public String getClazz() {
+    public String getType() {
         return (String) get(1);
     }
 
@@ -97,7 +97,7 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record3
 
     @Override
     public Field<String> field2() {
-        return Tag.TAG.CLAZZ;
+        return Tag.TAG.TYPE;
     }
 
     @Override
@@ -112,7 +112,7 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record3
 
     @Override
     public String component2() {
-        return getClazz();
+        return getType();
     }
 
     @Override
@@ -127,7 +127,7 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record3
 
     @Override
     public String value2() {
-        return getClazz();
+        return getType();
     }
 
     @Override
@@ -143,7 +143,7 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record3
 
     @Override
     public TagRecord value2(String value) {
-        setClazz(value);
+        setType(value);
         return this;
     }
 
@@ -175,11 +175,11 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record3
     /**
      * Create a detached, initialised TagRecord
      */
-    public TagRecord(UUID eventId, String clazz, String value) {
+    public TagRecord(UUID eventId, String type, String value) {
         super(Tag.TAG);
 
         setEventId(eventId);
-        setClazz(clazz);
+        setType(type);
         setValue(value);
     }
 }

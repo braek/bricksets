@@ -71,17 +71,17 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
     }
 
     /**
-     * Setter for <code>sandbox.event.clazz</code>.
+     * Setter for <code>sandbox.event.type</code>.
      */
-    public EventRecord setClazz(String value) {
+    public EventRecord setType(String value) {
         set(3, value);
         return this;
     }
 
     /**
-     * Getter for <code>sandbox.event.clazz</code>.
+     * Getter for <code>sandbox.event.type</code>.
      */
-    public String getClazz() {
+    public String getType() {
         return (String) get(3);
     }
 
@@ -140,7 +140,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public Field<String> field4() {
-        return Event.EVENT.CLAZZ;
+        return Event.EVENT.TYPE;
     }
 
     @Override
@@ -165,7 +165,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public String component4() {
-        return getClazz();
+        return getType();
     }
 
     @Override
@@ -190,7 +190,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public String value4() {
-        return getClazz();
+        return getType();
     }
 
     @Override
@@ -218,7 +218,7 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
 
     @Override
     public EventRecord value4(String value) {
-        setClazz(value);
+        setType(value);
         return this;
     }
 
@@ -252,13 +252,13 @@ public class EventRecord extends UpdatableRecordImpl<EventRecord> implements Rec
     /**
      * Create a detached, initialised EventRecord
      */
-    public EventRecord(UUID id, Long position, LocalDateTime occurredOn, String clazz, JSONB content) {
+    public EventRecord(UUID id, Long position, LocalDateTime occurredOn, String type, JSONB content) {
         super(Event.EVENT);
 
         setId(id);
         setPosition(position);
         setOccurredOn(occurredOn);
-        setClazz(clazz);
+        setType(type);
         setContent(content);
     }
 }

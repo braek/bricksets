@@ -36,7 +36,7 @@ public class Keys {
     public static final UniqueKey<EventRecord> PK_EVENT = Internal.createUniqueKey(Event.EVENT, DSL.name("pk_event"), new TableField[] { Event.EVENT.ID }, true);
     public static final UniqueKey<EventRecord> UNIQUE_POSITION = Internal.createUniqueKey(Event.EVENT, DSL.name("unique_position"), new TableField[] { Event.EVENT.POSITION }, true);
     public static final UniqueKey<FlywaySchemaHistoryRecord> FLYWAY_SCHEMA_HISTORY_PK = Internal.createUniqueKey(FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, DSL.name("flyway_schema_history_pk"), new TableField[] { FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK }, true);
-    public static final UniqueKey<TagRecord> PK_TAG = Internal.createUniqueKey(Tag.TAG, DSL.name("pk_tag"), new TableField[] { Tag.TAG.EVENT_ID, Tag.TAG.CLAZZ, Tag.TAG.VALUE }, true);
+    public static final UniqueKey<TagRecord> PK_TAG = Internal.createUniqueKey(Tag.TAG, DSL.name("pk_tag"), new TableField[] { Tag.TAG.EVENT_ID, Tag.TAG.TYPE, Tag.TAG.VALUE }, true);
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions

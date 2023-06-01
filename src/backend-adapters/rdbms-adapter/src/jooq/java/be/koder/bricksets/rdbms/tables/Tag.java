@@ -54,9 +54,9 @@ public class Tag extends TableImpl<TagRecord> {
     public final TableField<TagRecord, UUID> EVENT_ID = createField(DSL.name("event_id"), SQLDataType.UUID.nullable(false), this, "");
 
     /**
-     * The column <code>sandbox.tag.clazz</code>.
+     * The column <code>sandbox.tag.type</code>.
      */
-    public final TableField<TagRecord, String> CLAZZ = createField(DSL.name("clazz"), SQLDataType.VARCHAR.nullable(false), this, "");
+    public final TableField<TagRecord, String> TYPE = createField(DSL.name("type"), SQLDataType.VARCHAR.nullable(false), this, "");
 
     /**
      * The column <code>sandbox.tag.value</code>.
