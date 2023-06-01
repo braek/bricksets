@@ -53,12 +53,12 @@ public final class Brickset extends EventSourcedAggregate {
 
     @Override
     protected void dispatch(Event event) {
-        if (event instanceof BricksetCreated created) {
-            when(created);
+        if (event instanceof BricksetCreated concrete) {
+            when(concrete);
             return;
         }
-        if (event instanceof BricksetModified modified) {
-            when(modified);
+        if (event instanceof BricksetModified concrete) {
+            when(concrete);
             return;
         }
         if (event instanceof BricksetRemoved) {
